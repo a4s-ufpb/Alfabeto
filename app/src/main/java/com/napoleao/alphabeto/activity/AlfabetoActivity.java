@@ -2,6 +2,7 @@ package com.napoleao.alphabeto.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,11 +15,13 @@ import com.napoleao.alphabeto.R;
 import com.napoleao.alphabeto.activity.util.ComponentesAuxiliares;
 import com.napoleao.alphabeto.config.AppConfig;
 import com.napoleao.alphabeto.controller.GerenteDeDesafios;
-import com.napoleao.alphabeto.controller.FabricaTemas;
+import com.napoleao.alphabeto.controller.FabricaDesafios;
 import com.napoleao.alphabeto.controller.SingletonJogador;
-import com.napoleao.alphabeto.model.Tema;
+import com.napoleao.alphabeto.helper.dao.ChallengesDAO;
+import com.napoleao.alphabeto.model.Challenge;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AlfabetoActivity extends AppCompatActivity implements View.OnClickListener {
     //Componentes da interface
@@ -30,12 +33,14 @@ public class AlfabetoActivity extends AppCompatActivity implements View.OnClickL
             R.id.btnI,R.id.btnJ,R.id.btnK,R.id.btnL,R.id.btnM,R.id.btnN,R.id.btnO,R.id.btnP,R.id.btnQ,
             R.id.btnR,R.id.btnS,R.id.btnT,R.id.btnU,R.id.btnV,R.id.btnW,R.id.btnX,R.id.btnY,R.id.btnZ};
     //--------------------------------------------------------------------------------------------//
-    private ArrayList<Tema> listTema = new ArrayList<>();
+    private List<Challenge> listDesafios = new ArrayList<>();
     private GerenteDeDesafios gerenteDeDesafios;
     private ComponentesAuxiliares componentesAuxiliares;
-    private FabricaTemas temas = new FabricaTemas(listTema);
+    private int tipoImagem = 0;
+    private FabricaDesafios fabricaDesafios = new FabricaDesafios(listDesafios);
     private static final int NIVEL_SELECIONADO = 2;
     private int temaSelecionado;
+    private Long idTema;
     private char[] desafio;
     private int indice = 0;
     private SingletonJogador jogador = SingletonJogador.getJogador();
@@ -49,11 +54,20 @@ public class AlfabetoActivity extends AppCompatActivity implements View.OnClickL
 
         //Obtendo o tema escolhido
         Bundle extras = getIntent().getExtras();
+        idTema = extras.getLong("idTema");
         temaSelecionado = extras.getInt("tema");
 
         //Carregando os temas de acordo com a escolha
-        temas.escolhaDeTema(temaSelecionado);
-        listTema = gerenteDeDesafios.carregarTemas(listTema, NIVEL_SELECIONADO);
+        if (idTema != -1){
+            ChallengesDAO challengesDAO = new ChallengesDAO(this);
+            listDesafios = challengesDAO.findById(idTema);
+            listDesafios = gerenteDeDesafios.randomListDesafios(listDesafios);
+            tipoImagem = 1;
+            Log.d("DEBUG", "LIST: " + listDesafios.size());
+        }else {
+            fabricaDesafios.escolhaDeTema(temaSelecionado);
+            listDesafios = gerenteDeDesafios.carregarTemas(listDesafios, NIVEL_SELECIONADO);
+        }
 
         //Instanciando a interface
         imagem = findViewById(R.id.imageAlfabeto);
@@ -62,10 +76,11 @@ public class AlfabetoActivity extends AppCompatActivity implements View.OnClickL
         componentesAuxiliares.instanciarBotoes(botoesAlfabeto, this, botoes, this);
         animationView = findViewById(R.id.animationAlfabeto);
 
+        gerenteDeDesafios.setAtributosAlfabeto(imagem, txtQuiz, listDesafios, indice, tipoImagem);
+
         //Definindo os primeiros elementos a serem iniciados
-        imagem.setImageResource(listTema.get(indice).getImagem());
-        txtQuiz.setText(gerenteDeDesafios.definirPalavraAlfabeto(gerenteDeDesafios.dandoEspacos(listTema.get(indice).getNomeImagem())));
-        desafio = gerenteDeDesafios.definirPalavraAlfabeto(listTema.get(indice).getNomeImagem()).toCharArray();
+        txtQuiz.setText(gerenteDeDesafios.definirPalavraAlfabeto(gerenteDeDesafios.dandoEspacos(listDesafios.get(indice).getWord())));
+        desafio = gerenteDeDesafios.definirPalavraAlfabeto(listDesafios.get(indice).getWord()).toCharArray();
     }
 
     @Override
@@ -80,7 +95,7 @@ public class AlfabetoActivity extends AppCompatActivity implements View.OnClickL
      * @param v necessário para o mapeamento via XML
      */
     public void falarImagem(View v){
-        gerenteDeDesafios.falarImagem(listTema, indice);
+        gerenteDeDesafios.falarImagem(listDesafios, indice);
     }
 
     /**
@@ -88,28 +103,25 @@ public class AlfabetoActivity extends AppCompatActivity implements View.OnClickL
      * @param alternativa Caractere escolhido (botão clicado no teclado).
      */
     private void verificaResposta(char alternativa){
-        String resposta = gerenteDeDesafios.verificarAlternativa(this, alternativa,listTema.get(indice).getNomeImagem(),desafio, jogador);
+        String resposta = gerenteDeDesafios.verificarAlternativa(this, alternativa, listDesafios.get(indice).getWord(),desafio, jogador);
         txtQuiz.setText(gerenteDeDesafios.dandoEspacos(resposta));
 
-        boolean acertou = gerenteDeDesafios.verificaResposta(listTema.get(indice).getNomeImagem(), resposta);
+        boolean acertou = gerenteDeDesafios.verificaResposta(listDesafios.get(indice).getWord(), resposta);
         if (acertou){
             animationView.playAnimation();
-            gerenteDeDesafios.acertou(this, AppConfig.getInstance(this).getCurrentSound());
+            GerenteDeDesafios.acertou(this, AppConfig.getInstance(this).getCurrentSound());
             indice++;
-            if(indice == listTema.size()) {
-                componentesAuxiliares.invocarIntent(this, FimDeJogoActivity.class, temaSelecionado);
-            }else if(indice < listTema.size()){
+            if(indice == listDesafios.size() || indice == 5) {
+                componentesAuxiliares.invocarIntent(this, FimDeJogoActivity.class, temaSelecionado, idTema);
+            }else if(indice < listDesafios.size()){
                 componentesAuxiliares.desligarBotoes(botoes, botoesAlfabeto);
                 Handler handle = new Handler();
-                handle.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        gerenteDeDesafios.setAtributosAlfabeto(imagem, txtQuiz, listTema, indice);
-                        desafio = gerenteDeDesafios.definirPalavraAlfabeto(listTema.get(indice).getNomeImagem()).toCharArray();
-                        //Mudando o desafio. Para isso é chamado o método que seta a quantidade de espaços que formam a palavra
-                        txtQuiz.setText(gerenteDeDesafios.definirPalavraAlfabeto(gerenteDeDesafios.dandoEspacos(listTema.get(indice).getNomeImagem())));
-                        componentesAuxiliares.ligarBotoes(botoes, botoesAlfabeto);
-                    }
+                handle.postDelayed(() -> {
+                    gerenteDeDesafios.setAtributosAlfabeto(imagem, txtQuiz, listDesafios, indice, tipoImagem);
+                    desafio = gerenteDeDesafios.definirPalavraAlfabeto(listDesafios.get(indice).getWord()).toCharArray();
+                    //Mudando o desafio. Para isso é chamado o método que seta a quantidade de espaços que formam a palavra
+                    txtQuiz.setText(gerenteDeDesafios.definirPalavraAlfabeto(gerenteDeDesafios.dandoEspacos(listDesafios.get(indice).getWord())));
+                    componentesAuxiliares.ligarBotoes(botoes, botoesAlfabeto);
                 }, 2000);
             }
         }

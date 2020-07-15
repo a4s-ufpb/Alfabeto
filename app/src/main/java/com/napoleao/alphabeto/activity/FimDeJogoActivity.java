@@ -19,6 +19,7 @@ public class FimDeJogoActivity extends AppCompatActivity implements View.OnClick
 
     private SingletonJogador jogador = SingletonJogador.getJogador();
     private int select;
+    private Long idTema;
     int[] textIds = {R.id.txtPontuacao, R.id.txtRetornarTemas, R.id.txtRepetir, R.id.txtFraseFim};
     private GerenteDeDesafios gerenteDeDesafios;
     private ComponentesAuxiliares componentesAuxiliares;
@@ -32,6 +33,7 @@ public class FimDeJogoActivity extends AppCompatActivity implements View.OnClick
 
         Bundle extras = getIntent().getExtras();
         select = extras.getInt("tema");
+        idTema = extras.getLong("idTema");
 
         gerenteDeDesafios = new GerenteDeDesafios();
         componentesAuxiliares = new ComponentesAuxiliares();
@@ -87,6 +89,7 @@ public class FimDeJogoActivity extends AppCompatActivity implements View.OnClick
             case R.id.repetir:
                 it = new Intent(FimDeJogoActivity.this, NiveisActivity.class);
                 it.putExtra("tema", select);
+                it.putExtra("idTema", idTema);
                 startActivity(it);
                 finish();
                 break;

@@ -2,8 +2,7 @@ package com.napoleao.alphabeto.controller;
 
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
-import android.view.Gravity;
-import android.widget.Toast;
+import android.util.Log;
 
 import java.util.Locale;
 
@@ -36,22 +35,17 @@ public class SingletonAudio implements TextToSpeech.OnInitListener{
     }
 
     public void ditarFoto(String palavra){
-        tts.speak(palavra, tts.QUEUE_FLUSH, null);
+        tts.speak(palavra, TextToSpeech.QUEUE_FLUSH, null);
     }
 
     @Override
     public void onInit(int status) {
         if(status == TextToSpeech.SUCCESS){
             tts.setLanguage(Locale.getDefault());
-            Toast toast = Toast.makeText(myContext, "Serviço de áudio carregado com sucesso!", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.BOTTOM, 0, 0);
-            toast.show();
+            Log.d("AUDIO", "Serviço de áudio disponível");
         }else{
-            Toast toast = Toast.makeText(myContext, "Serviço de áudio indisponível. Reinicie o aplicativo!", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.BOTTOM, 0, 0);
-            toast.show();
+            Log.d("AUDIO", "Serviço de áudio disponível");
         }
-
     }
 
     public void stopTts(){

@@ -15,6 +15,7 @@ import com.napoleao.alphabeto.controller.GerenteDeDesafios;
 public class NiveisActivity extends AppCompatActivity implements View.OnClickListener{
 
     private int temaSelecionado;
+    private Long idTema;
     private GerenteDeDesafios gerenteDeDesafios;
     private ComponentesAuxiliares componentesAuxiliares;
 
@@ -35,6 +36,7 @@ public class NiveisActivity extends AppCompatActivity implements View.OnClickLis
 
         Bundle extras = getIntent().getExtras();
         temaSelecionado = extras.getInt("tema");
+        idTema = extras.getLong("idTema", -1);
     }
 
     @Override
@@ -117,6 +119,7 @@ public class NiveisActivity extends AppCompatActivity implements View.OnClickLis
     private void invocarIntent(Class novaActivity){
         Intent it = new Intent(NiveisActivity.this, novaActivity);
         it.putExtra("tema", temaSelecionado);
+        it.putExtra("idTema", idTema);
         startActivity(it);
         finish();
     }

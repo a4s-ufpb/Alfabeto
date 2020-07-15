@@ -1,16 +1,28 @@
 package com.napoleao.alphabeto.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.napoleao.alphabeto.R;
 import com.napoleao.alphabeto.activity.util.ComponentesAuxiliares;
+import com.napoleao.alphabeto.adapter.TemasAdapter;
 import com.napoleao.alphabeto.controller.GerenteDeDesafios;
+import com.napoleao.alphabeto.controller.RecyclerItemClickListener;
+import com.napoleao.alphabeto.helper.dao.TemasDAO;
+import com.napoleao.alphabeto.model.Tema;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int TEMA_CORES = 0;
@@ -26,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             R.id.txtBrinquedos, R.id.txtPartesDoCorpo, R.id.txtPaises};
     private GerenteDeDesafios gerenteDeDesafios;
     private ComponentesAuxiliares componentesAuxiliares;
+    private RecyclerView recyclerView;
+    private List<Tema> temasImportados = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +50,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         gerenteDeDesafios = new GerenteDeDesafios();
         componentesAuxiliares = new ComponentesAuxiliares();
+        recyclerView = findViewById(R.id.recyclerTemas);
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Handler handler = new Handler();
+                        handler.postDelayed(() -> {
+                            Intent intent = new Intent(MainActivity.this, NiveisActivity.class);
+                            intent.putExtra("idTema", temasImportados.get(position).getId());
+                            gerenteDeDesafios.ditarPalavra(temasImportados.get(position).getNomeImagem());
+                            startActivity(intent);
+                            finish();
+                        },1300);
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+                        Tema temaSelecionado = temasImportados.get(position);
+
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this, R.style.AlertDialogStyle);
+                        dialog.setTitle("Remover");
+                        dialog.setMessage("Você deseja remover o tema " + temaSelecionado.getNomeImagem() + "?");
+                        dialog.setPositiveButton("Sim", (dialog1, which) -> {
+                            TemasDAO temasDAO = new TemasDAO(getApplicationContext());
+                            if (temasDAO.delete(temaSelecionado)){
+                                configureRecyclerView();
+                                Toast.makeText(getApplicationContext(), "Tema removido com sucesso!", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(getApplicationContext(), "Erro ao remover tema!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                        dialog.setNegativeButton("Não", null);
+
+                        dialog.create();
+                        dialog.show();
+                    }
+
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    }
+                })
+        );
+
+        configureRecyclerView();
     }
 
     @Override
@@ -90,9 +150,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 temaSelecionado = TEMA_PARTES_DO_CORPO;
                 invocarIntent();
                 break;
+            case R.id.btnImport:
+                Intent it = new Intent(MainActivity.this, ImportTemasActivity.class);
+                startActivity(it);
+                finish();
             case R.id.btnMenuInicial:
                 onBackPressed();
         }
+    }
+
+    private void recuperarTemasSalvos(){
+        TemasDAO temasDAO = new TemasDAO(getApplicationContext());
+        temasImportados = temasDAO.findAll();
+    }
+
+    /**
+     * Configura o RecyclerView.
+     */
+    private void configureRecyclerView(){
+        recuperarTemasSalvos();
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        TemasAdapter temasAdapter = new TemasAdapter(MainActivity.this, temasImportados);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(temasAdapter);
     }
 
     /**
@@ -101,14 +182,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void invocarIntent(){
         Handler handler = new Handler();
 
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent it = new Intent(MainActivity.this, NiveisActivity.class);
-                it.putExtra("tema", temaSelecionado);
-                startActivity(it);
-                finish();
-            }
+        handler.postDelayed(() -> {
+            Intent it = new Intent(MainActivity.this, NiveisActivity.class);
+            it.putExtra("tema", temaSelecionado);
+            startActivity(it);
+            finish();
         }, 1300);
     }
 

@@ -27,9 +27,10 @@ public class ComponentesAuxiliares {
      * @param classe Activity a ser chamada
      * @param select Inteiro que define o tema dos desafios
      */
-    public void invocarIntent(Context context, Class classe, int select){
+    public void invocarIntent(Context context, Class classe, int select, Long idTema){
         Intent it = new Intent(context, classe);
         it.putExtra("tema", select);
+        it.putExtra("idTema", idTema);
         context.startActivity(it);
         ((Activity) context).finish();
     }

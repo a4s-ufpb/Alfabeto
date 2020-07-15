@@ -4,7 +4,7 @@
     package="com.napoleao.alphabeto">
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,11 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/AlfabetoTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name=".activity.SobreActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ConfiguracoesActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ImportTemasActivity"></activity>
+        <activity
+            android:name=".activity.SobreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ConfiguracoesActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SplashScreenActivity"
             android:screenOrientation="portrait">

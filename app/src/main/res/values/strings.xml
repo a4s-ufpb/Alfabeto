@@ -11,6 +11,7 @@
     <string name="paises">Países</string>
     <string name="brinquedos">Brinquedos</string>
     <string name="partes_corpo">Partes do Corpo</string>
+    <string name="importar">Importar Temas</string>
     <string name="a">a</string>
     <string name="b">b</string>
     <string name="c">c</string>
@@ -84,6 +85,10 @@
     <string name="op1">Opção 01</string>
     <string name="op2">Opção 02</string>
     <string name="op3">Opção 03</string>
+
+    <string name="id">"Digite o número de ID do Tema (Contexto):</string>
+    <string name="import_label">"Importar"</string>
+    <string name="save">Salvar</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
