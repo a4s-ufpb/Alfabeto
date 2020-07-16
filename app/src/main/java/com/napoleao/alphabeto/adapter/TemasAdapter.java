@@ -1,8 +1,6 @@
 package com.napoleao.alphabeto.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.napoleao.alphabeto.R;
-import com.napoleao.alphabeto.activity.NiveisActivity;
-import com.napoleao.alphabeto.controller.SingletonAudio;
 import com.napoleao.alphabeto.model.Tema;
 import com.squareup.picasso.Picasso;
 

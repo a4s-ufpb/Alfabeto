@@ -55,14 +55,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new RecyclerItemClickListener(this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
+                        componentesAuxiliares.impedirDuploClique(MainActivity.this);
+                        gerenteDeDesafios.ditarPalavra(temasImportados.get(position).getNomeImagem());
                         Handler handler = new Handler();
                         handler.postDelayed(() -> {
                             Intent intent = new Intent(MainActivity.this, NiveisActivity.class);
                             intent.putExtra("idTema", temasImportados.get(position).getId());
-                            gerenteDeDesafios.ditarPalavra(temasImportados.get(position).getNomeImagem());
                             startActivity(intent);
                             finish();
-                        },1300);
+                        },1000);
                     }
 
                     @Override
