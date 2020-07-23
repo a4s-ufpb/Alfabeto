@@ -25,70 +25,76 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ImportTemasActivity extends AppCompatActivity {
+public class ImportTemasByIdActivity extends AppCompatActivity {
 
     private Tema tema;
     private ConstraintLayout constraintLayout;
     private ImageView imageTema;
     private TextView txtNameTema, txtQuantDesafios;
+    private EditText idContext;
     private ProgressBar progressBar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_import_temas);
+        setContentView(R.layout.activity_import_by_id);
 
         constraintLayout = findViewById(R.id.constraintImport);
         progressBar = findViewById(R.id.progressBar);
         imageTema = findViewById(R.id.imageTemaImportado);
         txtNameTema = findViewById(R.id.textNameTemaImportado);
         txtQuantDesafios = findViewById(R.id.textQuantDesafios);
+        idContext = findViewById(R.id.editIdContext);
     }
 
     public void importContext(View view){
-        EditText idContext = findViewById(R.id.editIdContext);
         String idToSearch = idContext.getText().toString();
-        Long id = Long.parseLong(idToSearch);
-        Log.d("LONG", id.toString());
-        progressBar.setVisibility(View.VISIBLE);
-        Call call = new RetrofitConfig().contextService().getContextById(id);
-        call.enqueue(new Callback<Tema>() {
-            @Override
-            public void onResponse(Call<Tema> call, Response<Tema> response) {
-                if (response.isSuccessful()){
-                    Log.d("DEBUG", "Entrou");
-                    tema = response.body();
-                    txtNameTema.setText(tema.getNomeImagem());
-                    carregarImagem();
-                    txtQuantDesafios.setText(Integer.toString(tema.getChallenges().size()) + " Desafios");
-                    progressBar.setVisibility(View.GONE);
-                    constraintLayout.setVisibility(View.VISIBLE);
-                }else {
-                    Toast.makeText(getApplicationContext(), "Tema não encontrado, verifique o ID!", Toast.LENGTH_LONG).show();
-                    progressBar.setVisibility(View.GONE);
+        if (idToSearch.isEmpty()){
+            Toast.makeText(ImportTemasByIdActivity.this, "Insira um número de ID!", Toast.LENGTH_SHORT).show();
+        }else{
+            Long id = Long.parseLong(idToSearch);
+            Log.d("LONG", id.toString());
+            progressBar.setVisibility(View.VISIBLE);
+            Call call = new RetrofitConfig().contextService().getContextById(id);
+            call.enqueue(new Callback<Tema>() {
+                @Override
+                public void onResponse(Call<Tema> call, Response<Tema> response) {
+                    if (response.isSuccessful()){
+                        Log.d("DEBUG", "Entrou");
+                        tema = response.body();
+                        txtNameTema.setText(tema.getNomeImagem());
+                        carregarImagem();
+                        txtQuantDesafios.setText(Integer.toString(tema.getChallenges().size()) + " Desafios");
+                        progressBar.setVisibility(View.GONE);
+                        constraintLayout.setVisibility(View.VISIBLE);
+                    }else {
+                        Toast.makeText(getApplicationContext(), "Tema não encontrado, verifique o ID!", Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Houve um erro na requisição. Tente novamente!", Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onFailure(Call call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Houve um erro na requisição. Tente novamente!", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
     }
 
     public void salvarTema(View view){
         TemasDAO temasDAO = new TemasDAO(getApplicationContext());
         ChallengesDAO challengesDAO = new ChallengesDAO(getApplicationContext());
+        if (tema == null){
+            Toast.makeText(getApplicationContext(), "Erro! Você carregou algum tema?", Toast.LENGTH_LONG).show();
 
-        if (temasDAO.save(tema)){
+        }else {
+            temasDAO.save(tema);
+            for (Challenge c: tema.getChallenges()){
+                c.setIdTema(tema.getId());
+                Log.d("DESAFIO", "Desafio attr: " + c.getId());
+                challengesDAO.save(c);
+            }
             Toast.makeText(getApplicationContext(), "Tema salvo com sucesso!", Toast.LENGTH_SHORT).show();
-        }
-
-        for (Challenge c: tema.getChallenges()){
-            c.setIdTema(tema.getId());
-            Log.d("DESAFIO", "Desafio attr: " + c.getId());
-            challengesDAO.save(c);
         }
     }
 
@@ -109,7 +115,7 @@ public class ImportTemasActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent it = new Intent(ImportTemasActivity.this, MainActivity.class);
+        Intent it = new Intent(ImportTemasByIdActivity.this, ImportOptionsActivity.class);
         startActivity(it);
         finish();
     }

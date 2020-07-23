@@ -87,8 +87,19 @@
     <string name="op3">Opção 03</string>
 
     <string name="id">"Digite o número de ID do Tema (Contexto):</string>
-    <string name="import_label">"Importar"</string>
+    <string name="import_label_id">"Importar por ID"</string>
     <string name="save">Salvar</string>
+
+    <string name="menu_import">Importar</string>
+    <string name="tipo_importacao">Selecione o modo de importação:</string>
+    <string name="ou">Ou</string>
+    <string name="import_mail">Importação por e-mail</string>
+    <string name="import_id">Importação por número de ID</string>
+
+    <string name="import_label_mail">"Importar por E-mail"</string>
+    <string name="email">E-mail</string>
+    <string name="senha">Senha</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

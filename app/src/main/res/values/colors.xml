@@ -5,4 +5,5 @@
     <color name="colorAccent">#00FFFF</color>
     <color name="white">#FFFFFF</color>
     <color name="textColor">#000000</color>
+    <color name="error">#FF0033</color>
 </resources>

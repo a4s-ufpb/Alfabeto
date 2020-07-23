@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 invocarIntent();
                 break;
             case R.id.btnImport:
-                Intent it = new Intent(MainActivity.this, ImportTemasActivity.class);
+                Intent it = new Intent(MainActivity.this, ImportOptionsActivity.class);
                 startActivity(it);
                 finish();
             case R.id.btnMenuInicial:
