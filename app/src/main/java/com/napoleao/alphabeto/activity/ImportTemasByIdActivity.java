@@ -86,7 +86,8 @@ public class ImportTemasByIdActivity extends AppCompatActivity {
         ChallengesDAO challengesDAO = new ChallengesDAO(getApplicationContext());
         if (tema == null){
             Toast.makeText(getApplicationContext(), "Erro! Você carregou algum tema?", Toast.LENGTH_LONG).show();
-
+        }else if (tema.getChallenges().isEmpty()){
+            Toast.makeText(getApplicationContext(), "Erro! Este contexto não possui desafios!", Toast.LENGTH_LONG).show();
         }else {
             temasDAO.save(tema);
             for (Challenge c: tema.getChallenges()){

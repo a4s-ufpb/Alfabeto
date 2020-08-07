@@ -44,8 +44,9 @@ public class GerenteDeDesafios {
      */
     //Recebe o nome do desafio, deixa as consoantes e transforma as vogais em espaços.
     public String definirPalavraVogal(String vogal) {
+
         char[] caracteres = {'a','e','i','o','u'};
-        char[] palavra = vogal.toCharArray();
+        char[] palavra = vogal.toLowerCase().toCharArray();
 
         for(int i = 0; i < palavra.length; i++){
             for (char caractere : caracteres) {
@@ -67,7 +68,7 @@ public class GerenteDeDesafios {
     public String definirPalavraConsoante(String consoante){
         char[] caracteres = {'b','c','d','f','g','h','j','k','l','m','n','p','q',
                 'r','s','t','v','w','x','y','z'};
-        char[] palavra = consoante.toCharArray();
+        char[] palavra = consoante.toLowerCase().toCharArray();
 
         for(int i = 0; i < palavra.length; i++){
             for (char caractere : caracteres) {
@@ -89,7 +90,7 @@ public class GerenteDeDesafios {
     public String definirPalavraAlfabeto(String alfabeto){
         char[] caracteres = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q',
                 'r','s','t','u','v','w','x','y','z'};
-        char[] palavra = alfabeto.toCharArray();
+        char[] palavra = alfabeto.toLowerCase().toCharArray();
 
         for(int i = 0; i < palavra.length; i++){
             for (char caractere : caracteres) {

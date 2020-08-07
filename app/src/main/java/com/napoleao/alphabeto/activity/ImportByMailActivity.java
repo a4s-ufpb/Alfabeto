@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.napoleao.alphabeto.R;
 import com.napoleao.alphabeto.adapter.TemasAdapter;
+import com.napoleao.alphabeto.adapter.TemasAdapterImportByMail;
 import com.napoleao.alphabeto.helper.RetrofitConfig;
 import com.napoleao.alphabeto.helper.dao.ChallengesDAO;
 import com.napoleao.alphabeto.helper.dao.TemasDAO;
@@ -38,6 +39,7 @@ public class ImportByMailActivity extends AppCompatActivity {
     private EditText editEmail;
     private ProgressBar progressBarEmail;
     private RecyclerView recyclerImportByMail;
+    private List<Tema> temasSelecionados = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,10 +143,11 @@ public class ImportByMailActivity extends AppCompatActivity {
      */
     private void configureRecyclerView(){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        TemasAdapter temasAdapter = new TemasAdapter(ImportByMailActivity.this, user.getContexts());
+        TemasAdapterImportByMail temasAdapterImportByMail = new TemasAdapterImportByMail(ImportByMailActivity.this, user.getContexts());
         recyclerImportByMail.setLayoutManager(layoutManager);
         recyclerImportByMail.setHasFixedSize(true);
-        recyclerImportByMail.setAdapter(temasAdapter);
+        recyclerImportByMail.setAdapter(temasAdapterImportByMail);
+        temasSelecionados = temasAdapterImportByMail.getTemasSelecionados();
     }
 
     public void voltar(View view){
@@ -158,16 +161,17 @@ public class ImportByMailActivity extends AppCompatActivity {
         if (user == null){
             Toast.makeText(getApplicationContext(), "Erro! Nenhum contexto carregado!\nVocê inseriu algum e-mail?", Toast.LENGTH_LONG).show();
         }else{
-            for (Tema t: user.getContexts()){
-                temasDAO.save(t);
+            for (Tema t: temasSelecionados){
+                if (!t.getChallenges().isEmpty()){
+                    temasDAO.save(t);
 
-                for (Challenge c: t.getChallenges()){
-                    c.setIdTema(t.getId());
-                    Log.d("DESAFIO", "Desafio attr: " + c.getId());
-                    challengesDAO.save(c);
+                    for (Challenge c: t.getChallenges()){
+                        c.setIdTema(t.getId());
+                        Log.d("DESAFIO", "Desafio attr: " + c.getId());
+                        challengesDAO.save(c);
+                    }
                 }
             }
-
             Toast.makeText(ImportByMailActivity.this, "Temas salvos com sucesso!", Toast.LENGTH_LONG).show();
         }
     }
@@ -179,4 +183,5 @@ public class ImportByMailActivity extends AppCompatActivity {
         startActivity(it);
         finish();
     }
+
 }

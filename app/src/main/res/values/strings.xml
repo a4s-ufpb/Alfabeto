@@ -89,6 +89,7 @@
     <string name="id">"Digite o número de ID do Tema (Contexto):</string>
     <string name="import_label_id">"Importar por ID"</string>
     <string name="save">Salvar</string>
+    <string name="import_tema">Importar Tema</string>
 
     <string name="menu_import">Importar</string>
     <string name="tipo_importacao">Selecione o modo de importação:</string>

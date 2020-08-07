@@ -104,7 +104,7 @@ public class VogalActivity extends AppCompatActivity implements View.OnClickList
         String resposta = gerenteDeDesafios.verificarAlternativa(this, alternativa,listDesafios.get(indice).getWord(),desafio, jogador);
         txtQuiz.setText(gerenteDeDesafios.dandoEspacos(resposta));
 
-        boolean acertou = gerenteDeDesafios.verificaResposta(listDesafios.get(indice).getWord(), resposta);
+        boolean acertou = gerenteDeDesafios.verificaResposta(listDesafios.get(indice).getWord().toLowerCase(), resposta);
         if (acertou){
             animationView.playAnimation();
             GerenteDeDesafios.acertou(this, AppConfig.getInstance(this).getCurrentSound());
