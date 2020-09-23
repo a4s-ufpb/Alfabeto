@@ -101,7 +101,7 @@ public class VogalActivity extends AppCompatActivity implements View.OnClickList
      * @param alternativa Caractere escolhido (botão clicado no teclado).
      */
     private void verificaResposta(char alternativa){
-        String resposta = gerenteDeDesafios.verificarAlternativa(this, alternativa,listDesafios.get(indice).getWord(),desafio, jogador);
+        String resposta = gerenteDeDesafios.verificarAlternativa(this, alternativa,listDesafios.get(indice).getWord().toLowerCase(),desafio, jogador);
         txtQuiz.setText(gerenteDeDesafios.dandoEspacos(resposta));
 
         boolean acertou = gerenteDeDesafios.verificaResposta(listDesafios.get(indice).getWord().toLowerCase(), resposta);
