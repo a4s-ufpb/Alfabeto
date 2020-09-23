@@ -8,7 +8,7 @@
     tools:context=".activity.ImportOptionsActivity">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txtImportTemasLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -34,13 +34,13 @@
         android:contentDescription="@string/menu_anterior"
         android:onClick="voltar"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/txtBack3"
+        app:layout_constraintBottom_toTopOf="@+id/txtBackImportLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtBack3"
+        android:id="@+id/txtBackImportLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -68,14 +68,14 @@
         android:textStyle="bold"
         app:backgroundTint="@android:color/transparent"
         app:icon="@drawable/email"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintBottom_toTopOf="@+id/txtOrLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/txtImportModeLabel" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/txtImportModeLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -93,10 +93,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/txtImportTemasLabel" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/txtOrLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/luckiest_guy"
@@ -127,7 +127,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/txtOrLabel" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
