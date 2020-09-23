@@ -183,16 +183,19 @@ public class GerenteDeDesafios {
      */
     public List<Challenge> randomListDesafios(List<Challenge> desafios){
         List<Challenge> desafiosRandom = new ArrayList<>();
-        Set<Integer> indices = new HashSet<>();
-        Random random = new Random();
+        Random gerador = new Random();
+        List<Integer> valores = new ArrayList<>();
 
-        for (int i = 0; i < desafios.size(); i++){
-            indices.add(random.nextInt(desafios.size()));
+        while (valores.size() < desafios.size()) {
+            Integer num = gerador.nextInt(desafios.size());
+            if (!valores.contains(num)) {
+                valores.add(num);
+                System.out.println(num);
+            }
         }
-        Integer[] indicesConvertidos = indices.toArray(new Integer[indices.size()]);
 
-        for (Integer indicesConvertido : indicesConvertidos) {
-            desafiosRandom.add(desafios.get(indicesConvertido));
+        for (int i = 0; i < valores.size(); i++){
+            desafiosRandom.add(desafios.get(valores.get(i)));
         }
 
         return desafiosRandom;
