@@ -39,6 +39,9 @@ public class TemasAdapterImportByMail extends RecyclerView.Adapter<TemasAdapterI
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final Tema tema = temasImportados.get(position);
         holder.textNameTema.setText(tema.getNomeImagem());
+        String quantDesafios = "(" + tema.getChallenges().size() + " DESAFIOS)";
+        holder.textQuantDesafios.setText(quantDesafios);
+
         holder.checkBox.setOnClickListener(view -> {
             if (holder.checkBox.isChecked()){
                 temasSelecionados.add(tema);
@@ -63,6 +66,7 @@ public class TemasAdapterImportByMail extends RecyclerView.Adapter<TemasAdapterI
 
         ImageView imageTema;
         TextView textNameTema;
+        TextView textQuantDesafios;
         CheckBox checkBox;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -71,6 +75,7 @@ public class TemasAdapterImportByMail extends RecyclerView.Adapter<TemasAdapterI
             imageTema = itemView.findViewById(R.id.imageTema);
             textNameTema = itemView.findViewById(R.id.textNameTema);
             checkBox = itemView.findViewById(R.id.checkBox);
+            textQuantDesafios = itemView.findViewById(R.id.textQuantDesafios);
         }
     }
 
