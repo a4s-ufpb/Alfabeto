@@ -53,7 +53,6 @@ public class ImportTemasByIdActivity extends AppCompatActivity {
             Toast.makeText(ImportTemasByIdActivity.this, "Insira um número de ID!", Toast.LENGTH_SHORT).show();
         }else{
             Long id = Long.parseLong(idToSearch);
-            Log.d("LONG", id.toString());
             progressBar.setVisibility(View.VISIBLE);
             Call call = new RetrofitConfig().contextService().getContextById(id);
             call.enqueue(new Callback<Tema>() {
@@ -64,7 +63,8 @@ public class ImportTemasByIdActivity extends AppCompatActivity {
                         tema = response.body();
                         txtNameTema.setText(tema.getNomeImagem());
                         carregarImagem();
-                        txtQuantDesafios.setText(Integer.toString(tema.getChallenges().size()) + " Desafios");
+                        String quantDesafios = "("+tema.getChallenges().size() + " Desafios)";
+                        txtQuantDesafios.setText(quantDesafios);
                         progressBar.setVisibility(View.GONE);
                         constraintLayout.setVisibility(View.VISIBLE);
                     }else {
@@ -76,6 +76,7 @@ public class ImportTemasByIdActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call call, Throwable t) {
                     Toast.makeText(getApplicationContext(), "Houve um erro na requisição. Tente novamente!", Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.GONE);
                 }
             });
         }
@@ -89,13 +90,17 @@ public class ImportTemasByIdActivity extends AppCompatActivity {
         }else if (tema.getChallenges().isEmpty()){
             Toast.makeText(getApplicationContext(), "Erro! Este contexto não possui desafios!", Toast.LENGTH_LONG).show();
         }else {
-            temasDAO.save(tema);
-            for (Challenge c: tema.getChallenges()){
-                c.setIdTema(tema.getId());
-                Log.d("DESAFIO", "Desafio attr: " + c.getId());
-                challengesDAO.save(c);
+            if (temasDAO.save(tema)){
+                for (Challenge c: tema.getChallenges()){
+                    c.setIdTema(tema.getId());
+                    Log.d("DESAFIO", "Desafio attr: " + c.getId());
+                    challengesDAO.save(c);
+                }
+                Toast.makeText(getApplicationContext(), "Tema salvo com sucesso!", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(getApplicationContext(), "Ops! Esse tema já foi salvo anteriormente!", Toast.LENGTH_SHORT).show();
+
             }
-            Toast.makeText(getApplicationContext(), "Tema salvo com sucesso!", Toast.LENGTH_SHORT).show();
         }
     }
 
