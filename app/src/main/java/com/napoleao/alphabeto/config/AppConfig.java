@@ -28,9 +28,9 @@ public class AppConfig  {
             if(sPreferences == null) {
                 sPreferences = appContext.getSharedPreferences("configs", MODE_PRIVATE);
             }
-            this.currentLetterType = sPreferences.getString("letter_type", "casual");
-            this.currentLetterCase = sPreferences.getString("letter_case", "maiúsculas");
-            this.currentSound = sPreferences.getString("hit_sound", "Opção 03");
+            this.currentLetterType = sPreferences.getString("letter_type", BASTAO);
+            this.currentLetterCase = sPreferences.getString("letter_case", UPPER);
+            this.currentSound = sPreferences.getString("hit_sound", OPCAO03);
             this.currentButtonConfig = sPreferences.getString("button_font_preferences", "fonts/bastão.ttf");
             this.currentButtonCase = sPreferences.getBoolean("button_case_preferences", true);
         } catch (Exception e) {
