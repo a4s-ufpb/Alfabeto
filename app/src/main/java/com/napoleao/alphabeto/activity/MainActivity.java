@@ -18,6 +18,7 @@ import com.napoleao.alphabeto.activity.util.ComponentesAuxiliares;
 import com.napoleao.alphabeto.adapter.TemasAdapter;
 import com.napoleao.alphabeto.controller.GerenteDeDesafios;
 import com.napoleao.alphabeto.controller.RecyclerItemClickListener;
+import com.napoleao.alphabeto.helper.ApiConfig;
 import com.napoleao.alphabeto.helper.dao.TemasDAO;
 import com.napoleao.alphabeto.model.Tema;
 
@@ -47,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         instanciarTextButtons();
+
+        // Init ApiConfig
+        ApiConfig.getInstance(getApplicationContext());
 
         gerenteDeDesafios = new GerenteDeDesafios();
         componentesAuxiliares = new ComponentesAuxiliares();

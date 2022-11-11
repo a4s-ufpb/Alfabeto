@@ -138,7 +138,7 @@ public class ConfiguracoesActivity extends AppCompatActivity implements View.OnC
      */
     public void saveChanges(View view){
         pushChanges();
-        this.configurator.saveAllChange(getApplicationContext());
+        this.configurator.saveAllChange();
         this.recreate();
         Toast.makeText(this, "Configurações salvas com sucesso!", Toast.LENGTH_SHORT).show();
     }
