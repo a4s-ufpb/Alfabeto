@@ -120,6 +120,10 @@ public class ImportByMailActivity extends AppCompatActivity {
                 }
             }
             Toast.makeText(ImportByMailActivity.this, contSucessos + " novo(s) tema(s) salvo(s)!", Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent(ImportByMailActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
     }
 

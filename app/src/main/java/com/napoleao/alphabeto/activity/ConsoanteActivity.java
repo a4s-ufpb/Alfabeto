@@ -76,7 +76,7 @@ public class ConsoanteActivity extends AppCompatActivity implements View.OnClick
         componentesAuxiliares.instanciarBotoes(botoesConsoantes, this, botoes, this);
         animationView = findViewById(R.id.animationConsoantes);
 
-        gerenteDeDesafios.setAtributosConsoantes(imagem, txtQuiz, listDesafios, indice, tipoImagem);
+        gerenteDeDesafios.setAtributosConsoantes(imagem, txtQuiz, listDesafios, indice, tipoImagem, getApplicationContext());
 
         //Definindo os primeiros elementos a serem iniciados
         txtQuiz.setText(gerenteDeDesafios.definirPalavraConsoante(gerenteDeDesafios.dandoEspacos(listDesafios.get(indice).getWord())));
@@ -119,7 +119,7 @@ public class ConsoanteActivity extends AppCompatActivity implements View.OnClick
                 handle.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        gerenteDeDesafios.setAtributosConsoantes(imagem, txtQuiz, listDesafios, indice, tipoImagem);
+                        gerenteDeDesafios.setAtributosConsoantes(imagem, txtQuiz, listDesafios, indice, tipoImagem, getApplicationContext());
                         desafio = gerenteDeDesafios.definirPalavraConsoante(listDesafios.get(indice).getWord()).toCharArray();
                         //Mudando o desafio. Para isso é chamado o método que seta a quantidade de espaços que formam a palavra
                         txtQuiz.setText(gerenteDeDesafios.definirPalavraConsoante(gerenteDeDesafios.dandoEspacos(listDesafios.get(indice).getWord())));

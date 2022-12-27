@@ -74,7 +74,7 @@ public class VogalActivity extends AppCompatActivity implements View.OnClickList
         componentesAuxiliares.instanciarBotoes(botoesVogais, this, botoes, this);
         animationView = findViewById(R.id.animationVogais);
 
-        gerenteDeDesafios.setAtributosVogais(imagem, txtQuiz, listDesafios, indice, tipoImagem);
+        gerenteDeDesafios.setAtributosVogais(imagem, txtQuiz, listDesafios, indice, tipoImagem, this);
 
         //Definindo os primeiros elementos a serem iniciados
         txtQuiz.setText(gerenteDeDesafios.dandoEspacos(gerenteDeDesafios.definirPalavraVogal(listDesafios.get(indice).getWord())));
@@ -115,7 +115,7 @@ public class VogalActivity extends AppCompatActivity implements View.OnClickList
                 componentesAuxiliares.desligarBotoes(botoes, botoesVogais);
                 Handler handle = new Handler();
                 handle.postDelayed(() -> {
-                    gerenteDeDesafios.setAtributosVogais(imagem, txtQuiz, listDesafios, indice, tipoImagem);
+                    gerenteDeDesafios.setAtributosVogais(imagem, txtQuiz, listDesafios, indice, tipoImagem, getApplicationContext());
                     desafio = gerenteDeDesafios.definirPalavraVogal(listDesafios.get(indice).getWord()).toCharArray();
                     //Mudando o desafio. Para isso é chamado o método que seta a quantidade de espaços que formam a palavra
                     txtQuiz.setText(gerenteDeDesafios.dandoEspacos(gerenteDeDesafios.definirPalavraVogal(listDesafios.get(indice).getWord())));

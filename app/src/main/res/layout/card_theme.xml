@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="8dp"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/themeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <FrameLayout
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="#00FFFFFF"
+                app:cardCornerRadius="8dp">
+
+                <ImageView
+                    android:id="@+id/img_left"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:contentDescription="image"
+                    android:onClick="imageButtonComida"
+                    android:scaleType="fitXY"
+                    tools:visibility="visible" />
+
+                <com.napoleao.alphabeto.config.AlphaTextView
+                    android:id="@+id/tv_theme_name_left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="#af000000"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:padding="4dp"
+                    android:text="Tema"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
+
+                <ImageButton
+                    android:id="@+id/btnDel"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right|top"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_rounded_backgroud_2"
+                    android:fadingEdge="horizontal"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    android:tint="#8F3D59"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/ic_baseline_delete_24" />
+
+                <ImageButton
+                    android:id="@+id/btnEdit"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="top|left"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_rounded_backgroud_left"
+                    android:fadingEdge="horizontal"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    android:visibility="invisible"
+                    app:srcCompat="@android:drawable/ic_menu_edit" />
+            </androidx.cardview.widget.CardView>
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

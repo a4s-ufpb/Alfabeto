@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static String DB_NAME = "ALFABETO_DB";
+    public static String DB_NAME = "ALFABETO_DB_v1";
     public static String TABLE_TEMAS = "temas";
     public static String TABLE_DESAFIOS = "desafios";
     public static int VERSION = 1;
@@ -19,12 +19,12 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String sqlTemas = "CREATE TABLE IF NOT EXISTS " + TABLE_TEMAS +
-                " (idTema LONG PRIMARY KEY, nomeImagem TEXT," +
-                " imagemUrl TEXT, UNIQUE(idTema, nomeImagem))";
+                " (idTema INTEGER PRIMARY KEY AUTOINCREMENT, nomeImagem TEXT," +
+                " imagemUrl TEXT)";
 
         String sqlDesafios = "CREATE TABLE IF NOT EXISTS " + TABLE_DESAFIOS +
-                " (idDesafio LONG PRIMARY KEY, word TEXT," +
-                " imageUrl TEXT, idTema LONG, FOREIGN KEY (idTema) REFERENCES " + TABLE_TEMAS + "(idTema))";
+                " (idDesafio INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT," +
+                " imageUrl TEXT, idTema INTEGER, FOREIGN KEY (idTema) REFERENCES " + TABLE_TEMAS + "(idTema))";
 
         try {
             sqLiteDatabase.execSQL(sqlTemas);

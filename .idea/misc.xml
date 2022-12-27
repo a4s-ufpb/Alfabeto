@@ -3,13 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout-sw600dp/activity_create.xml" value="0.13465952563121653" />
+        <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout-sw600dp/activity_create.xml" value="0.33" />
         <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout-sw600dp/activity_import_by_mail.xml" value="0.13465952563121653" />
         <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout-sw600dp/activity_import_options.xml" value="0.13465952563121653" />
         <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout/activity_create.xml" value="0.17831813576494426" />
         <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout/activity_import_by_id.xml" value="0.17831813576494426" />
         <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout/activity_import_by_mail.xml" value="0.17831813576494426" />
         <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout/activity_import_options.xml" value="0.17831813576494426" />
+        <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout/activity_main.xml" value="0.16304347826086957" />
+        <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout/card_theme.xml" value="0.1" />
       </map>
     </option>
   </component>

@@ -8,9 +8,9 @@ import android.widget.TextView;
 
 import com.napoleao.alphabeto.R;
 import com.napoleao.alphabeto.activity.util.ComponentesAuxiliares;
+import com.napoleao.alphabeto.activity.util.ImageLoadUtil;
 import com.napoleao.alphabeto.model.Challenge;
 import com.napoleao.alphabeto.model.Tema;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -219,19 +219,13 @@ public class GerenteDeDesafios {
      * @param temas Lista dos temas carregados
      * @param indice Índice atual da lista de temas
      */
-    public void setAtributosVogais(ImageView imagem, TextView textoImagem, List<Challenge> temas, int indice, int tipoImagem){
+    public void setAtributosVogais(ImageView imagem, TextView textoImagem, List<Challenge> temas, int indice, int tipoImagem, Context context){
         if (tipoImagem == 0){
             imagem.setImageResource(temas.get(indice).getIdImagem());
             textoImagem.setText(definirPalavraVogal(temas.get(indice).getWord()));
         }else {
-            Picasso.get()
-                    .load(temas.get(indice).getImageUrl())
-                    .fit()
-                    .error(R.drawable.error)
-                    .centerInside()
-                    .into(imagem);
+            ImageLoadUtil.getInstance().loadImage(temas.get(indice).getImageUrl(), imagem, context);
         }
-
     }
 
     /**
@@ -241,17 +235,12 @@ public class GerenteDeDesafios {
      * @param temas Lista dos temas carregados
      * @param indice Índice atual da lista de temas
      */
-    public void setAtributosConsoantes(ImageView imagem, TextView textoImagem, List<Challenge> temas, int indice, int tipoImagem){
+    public void setAtributosConsoantes(ImageView imagem, TextView textoImagem, List<Challenge> temas, int indice, int tipoImagem, Context context){
         if (tipoImagem == 0){
             imagem.setImageResource(temas.get(indice).getIdImagem());
             textoImagem.setText(definirPalavraConsoante(temas.get(indice).getWord()));
         }else {
-            Picasso.get()
-                    .load(temas.get(indice).getImageUrl())
-                    .fit()
-                    .error(R.drawable.error)
-                    .centerInside()
-                    .into(imagem);
+            ImageLoadUtil.getInstance().loadImage(temas.get(indice).getImageUrl(), imagem, context);
         }
     }
 
@@ -262,17 +251,12 @@ public class GerenteDeDesafios {
      * @param temas Lista dos temas carregados
      * @param indice Índice atual da lista de temas
      */
-    public void setAtributosAlfabeto(ImageView imagem, TextView textoImagem, List<Challenge> temas, int indice, int tipoImagem){
+    public void setAtributosAlfabeto(ImageView imagem, TextView textoImagem, List<Challenge> temas, int indice, int tipoImagem, Context context){
         if (tipoImagem == 0){
             imagem.setImageResource(temas.get(indice).getIdImagem());
             textoImagem.setText(definirPalavraAlfabeto(temas.get(indice).getWord()));
         }else {
-            Picasso.get()
-                    .load(temas.get(indice).getImageUrl())
-                    .fit()
-                    .error(R.drawable.error)
-                    .centerInside()
-                    .into(imagem);
+            ImageLoadUtil.getInstance().loadImage(temas.get(indice).getImageUrl(), imagem, context);
         }
     }
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context=".activity.ImportTemasByIdActivity">
+    tools:context=".activity.CreateTemaActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:fontFamily="@font/luckiest_guy"
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:fontFamily="@font/luckiest_guy"
@@ -227,6 +227,7 @@
                                 android:alpha="0.8"
                                 android:text="Cancelar"
                                 android:visibility="gone"
+                                app:backgroundTint="#B2008577"
                                 tools:visibility="gone" />
 
                             <Button
@@ -253,7 +254,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginRight="10dp"
+                android:background="@drawable/recycler_view">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/palavrasRows"

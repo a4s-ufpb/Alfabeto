@@ -5,48 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context=".activity.ImportTemasByIdActivity">
-
-    <ImageButton
-        android:id="@+id/btnVoltarImportar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/voltar"
-        android:onClick="voltar"
-        android:padding="5dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/txtBack2"
-        app:layout_constraintEnd_toStartOf="@+id/btnSalvarImportar"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/botao_tela_anterior" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtBack2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center|center_horizontal"
-        android:text="@string/voltar"
-        android:textColor="@android:color/white"
-        android:textSize="25sp"
-        app:fontFamily="@font/luckiest_guy"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btnVoltarImportar"
-        app:layout_constraintStart_toStartOf="@+id/btnVoltarImportar" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtSave2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center|center_horizontal"
-        android:text="@string/save"
-        android:textColor="@android:color/white"
-        android:textSize="25sp"
-        app:fontFamily="@font/luckiest_guy"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btnSalvarImportar"
-        app:layout_constraintStart_toStartOf="@+id/btnSalvarImportar" />
+    tools:context=".activity.CreateTemaActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -59,151 +18,305 @@
         android:layout_marginRight="8dp"
         android:fontFamily="@font/luckiest_guy"
         android:gravity="center"
-        android:text="@string/importar"
+        android:text="@string/import_label_create"
         android:textAllCaps="true"
         android:textColor="@color/white"
-        android:textSize="70sp"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:fontFamily="@font/luckiest_guy"
-        android:gravity="center"
-        android:text="@string/id"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/editIdContext"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@id/btnVoltarImportar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/textView">
 
-    <EditText
-        android:id="@+id/editIdContext"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/luckiest_guy"
+                android:gravity="center"
+                android:text="@string/create_name_tema"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="#00FFFFFF"
+                app:cardCornerRadius="10dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="10dp">
+
+                        <ImageView
+                            android:id="@+id/imageView72"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+                        <ImageView
+                            android:id="@+id/imageView102"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|right"
+                            app:srcCompat="@android:drawable/ic_menu_add"
+                            tools:ignore="ImageContrastCheck" />
+                    </FrameLayout>
+
+                    <View
+                        android:id="@+id/view2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="154dp"
+                        android:alpha="0.7" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tlIdTheme2"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_margin="10dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/theme_name2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_marginTop="4dp"
+                            android:hint="Nome do Tema"
+                            android:imeOptions="actionDone"
+                            android:singleLine="true" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </FrameLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/luckiest_guy"
+                android:gravity="center"
+                android:text="@string/create_name_palavra"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardBackgroundColor="#00FFFFFF"
+                    app:cardCornerRadius="10dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp">
+
+                        <FrameLayout
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="10dp">
+
+                            <ImageView
+                                android:id="@+id/imageView7"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="10dp"
+                                app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+                            <ImageView
+                                android:id="@+id/imageView10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|right"
+                                app:srcCompat="@android:drawable/ic_menu_add"
+                                tools:ignore="ImageContrastCheck" />
+                        </FrameLayout>
+
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="180dp"
+                            android:alpha="0.7" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tlIdPalavra"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|top|center_vertical"
+                            android:layout_margin="10dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/palavra_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="10dp"
+                                android:layout_marginTop="4dp"
+                                android:hint="Palavra"
+                                android:imeOptions="actionDone"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <LinearLayout
+                            android:id="@+id/view3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="55dp"
+                            android:layout_gravity="bottom|right"
+                            android:layout_marginRight="10dp">
+
+                            <Button
+                                android:id="@+id/buttonAddPalavra2"
+                                android:layout_width="0dp"
+                                android:layout_height="48dp"
+                                android:layout_weight=".40"
+                                android:alpha="0.8"
+                                android:text="Cancelar"
+                                android:visibility="gone"
+                                app:backgroundTint="#B2008577"
+                                tools:visibility="gone" />
+
+                            <Button
+                                android:id="@+id/buttonAddPalavra"
+                                android:layout_width="0dp"
+                                android:layout_height="48dp"
+                                android:layout_gravity="left"
+                                android:layout_weight=".40"
+                                android:alpha="0.8"
+                                android:text="Adicionar Palavra"
+                                app:backgroundTint="#B2008577"
+                                tools:visibility="visible" />
+                        </LinearLayout>
+
+                    </FrameLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/recycler_view">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/palavrasRows"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:alpha="1"
+                    android:animateLayoutChanges="false" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtBack2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ems="3"
-        android:fontFamily="@font/luckiest_guy"
-        android:gravity="center"
-        android:inputType="number"
-        android:textColorHighlight="@color/white"
-        android:textColorLink="@color/white"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnImport"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:gravity="center|center_horizontal"
+        android:text="@string/voltar"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:fontFamily="@font/luckiest_guy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnVoltarImportar"
+        app:layout_constraintStart_toStartOf="@+id/btnVoltarImportar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtSave2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center|center_horizontal"
+        android:text="@string/save"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:fontFamily="@font/luckiest_guy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnSalvarImportar"
+        app:layout_constraintStart_toStartOf="@+id/btnSalvarImportar" />
 
     <ImageButton
-        android:id="@+id/btnImport"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="8dp"
+        android:id="@+id/btnVoltarImportar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:background="@android:color/transparent"
-        android:onClick="importContext"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/constraintImport"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/voltar"
+        android:onClick="voltar"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/txtBack2"
+        app:layout_constraintEnd_toStartOf="@+id/btnSalvarImportar"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editIdContext"
-        app:srcCompat="@drawable/import_context" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/luckiest_guy"
-        android:text="@string/import_tema"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="@+id/btnImport"
-        app:layout_constraintStart_toStartOf="@+id/btnImport"
-        app:layout_constraintTop_toBottomOf="@+id/btnImport" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintImport"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="8dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/btnVoltarImportar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnImport">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageTemaImportado"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/animais" />
-
-        <TextView
-            android:id="@+id/textNameTemaImportado"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:fontFamily="@font/luckiest_guy"
-            android:gravity="center"
-            android:text="@string/temas"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="35sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageTemaImportado"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageTemaImportado"
-            app:layout_constraintTop_toTopOf="@+id/imageTemaImportado"
-            app:layout_constraintVertical_bias="0.39" />
-
-        <TextView
-            android:id="@+id/textQuantDesafios"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/luckiest_guy"
-            android:gravity="center"
-            android:text="TextView"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="35sp"
-            app:layout_constraintEnd_toEndOf="@+id/textNameTemaImportado"
-            app:layout_constraintStart_toStartOf="@+id/textNameTemaImportado"
-            app:layout_constraintTop_toBottomOf="@+id/textNameTemaImportado" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:srcCompat="@drawable/botao_tela_anterior" />
 
     <ImageButton
         android:id="@+id/btnSalvarImportar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/salvar"
         android:onClick="salvarTema"
@@ -223,7 +336,6 @@
         app:layout_constraintBottom_toTopOf="@+id/btnVoltarImportar"
         app:layout_constraintEnd_toStartOf="@+id/constraintImport"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/constraintImport"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintStart_toEndOf="@+id/constraintImport" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
