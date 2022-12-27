@@ -346,9 +346,7 @@ public class CreateTemaActivity extends AppCompatActivity implements View.OnClic
 
         salvarTemaAtual();
 
-        Intent intent = new Intent(CreateTemaActivity.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        voltarParaMenu();
     }
 
     public void saveImageToObject(Object object)
@@ -516,12 +514,25 @@ public class CreateTemaActivity extends AppCompatActivity implements View.OnClic
         onBackPressed();
     }
 
+    public void voltarParaMenu() {
+        Intent intent = new Intent(CreateTemaActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent it = new Intent(CreateTemaActivity.this, ImportOptionsActivity.class);
-        startActivity(it);
-        finish();
+
+        if(this.editMode) {
+            voltarParaMenu();
+        } else {
+            Intent it = new Intent(CreateTemaActivity.this, ImportOptionsActivity.class);
+            startActivity(it);
+            finish();
+        }
+
     }
 
     @Override
