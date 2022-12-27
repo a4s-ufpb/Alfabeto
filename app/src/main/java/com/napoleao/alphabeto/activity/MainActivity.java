@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         del_btn.setOnClickListener(new View.OnClickListener(){
                             @Override
                             public void onClick(View v) {
-                                deleteSelectedTheme(temaSelecionado);
+                                deleteSelectedTheme(temaSelecionado, alertDialog);
                             }
                         });
 
@@ -116,13 +116,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         });
                     }
 
-                    private void deleteSelectedTheme(Tema temaSelecionado) {
+                    private void deleteSelectedTheme(Tema temaSelecionado, AlertDialog alertDialog) {
                         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this, R.style.AlertDialogStyle);
                         dialog.setTitle("Remover");
                         dialog.setMessage("Você deseja remover o tema " + temaSelecionado.getNomeImagem() + "?");
                         dialog.setPositiveButton("Sim", (dialog1, which) -> {
                             TemasDAO temasDAO = TemasDAO.getInstance(getApplicationContext());
                             if (temasDAO.delete(temaSelecionado)){
+                                alertDialog.dismiss();
                                 configureRecyclerView();
                                 Toast.makeText(getApplicationContext(), "Tema removido com sucesso!", Toast.LENGTH_SHORT).show();
                             }else{
