@@ -55,6 +55,10 @@
             android:name=".activity.FimDeJogoActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".activity.CreateTemaActivity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

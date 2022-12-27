@@ -54,6 +54,27 @@
         app:layout_constraintStart_toStartOf="@+id/btnVoltarImport" />
 
     <Button
+        android:id="@+id/btnCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="32dp"
+        android:onClick="onClick"
+        android:text="@string/import_criar"
+        android:textStyle="bold"
+        app:backgroundTint="@android:color/transparent"
+        app:icon="@drawable/adicionar"
+        app:layout_constraintBottom_toTopOf="@+id/btnImportByMail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtImportModeLabel" />
+
+    <Button
         android:id="@+id/btnImportByMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,17 +83,18 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:onClick="onClick"
         android:text="@string/import_mail"
         android:textSize="30sp"
         android:textStyle="bold"
         app:backgroundTint="@android:color/transparent"
         app:icon="@drawable/email"
-        app:layout_constraintBottom_toTopOf="@+id/txtOrLabel"
+        app:layout_constraintBottom_toTopOf="@+id/btnImportById"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtImportModeLabel" />
+        app:layout_constraintTop_toBottomOf="@id/btnCreate" />
 
     <TextView
         android:id="@+id/txtImportModeLabel"
@@ -95,28 +117,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtImportTemasLabel" />
 
-    <TextView
-        android:id="@+id/txtOrLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/luckiest_guy"
-        android:text="@string/ou"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnImportById"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnImportByMail" />
-
     <Button
         android:id="@+id/btnImportById"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:onClick="onClick"
         android:text="@string/import_id"
         android:textSize="30sp"
@@ -127,7 +137,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtOrLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/btnImportByMail" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"

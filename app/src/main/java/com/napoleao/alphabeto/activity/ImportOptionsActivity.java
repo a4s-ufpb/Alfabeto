@@ -19,6 +19,9 @@ public class ImportOptionsActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.btnCreate:
+                invocarIntent(CreateTemaActivity.class);
+                break;
             case R.id.btnImportByMail:
                 invocarIntent(ImportByMailActivity.class);
                 break;
