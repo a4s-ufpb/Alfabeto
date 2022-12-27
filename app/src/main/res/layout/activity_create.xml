@@ -58,8 +58,8 @@
                 android:textSize="30sp" />
 
             <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
@@ -115,7 +115,7 @@
                             android:layout_height="match_parent"
                             android:layout_margin="10dp"
                             android:layout_marginTop="4dp"
-                            android:hint="Nome do Tema"
+                            android:hint="@string/create_name_theme"
                             android:imeOptions="actionDone"
                             android:singleLine="true" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -206,7 +206,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_margin="10dp"
                                 android:layout_marginTop="4dp"
-                                android:hint="Palavra"
+                                android:hint="@string/create_palavra_word"
                                 android:imeOptions="actionDone"
                                 android:singleLine="true" />
 
@@ -225,7 +225,7 @@
                                 android:layout_height="48dp"
                                 android:layout_weight=".40"
                                 android:alpha="0.8"
-                                android:text="Cancelar"
+                                android:text="@string/create_cancel"
                                 android:visibility="gone"
                                 app:backgroundTint="#B2008577"
                                 tools:visibility="gone" />
@@ -237,7 +237,7 @@
                                 android:layout_gravity="left"
                                 android:layout_weight=".40"
                                 android:alpha="0.8"
-                                android:text="Adicionar Palavra"
+                                android:text="@string/create_palavra_add"
                                 app:backgroundTint="#B2008577"
                                 tools:visibility="visible" />
                         </LinearLayout>

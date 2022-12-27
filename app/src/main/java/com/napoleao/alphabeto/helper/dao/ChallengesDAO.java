@@ -118,7 +118,8 @@ public class ChallengesDAO implements IChallengesDAO {
             cv.put("imageUrl", challenge.getImageUrl());
             cv.put("idTema", challenge.getIdTema());
 
-            write.update(DBHelper.TABLE_DESAFIOS, cv, "id="+challenge.getId(), null);
+            String[] args = {challenge.getId().toString()};
+            write.update(DBHelper.TABLE_DESAFIOS, cv, "idDesafio=?", args);
             cv.clear();
         }catch (Exception e){
             Toast.makeText(context, "Erro ao atualizar tema!", Toast.LENGTH_LONG).show();
@@ -138,8 +139,8 @@ public class ChallengesDAO implements IChallengesDAO {
         while (cursor.moveToNext()){
             Challenge challenge = new Challenge();
             Long idDesafio = cursor.getLong(cursor.getColumnIndex("idDesafio"));
-            String word = cursor.getString(cursor.getColumnIndex("nomeImagem"));
-            String imageUrl = cursor.getString(cursor.getColumnIndex("imagemUrl"));
+            String word = cursor.getString(cursor.getColumnIndex("word"));
+            String imageUrl = cursor.getString(cursor.getColumnIndex("imageUrl"));
             Long idTema = cursor.getLong(cursor.getColumnIndex("idTema"));
 
             challenge.setId(idDesafio);

@@ -115,10 +115,10 @@ public class TemasDAO implements ITemasDAO {
         try {
             ContentValues cv = new ContentValues();
 
-            cv.put("name", tema.getNomeImagem());
-            cv.put("imageUrl", tema.getImageUrl());
+            cv.put("nomeImagem", tema.getNomeImagem());
+            cv.put("imagemUrl", tema.getImageUrl());
 
-            write.update(DBHelper.TABLE_TEMAS, cv, "id="+tema.getId(), null);
+            write.update(DBHelper.TABLE_TEMAS, cv, "idTema="+tema.getId(), null);
             cv.clear();
         }catch (Exception e){
             Toast.makeText(context, "Erro ao atualizar tema!", Toast.LENGTH_LONG).show();

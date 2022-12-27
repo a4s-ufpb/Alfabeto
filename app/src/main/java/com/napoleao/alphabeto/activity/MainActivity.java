@@ -74,6 +74,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onLongItemClick(View view, int position) {
                         Tema temaSelecionado = temasImportados.get(position);
 
+                        editSelectedTheme(temaSelecionado);
+                    }
+
+                    private void deleteSelectedTheme(Tema temaSelecionado) {
                         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this, R.style.AlertDialogStyle);
                         dialog.setTitle("Remover");
                         dialog.setMessage("Você deseja remover o tema " + temaSelecionado.getNomeImagem() + "?");
@@ -91,6 +95,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         dialog.create();
                         dialog.show();
+                    }
+
+                    private void editSelectedTheme(Tema editTema) {
+                        Intent intent = new Intent(getApplicationContext(), CreateTemaActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("editMode", true);
+                        intent.putExtra("themeID", editTema.getId());
+                        getApplicationContext().startActivity(intent);
                     }
 
                     @Override
