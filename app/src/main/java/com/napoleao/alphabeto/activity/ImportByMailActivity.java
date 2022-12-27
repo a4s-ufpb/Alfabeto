@@ -99,8 +99,8 @@ public class ImportByMailActivity extends AppCompatActivity {
     }
 
     public void salvarTemaByMail(View view){
-        TemasDAO temasDAO = new TemasDAO(getApplicationContext());
-        ChallengesDAO challengesDAO = new ChallengesDAO(getApplicationContext());
+        TemasDAO temasDAO = TemasDAO.getInstance(getApplicationContext());
+        ChallengesDAO challengesDAO = ChallengesDAO.getInstance(getApplicationContext());
         int contSucessos = 0;
 
         if (temasCarregados == null){

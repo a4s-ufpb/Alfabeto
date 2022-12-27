@@ -15,13 +15,21 @@ import java.util.List;
 
 public class ChallengesDAO implements IChallengesDAO {
 
+    private static ChallengesDAO instance;
     private SQLiteDatabase write;
     private SQLiteDatabase read;
     private Context context;
 
+    public static synchronized ChallengesDAO getInstance(Context context) {
+        if (instance == null) {
+            instance = new ChallengesDAO(context);
+        }
+        return instance;
+    }
+
     public ChallengesDAO(Context context){
         this.context = context;
-        DBHelper dbHelper = new DBHelper(context);
+        DBHelper dbHelper = DBHelper.getInstance(context);
         write = dbHelper.getWritableDatabase();
         read = dbHelper.getReadableDatabase();
     }
@@ -67,6 +75,7 @@ public class ChallengesDAO implements IChallengesDAO {
         try {
             Long id = write.insertOrThrow(DBHelper.TABLE_DESAFIOS, null, cv);
             challenge.setId(id);
+            cv.clear();
             Log.d("SAVE", "Desafio salvo com sucesso!");
         }catch (Exception e){
             Log.d("SAVE", "Erro ao salvar!");

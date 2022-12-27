@@ -7,10 +7,18 @@ import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
 
+    private static DBHelper instance;
     public static String DB_NAME = "ALFABETO_DB_v1";
     public static String TABLE_TEMAS = "temas";
     public static String TABLE_DESAFIOS = "desafios";
     public static int VERSION = 1;
+
+    public static synchronized DBHelper getInstance(Context context) {
+        if (instance == null) {
+            instance = new DBHelper(context.getApplicationContext());
+        }
+        return instance;
+    }
 
     public DBHelper(Context context){
         super(context, DB_NAME, null, VERSION);

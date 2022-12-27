@@ -83,8 +83,8 @@ public class ImportTemasByIdActivity extends AppCompatActivity {
     }
 
     public void salvarTema(View view){
-        TemasDAO temasDAO = new TemasDAO(getApplicationContext());
-        ChallengesDAO challengesDAO = new ChallengesDAO(getApplicationContext());
+        TemasDAO temasDAO = TemasDAO.getInstance(getApplicationContext());
+        ChallengesDAO challengesDAO = ChallengesDAO.getInstance(getApplicationContext());
         if (tema == null){
             Toast.makeText(getApplicationContext(), "Erro! Você carregou algum tema?", Toast.LENGTH_LONG).show();
         }else if (tema.getChallenges().isEmpty()){

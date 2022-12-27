@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         dialog.setTitle("Remover");
                         dialog.setMessage("Você deseja remover o tema " + temaSelecionado.getNomeImagem() + "?");
                         dialog.setPositiveButton("Sim", (dialog1, which) -> {
-                            TemasDAO temasDAO = new TemasDAO(getApplicationContext());
+                            TemasDAO temasDAO = TemasDAO.getInstance(getApplicationContext());
                             if (temasDAO.delete(temaSelecionado)){
                                 configureRecyclerView();
                                 Toast.makeText(getApplicationContext(), "Tema removido com sucesso!", Toast.LENGTH_SHORT).show();

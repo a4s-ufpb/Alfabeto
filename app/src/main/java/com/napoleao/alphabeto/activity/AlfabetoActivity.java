@@ -59,7 +59,7 @@ public class AlfabetoActivity extends AppCompatActivity implements View.OnClickL
 
         //Carregando os temas de acordo com a escolha
         if (idTema != -1){
-            ChallengesDAO challengesDAO = new ChallengesDAO(this);
+            ChallengesDAO challengesDAO = ChallengesDAO.getInstance(this);
             listDesafios = challengesDAO.findById(idTema);
             listDesafios = gerenteDeDesafios.randomListDesafios(listDesafios);
             tipoImagem = 1;

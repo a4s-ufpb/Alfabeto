@@ -84,8 +84,8 @@ public class CreateTemaActivity extends AppCompatActivity implements View.OnClic
         this.tema = new Tema();
         this.editPalavra = new Challenge();
 
-        this.temasDAO = new TemasDAO(getApplicationContext());
-        this.challengesDAO = new ChallengesDAO(getApplicationContext());
+        this.temasDAO = TemasDAO.getInstance(getApplicationContext());
+        this.challengesDAO = ChallengesDAO.getInstance(getApplicationContext());
 
         super.onCreate(savedInstanceState);
 

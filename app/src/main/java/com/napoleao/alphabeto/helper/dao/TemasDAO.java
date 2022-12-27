@@ -15,13 +15,21 @@ import java.util.List;
 
 public class TemasDAO implements ITemasDAO {
 
+    private static TemasDAO instance;
     private SQLiteDatabase write;
     private SQLiteDatabase read;
     private Context context;
 
+    public static synchronized TemasDAO getInstance(Context context) {
+        if (instance == null) {
+            instance = new TemasDAO(context);
+        }
+        return instance;
+    }
+
     public TemasDAO(Context context){
         this.context = context;
-        DBHelper dbHelper = new DBHelper(context);
+        DBHelper dbHelper = DBHelper.getInstance(context);
         write = dbHelper.getWritableDatabase();
         read = dbHelper.getReadableDatabase();
     }
