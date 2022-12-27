@@ -82,6 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:hapticFeedbackEnabled="true"
                     android:orientation="vertical">
 
                     <ImageButton
@@ -92,6 +93,7 @@
                         android:layout_margin="5dp"
                         android:layout_marginEnd="16dp"
                         android:background="#00ffffff"
+                        android:clickable="false"
                         android:src="@android:drawable/ic_menu_edit" />
 
                     <TextView
@@ -100,8 +102,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:layout_weight="1"
+                        android:clickable="false"
                         android:fontFamily="@font/luckiest_guy"
                         android:text="Editar"
+                        android:textColor="#FFFFFF"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -115,6 +119,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:hapticFeedbackEnabled="true"
                     android:orientation="vertical">
 
                     <ImageButton
@@ -125,16 +130,18 @@
                         android:layout_margin="5dp"
                         android:layout_marginStart="8dp"
                         android:background="#00ffffff"
-                        android:src="@drawable/ic_baseline_delete_24"
-                        android:tint="#FFFFFF" />
+                        android:clickable="false"
+                        android:src="@android:drawable/ic_menu_delete" />
 
                     <TextView
                         android:id="@+id/textView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
+                        android:clickable="false"
                         android:fontFamily="@font/luckiest_guy"
                         android:text="Apagar"
+                        android:textColor="#FFFFFF"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -155,7 +162,9 @@
                     android:id="@+id/areaClose"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:clickable="false"
                     android:gravity="center"
+                    android:hapticFeedbackEnabled="true"
                     android:orientation="vertical">
 
                     <ImageButton
@@ -166,6 +175,7 @@
                         android:layout_margin="5dp"
                         android:layout_marginEnd="16dp"
                         android:background="#00ffffff"
+                        android:clickable="false"
                         android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
                     <TextView
@@ -176,6 +186,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/luckiest_guy"
                         android:text="Fechar"
+                        android:textColor="#FFFFFF"
                         android:textSize="16sp" />
                 </LinearLayout>
 

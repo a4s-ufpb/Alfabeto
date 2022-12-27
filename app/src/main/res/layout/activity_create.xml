@@ -319,6 +319,7 @@
         android:layout_height="70dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/salvar"
+        android:hapticFeedbackEnabled="true"
         android:onClick="salvarTema"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/txtSave2"
