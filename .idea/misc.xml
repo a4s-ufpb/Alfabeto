@@ -11,7 +11,11 @@
         <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout/activity_import_by_mail.xml" value="0.17831813576494426" />
         <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout/activity_import_options.xml" value="0.17831813576494426" />
         <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout/activity_main.xml" value="0.16304347826086957" />
+        <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout/alertaTemaOptions.xml" value="0.33" />
+        <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout/alerta_tema_options.xml" value="0.33" />
         <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout/card_theme.xml" value="0.1" />
+        <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout/import_adapter.xml" value="0.17831813576494426" />
+        <entry key="..\:/Documents/GitHub/Alfabeto/app/src/main/res/layout/temas_importados_adapter.xml" value="0.17831813576494426" />
       </map>
     </option>
   </component>
