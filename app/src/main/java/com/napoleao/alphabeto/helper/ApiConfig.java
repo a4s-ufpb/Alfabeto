@@ -121,6 +121,9 @@ public class ApiConfig
     }
 
     public String getDominio() {
+        if(BuildConfig.EDUC_API_URL != null) {
+            return BuildConfig.EDUC_API_URL;
+        }
         return dominio;
     }
 }

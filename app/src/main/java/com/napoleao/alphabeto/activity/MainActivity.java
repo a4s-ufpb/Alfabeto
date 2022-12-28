@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Tema temaSelecionado = temasImportados.get(position);
 
                         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                         alertDialog.show();
                         Window win = alertDialog.getWindow();
                         win.setContentView(R.layout.alerta_tema_options);

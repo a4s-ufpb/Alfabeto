@@ -10,6 +10,9 @@ android {
         versionName "0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+
+        // get API URL from system enviroment variable
+        buildConfigField "String", "EDUC_API_URL", "\""+System.getenv("EDUC_API_URL")+"\""
     }
     buildTypes {
         release {
