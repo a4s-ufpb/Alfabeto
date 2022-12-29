@@ -27,6 +27,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
@@ -73,7 +74,7 @@
                     android:layout_height="100dp">
 
                     <FrameLayout
-						android:id="@+id/areaImagemTema"
+                        android:id="@+id/areaImagemTema"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_gravity="center_vertical"
@@ -165,7 +166,7 @@
                         android:layout_height="120dp">
 
                         <FrameLayout
-							android:id="@+id/areaImagemPalavra"
+                            android:id="@+id/areaImagemPalavra"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_gravity="center_vertical"
@@ -333,12 +334,25 @@
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/btnVoltarImportar"
-        app:layout_constraintEnd_toStartOf="@+id/constraintImport"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/constraintImport" />
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/frameAuxPhotoFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@id/btnVoltarImportar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

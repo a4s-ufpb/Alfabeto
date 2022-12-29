@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +29,7 @@ import com.napoleao.alphabeto.R;
 import com.napoleao.alphabeto.activity.util.ImageLoadUtil;
 import com.napoleao.alphabeto.adapter.CreatePalavraAdapter;
 import com.napoleao.alphabeto.config.AlphaTextView;
+import com.napoleao.alphabeto.fragment.SearchFragment;
 import com.napoleao.alphabeto.helper.dao.ChallengesDAO;
 import com.napoleao.alphabeto.helper.dao.TemasDAO;
 import com.napoleao.alphabeto.model.Challenge;
@@ -113,17 +119,11 @@ public class CreateTemaActivity extends AppCompatActivity implements View.OnClic
         layManager = new GridLayoutManager(getApplicationContext(), 2);
 
         findViewById(R.id.areaImagemTema).setOnClickListener(v -> {
-            ImagePicker.with(CreateTemaActivity.this)
-                    .crop()
-                    .compress(420)
-                    .start(1);
+            mostrarOpcaoDeSelecionarImagem(1);
         });
 
         findViewById(R.id.areaImagemPalavra).setOnClickListener(v -> {
-            ImagePicker.with(CreateTemaActivity.this)
-                    .crop()
-                    .compress(420)
-                    .start(2);
+            mostrarOpcaoDeSelecionarImagem(2);
         });
 
         findViewById(R.id.buttonAddPalavra).setOnClickListener(v -> {
@@ -181,6 +181,81 @@ public class CreateTemaActivity extends AppCompatActivity implements View.OnClic
         updateTemaInfo();
 
         fillRecycleView();
+    }
+
+    public void mostrarOpcaoDeSelecionarImagem(int TAG) {
+
+        AlertDialog alertDialog = new AlertDialog.Builder(CreateTemaActivity.this).create();
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.show();
+
+        Window win = alertDialog.getWindow();
+        win.setContentView(R.layout.alerta_imagem_options);
+
+        win.setBackgroundDrawableResource(R.drawable.background_gradient);
+
+        View web_btn = (View)win.findViewById(R.id.areaWeb);
+        web_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                caregarBuscaParaImagem(TAG);
+                alertDialog.dismiss();
+            }
+        });
+
+        View cam_btn = (View)win.findViewById(R.id.areaCamera);
+        cam_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                ImagePicker.with(CreateTemaActivity.this)
+                        .cameraOnly()
+                        .crop()
+                        .compress(420)
+                        .start(TAG);
+                alertDialog.dismiss();
+            }
+        });
+
+        View biblioteca_btn = (View)win.findViewById(R.id.areaBiblioteca);
+        biblioteca_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                ImagePicker.with(CreateTemaActivity.this)
+                        .galleryOnly()
+                        .crop()
+                        .compress(420)
+                        .start(TAG);
+                alertDialog.dismiss();
+            }
+        });
+
+        View close_btn = (View)win.findViewById(R.id.areaClose);
+        close_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+    }
+
+    public void caregarBuscaParaImagem(int TAG) {
+        String nomeParaBuscar = null;
+
+        TextInputLayout textIn = TAG==1?this.tlIdTema:this.tlIdPalavra;
+        if(textIn.getEditText().getText() != null && textIn.getEditText().getText().toString().length() > 0) {
+            nomeParaBuscar = textIn.getEditText().getText().toString();
+        }
+
+        if(nomeParaBuscar != null) {
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            Fragment searchF = new SearchFragment(nomeParaBuscar, TAG);
+            ft.replace(R.id.frameAuxPhotoFragment, searchF);
+            ft.addToBackStack(null);
+            ft.commit();
+        } else {
+            Toast.makeText(getApplicationContext(), "Preencha o campo para pesquisar imagens.", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void updateTemaInfo()
@@ -523,14 +598,19 @@ public class CreateTemaActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
 
-        if(this.editMode) {
-            voltarParaMenu();
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            if(this.editMode) {
+                voltarParaMenu();
+            } else {
+                Intent it = new Intent(CreateTemaActivity.this, ImportOptionsActivity.class);
+                startActivity(it);
+                finish();
+            }
         } else {
-            Intent it = new Intent(CreateTemaActivity.this, ImportOptionsActivity.class);
-            startActivity(it);
-            finish();
+            getSupportFragmentManager().popBackStack();
         }
 
     }

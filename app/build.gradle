@@ -56,4 +56,6 @@ dependencies {
     // Obter Imagem da Galeria/Camera
     implementation 'com.github.dhaval2404:imagepicker:2.1'
 
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4'
+
 }
