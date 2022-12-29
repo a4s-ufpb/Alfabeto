@@ -112,14 +112,14 @@ public class CreateTemaActivity extends AppCompatActivity implements View.OnClic
         recyclerView = findViewById(R.id.palavrasRows);
         layManager = new GridLayoutManager(getApplicationContext(), 2);
 
-        imagemTema.setOnClickListener(v -> {
+        findViewById(R.id.areaImagemTema).setOnClickListener(v -> {
             ImagePicker.with(CreateTemaActivity.this)
                     .crop()
                     .compress(420)
                     .start(1);
         });
 
-        imagemPalavra.setOnClickListener(v -> {
+        findViewById(R.id.areaImagemPalavra).setOnClickListener(v -> {
             ImagePicker.with(CreateTemaActivity.this)
                     .crop()
                     .compress(420)

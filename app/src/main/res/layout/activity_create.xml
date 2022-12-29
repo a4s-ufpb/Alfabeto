@@ -73,6 +73,7 @@
                     android:layout_height="100dp">
 
                     <FrameLayout
+						android:id="@+id/areaImagemTema"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_gravity="center_vertical"
@@ -164,6 +165,7 @@
                         android:layout_height="120dp">
 
                         <FrameLayout
+							android:id="@+id/areaImagemPalavra"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_gravity="center_vertical"
