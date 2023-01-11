@@ -9,15 +9,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.napoleao.alphabeto.R;
 import com.napoleao.alphabeto.activity.util.ComponentesAuxiliares;
+import com.napoleao.alphabeto.activity.util.ImageLoadUtil;
 import com.napoleao.alphabeto.adapter.TemasAdapter;
 import com.napoleao.alphabeto.controller.GerenteDeDesafios;
 import com.napoleao.alphabeto.controller.RecyclerItemClickListener;
+import com.napoleao.alphabeto.helper.ApiConfig;
 import com.napoleao.alphabeto.helper.dao.TemasDAO;
 import com.napoleao.alphabeto.model.Tema;
 
@@ -48,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         instanciarTextButtons();
 
+        // Init ApiConfig
+        ApiConfig.getInstance(getApplicationContext());
+
         gerenteDeDesafios = new GerenteDeDesafios();
         componentesAuxiliares = new ComponentesAuxiliares();
         recyclerView = findViewById(R.id.recyclerTemas);
@@ -70,12 +78,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onLongItemClick(View view, int position) {
                         Tema temaSelecionado = temasImportados.get(position);
 
+                        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        alertDialog.show();
+                        Window win = alertDialog.getWindow();
+                        win.setContentView(R.layout.alerta_tema_options);
+
+                        win.setBackgroundDrawableResource(R.drawable.background_gradient);
+
+                        ImageView imageTemaView = (ImageView)win.findViewById(R.id.imgTema);
+                        ImageLoadUtil.getInstance().loadImage(temaSelecionado.getImageUrl(), imageTemaView, getApplicationContext());
+
+                        TextView nomeTemaView = (TextView)win.findViewById(R.id.nomeTema);
+                        nomeTemaView.setText(temaSelecionado.getNomeImagem());
+
+                        View edit_btn = (View)win.findViewById(R.id.areaEdit);
+                        edit_btn.setOnClickListener(new View.OnClickListener(){
+                            @Override
+                            public void onClick(View v) {
+                                editSelectedTheme(temaSelecionado);
+                            }
+                        });
+
+                        View del_btn = (View)win.findViewById(R.id.areaDel);
+                        del_btn.setOnClickListener(new View.OnClickListener(){
+                            @Override
+                            public void onClick(View v) {
+                                deleteSelectedTheme(temaSelecionado, alertDialog);
+                            }
+                        });
+
+                        View close_btn = (View)win.findViewById(R.id.areaClose);
+                        close_btn.setOnClickListener(new View.OnClickListener(){
+                            @Override
+                            public void onClick(View v) {
+                                alertDialog.dismiss();
+                            }
+                        });
+                    }
+
+                    private void deleteSelectedTheme(Tema temaSelecionado, AlertDialog alertDialog) {
                         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this, R.style.AlertDialogStyle);
                         dialog.setTitle("Remover");
                         dialog.setMessage("Você deseja remover o tema " + temaSelecionado.getNomeImagem() + "?");
                         dialog.setPositiveButton("Sim", (dialog1, which) -> {
-                            TemasDAO temasDAO = new TemasDAO(getApplicationContext());
+                            TemasDAO temasDAO = TemasDAO.getInstance(getApplicationContext());
                             if (temasDAO.delete(temaSelecionado)){
+                                alertDialog.dismiss();
                                 configureRecyclerView();
                                 Toast.makeText(getApplicationContext(), "Tema removido com sucesso!", Toast.LENGTH_SHORT).show();
                             }else{
@@ -87,6 +136,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         dialog.create();
                         dialog.show();
+                    }
+
+                    private void editSelectedTheme(Tema editTema) {
+                        Intent intent = new Intent(getApplicationContext(), CreateTemaActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("editMode", true);
+                        intent.putExtra("themeID", editTema.getId());
+                        getApplicationContext().startActivity(intent);
                     }
 
                     @Override

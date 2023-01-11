@@ -59,7 +59,7 @@ public class AlfabetoActivity extends AppCompatActivity implements View.OnClickL
 
         //Carregando os temas de acordo com a escolha
         if (idTema != -1){
-            ChallengesDAO challengesDAO = new ChallengesDAO(this);
+            ChallengesDAO challengesDAO = ChallengesDAO.getInstance(this);
             listDesafios = challengesDAO.findById(idTema);
             listDesafios = gerenteDeDesafios.randomListDesafios(listDesafios);
             tipoImagem = 1;
@@ -76,7 +76,7 @@ public class AlfabetoActivity extends AppCompatActivity implements View.OnClickL
         componentesAuxiliares.instanciarBotoes(botoesAlfabeto, this, botoes, this);
         animationView = findViewById(R.id.animationAlfabeto);
 
-        gerenteDeDesafios.setAtributosAlfabeto(imagem, txtQuiz, listDesafios, indice, tipoImagem);
+        gerenteDeDesafios.setAtributosAlfabeto(imagem, txtQuiz, listDesafios, indice, tipoImagem, getApplicationContext());
 
         //Definindo os primeiros elementos a serem iniciados
         txtQuiz.setText(gerenteDeDesafios.definirPalavraAlfabeto(gerenteDeDesafios.dandoEspacos(listDesafios.get(indice).getWord())));
@@ -117,7 +117,7 @@ public class AlfabetoActivity extends AppCompatActivity implements View.OnClickL
                 componentesAuxiliares.desligarBotoes(botoes, botoesAlfabeto);
                 Handler handle = new Handler();
                 handle.postDelayed(() -> {
-                    gerenteDeDesafios.setAtributosAlfabeto(imagem, txtQuiz, listDesafios, indice, tipoImagem);
+                    gerenteDeDesafios.setAtributosAlfabeto(imagem, txtQuiz, listDesafios, indice, tipoImagem, getApplicationContext());
                     desafio = gerenteDeDesafios.definirPalavraAlfabeto(listDesafios.get(indice).getWord()).toCharArray();
                     //Mudando o desafio. Para isso é chamado o método que seta a quantidade de espaços que formam a palavra
                     txtQuiz.setText(gerenteDeDesafios.definirPalavraAlfabeto(gerenteDeDesafios.dandoEspacos(listDesafios.get(indice).getWord())));

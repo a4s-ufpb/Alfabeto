@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.napoleao.alphabeto.R;
+import com.napoleao.alphabeto.activity.util.ImageLoadUtil;
 import com.napoleao.alphabeto.model.Tema;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,11 +50,7 @@ public class TemasAdapterImportByMail extends RecyclerView.Adapter<TemasAdapterI
             }
         });
 
-        Picasso.get()
-                .load(tema.getImageUrl())
-                .fit()
-                .centerCrop()
-                .into(holder.imageTema);
+        ImageLoadUtil.getInstance().loadImage(tema.getImageUrl(), holder.imageTema, context);
     }
 
     @Override

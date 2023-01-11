@@ -14,12 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.napoleao.alphabeto.R;
+import com.napoleao.alphabeto.activity.util.ImageLoadUtil;
 import com.napoleao.alphabeto.helper.RetrofitConfig;
 import com.napoleao.alphabeto.helper.dao.ChallengesDAO;
 import com.napoleao.alphabeto.helper.dao.TemasDAO;
 import com.napoleao.alphabeto.model.Challenge;
 import com.napoleao.alphabeto.model.Tema;
-import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -83,8 +83,8 @@ public class ImportTemasByIdActivity extends AppCompatActivity {
     }
 
     public void salvarTema(View view){
-        TemasDAO temasDAO = new TemasDAO(getApplicationContext());
-        ChallengesDAO challengesDAO = new ChallengesDAO(getApplicationContext());
+        TemasDAO temasDAO = TemasDAO.getInstance(getApplicationContext());
+        ChallengesDAO challengesDAO = ChallengesDAO.getInstance(getApplicationContext());
         if (tema == null){
             Toast.makeText(getApplicationContext(), "Erro! Você carregou algum tema?", Toast.LENGTH_LONG).show();
         }else if (tema.getChallenges().isEmpty()){
@@ -97,6 +97,11 @@ public class ImportTemasByIdActivity extends AppCompatActivity {
                     challengesDAO.save(c);
                 }
                 Toast.makeText(getApplicationContext(), "Tema salvo com sucesso!", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(ImportTemasByIdActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
             }else {
                 Toast.makeText(getApplicationContext(), "Ops! Esse tema já foi salvo anteriormente!", Toast.LENGTH_SHORT).show();
 
@@ -104,14 +109,8 @@ public class ImportTemasByIdActivity extends AppCompatActivity {
         }
     }
 
-    private void carregarImagem(){
-        String url = tema.getImageUrl();
-        Picasso.get()
-                .load(url)
-                .fit()
-                .error(R.drawable.error)
-                .centerCrop()
-                .into(imageTema);
+    private void carregarImagem() {
+        ImageLoadUtil.getInstance().loadImage(tema.getImageUrl(), imageTema, getApplicationContext());
     }
 
     public void voltar(View v){
