@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.napoleao.alphabeto.R;
-import com.napoleao.alphabeto.helper.SearchEngineClientBing;
+import com.napoleao.alphabeto.helper.SearchEngineClient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +24,7 @@ public class SearchFragment extends Fragment {
 
     private RecyclerView rv;
     private GridLayoutManager laymanager;
-    private SearchEngineClientBing searchEngine;
+    private SearchEngineClient searchEngine;
 
     private ArrayList<HashMap<String, Object>> resultado = new ArrayList();
 
@@ -39,7 +39,7 @@ public class SearchFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_nav_search,container,false);
 
-        searchEngine = new SearchEngineClientBing(getContext());
+        searchEngine = new SearchEngineClient(getContext());
         rv = root.findViewById(R.id.search_rv);
 
         laymanager = new GridLayoutManager(getContext(),2,RecyclerView.VERTICAL,false);
@@ -49,7 +49,7 @@ public class SearchFragment extends Fragment {
                 public void run() {
                     getActivity().findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
 
-                    searchEngine.search(query, new SearchEngineClientBing.SearchEngineClientBingCompletionHandler() {
+                    searchEngine.search(query, new SearchEngineClient.SearchEngineClientBingCompletionHandler() {
                         @Override
                         public void success(List<HashMap<String, Object>> resultado) {
                             getActivity().runOnUiThread (new Thread(new Runnable() {

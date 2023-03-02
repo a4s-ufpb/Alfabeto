@@ -49,7 +49,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         String imageUrl = null;
 
         try {
-            imageUrl = resultado.get(position).get("thumbnailUrl").toString();
+            imageUrl = resultado.get(position).get("webformatURL").toString();
         } catch(Exception e){
             Toast.makeText(fragmentContext,"Imagem Invalida, Tente escolher Outra",Toast.LENGTH_SHORT).show();
         }

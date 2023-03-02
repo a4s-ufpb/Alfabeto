@@ -18,12 +18,12 @@ import java.util.List;
 import java.util.Map;
 
 
-public class SearchEngineClientBing {
+public class SearchEngineClient {
 
     private static String API_KEY = null;
 
-    public SearchEngineClientBing (Context context){
-        API_KEY = context.getResources().getString(R.string.bing_key);
+    public SearchEngineClient(Context context){
+        API_KEY = context.getResources().getString(R.string.pixabay_key);
     }
 
     public interface SearchEngineClientBingCompletionHandler
@@ -56,22 +56,21 @@ public class SearchEngineClientBing {
 
                 Uri.Builder builder = new Uri.Builder();
                 builder.scheme("https")
-                        .authority("api.bing.microsoft.com")
-                        .appendPath("v7.0")
-                        .appendPath("images")
-                        .appendPath("search")
+                        .authority("pixabay.com")
+                        .appendPath("api")
+                        .appendPath("/")
+                        .appendQueryParameter("key", API_KEY)
                         .appendQueryParameter("q", search)
-                        .appendQueryParameter("imageType", "photo")
-                        .appendQueryParameter("count", "150")
-                        .appendQueryParameter("offset", "0")
-                        .appendQueryParameter("safeSearch", "Strict");
+                        .appendQueryParameter("image_type", "photo")
+                        .appendQueryParameter("lang", "pt")
+                        .appendQueryParameter("per_page", "200")
+                        .appendQueryParameter("page", "1");
 
                 URL url = new URL(builder.build().toString());
 
                 URLConnection connection = url.openConnection();
                 connection.setConnectTimeout(5000);
                 connection.setReadTimeout(5000);
-                connection.setRequestProperty("Ocp-Apim-Subscription-Key", API_KEY);
                 HttpURLConnection connectionResp = ((HttpURLConnection)connection);
                 String strCurrentLine = "";
                 if (connectionResp.getResponseCode() == 200) {
@@ -82,7 +81,7 @@ public class SearchEngineClientBing {
                     }
                     ObjectMapper mapper = new ObjectMapper();
                     Map mapRequest = mapper.readValue(strCurrentLine, Map.class);
-                    results = (List<HashMap<String, Object>>)mapRequest.get("value");
+                    results = (List<HashMap<String, Object>>)mapRequest.get("hits");
 
                     completionHandler.success(results);
                 }
