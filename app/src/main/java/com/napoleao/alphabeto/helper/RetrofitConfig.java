@@ -9,7 +9,7 @@ public class RetrofitConfig {
 
     public static Retrofit getRetrofit(){
         return new Retrofit.Builder()
-                .baseUrl(ApiConfig.getInstance(null).getDominio())
+                .baseUrl(ApiConfig.getInstance(null).getDomain())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
