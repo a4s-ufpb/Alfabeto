@@ -19,6 +19,9 @@ import com.napoleao.alphabeto.R;
 import com.napoleao.alphabeto.activity.MainActivity;
 import com.napoleao.alphabeto.config.AppConfig;
 
+/**
+ * Classe responsável por agrupar métodos auxiliares.
+ */
 public class ComponentesAuxiliares {
 
     /**

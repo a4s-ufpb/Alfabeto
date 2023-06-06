@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Classe responsável por implementar o fragment da busca de imagens.
+ */
 public class SearchFragment extends Fragment {
 
     private String query;

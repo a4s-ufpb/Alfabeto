@@ -4,7 +4,9 @@ import com.napoleao.alphabeto.model.Challenge;
 
 import java.util.List;
 
-
+/**
+ * Classe responsável por gerenciar a fabricação de desafios.
+ */
 public class FabricaDesafios {
 
     private GerenteDeTemas gerenteDeTemas;

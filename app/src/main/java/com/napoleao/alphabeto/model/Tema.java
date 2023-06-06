@@ -8,6 +8,9 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe responsável por representar um tema.
+ */
 public class Tema {
 
     private Long id;

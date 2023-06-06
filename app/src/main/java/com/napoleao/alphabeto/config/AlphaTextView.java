@@ -7,6 +7,9 @@ import android.util.Log;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
+/**
+ * Classe responsável por gerenciar a fonte do aplicativo.
+ */
 public class AlphaTextView extends AppCompatTextView {
     private Context context;
     private String fontFamily;

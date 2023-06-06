@@ -17,7 +17,9 @@ import com.napoleao.alphabeto.R;
 import com.napoleao.alphabeto.activity.util.ComponentesAuxiliares;
 import com.napoleao.alphabeto.controller.SingletonAudio;
 
-
+/**
+ * Classe responsável por gerenciar a tela inicial do aplicativo.
+ */
 public class TelaInicialActivity extends AppCompatActivity implements View.OnClickListener {
 
     int[] botoes = {R.id.btnIniciar, R.id.btnConfig, R.id.btnSobre};

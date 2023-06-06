@@ -2,6 +2,9 @@ package com.napoleao.alphabeto.model;
 
 import java.io.Serializable;
 
+/**
+ * Classe responsável por representar um desafio.
+ */
 public class Challenge implements Serializable {
 
     private Long id;

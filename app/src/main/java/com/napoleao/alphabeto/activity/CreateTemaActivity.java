@@ -47,6 +47,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Classe responsável por gerenciar a tela de criação de temas.
+ */
 public class CreateTemaActivity extends AppCompatActivity implements View.OnClickListener
 {
 
@@ -77,6 +80,10 @@ public class CreateTemaActivity extends AppCompatActivity implements View.OnClic
     public HashMap<Object, String> imagePathToObjectMap;
     public String imageSavePath;
 
+    /**
+     * Método responsável por inicializar os componentes da tela.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

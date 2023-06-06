@@ -3,6 +3,9 @@ package com.napoleao.alphabeto.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe responsável por representar um usuário.
+ */
 public class User {
     private Long id;
     private String name;

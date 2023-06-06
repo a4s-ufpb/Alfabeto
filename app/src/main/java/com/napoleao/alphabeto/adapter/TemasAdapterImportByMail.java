@@ -18,6 +18,9 @@ import com.napoleao.alphabeto.model.Tema;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe responsável por gerenciar o adapter da tela de importação de temas.
+ */
 public class TemasAdapterImportByMail extends RecyclerView.Adapter<TemasAdapterImportByMail.MyViewHolder>{
     private Context context;
     private List<Tema> temasImportados;

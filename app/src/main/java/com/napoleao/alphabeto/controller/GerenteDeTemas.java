@@ -5,6 +5,9 @@ import com.napoleao.alphabeto.model.Challenge;
 
 import java.util.List;
 
+/**
+ * Classe responsável por gerenciar os temas.
+ */
 public class GerenteDeTemas {
 
     private List<Challenge> challenges;

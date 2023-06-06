@@ -14,13 +14,19 @@ import com.napoleao.alphabeto.R;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-
+/**
+ * Classe responsável por carregar imagens a partir de uma url.
+ */
 public class ImageLoadUtil {
     private final String TAG = "ImageLoadUtil";
     private static ImageLoadUtil instance;
 
     private ImageLoadUtil(){}
 
+    /**
+     * Retorna uma instância da classe.
+     * @return instância da classe
+     */
     public static ImageLoadUtil getInstance(){
         if(instance == null){
             instance = new ImageLoadUtil();
@@ -29,6 +35,12 @@ public class ImageLoadUtil {
         return instance;
     }
 
+    /**
+     * Carrega uma imagem a partir de uma url.
+     * @param imageUrl url da imagem
+     * @param themeImageLeft ImageView que receberá a imagem
+     * @param context contexto da aplicação
+     */
     public void loadImage(String imageUrl, ImageView themeImageLeft, Context context){
         DiskCacheStrategy diskCacheStrategy = new DiskCacheStrategy() {
             @Override

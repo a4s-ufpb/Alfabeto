@@ -15,6 +15,9 @@ import com.napoleao.alphabeto.R;
 import com.napoleao.alphabeto.activity.util.ComponentesAuxiliares;
 import com.napoleao.alphabeto.config.AppConfig;
 
+/**
+ * Classe responsável por gerenciar a tela de configurações do aplicativo.
+ */
 public class ConfiguracoesActivity extends AppCompatActivity implements View.OnClickListener{
 
     private AppConfig configurator;
@@ -31,6 +34,10 @@ public class ConfiguracoesActivity extends AppCompatActivity implements View.OnC
     int[] textIds = {R.id.txtConfig, R.id.txtTipoLetra, R.id.txtVisualizacao, R.id.txtSomAcerto,
         R.id.txtBack, R.id.txtSave};
 
+    /**
+     * Método responsável por inicializar os componentes da tela.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +59,9 @@ public class ConfiguracoesActivity extends AppCompatActivity implements View.OnC
         this.rbOpcao3 = findViewById(R.id.rbOpcao3);
     }
 
+    /**
+     * Método responsável por instanciar os botões de texto da tela.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -143,6 +153,10 @@ public class ConfiguracoesActivity extends AppCompatActivity implements View.OnC
         Toast.makeText(this, "Configurações salvas com sucesso!", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Define o som de acerto de acordo com a opção selecionada.
+     * @param view
+     */
     @Override
     public void onClick(View view) {
         MediaPlayer acertou = null;
@@ -160,6 +174,10 @@ public class ConfiguracoesActivity extends AppCompatActivity implements View.OnC
         acertou.start();
     }
 
+    /**
+     * Volta para a tela de menu.
+     * @param v
+     */
     public void voltarConfiguracoes(View v){
         onBackPressed();
     }
@@ -174,6 +192,9 @@ public class ConfiguracoesActivity extends AppCompatActivity implements View.OnC
         }
     }
 
+    /**
+     * Volta para a tela de menu.
+     */
     @Override
     public void onBackPressed(){
         finish();

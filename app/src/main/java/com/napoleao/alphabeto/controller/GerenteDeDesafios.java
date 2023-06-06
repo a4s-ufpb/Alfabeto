@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+/**
+ * Classe responsável por gerenciar os desafios.
+ */
 public class GerenteDeDesafios {
 
     private ComponentesAuxiliares componentesAuxiliares;

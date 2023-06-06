@@ -17,7 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * Class para implementação de busca de imagens no Pixabay.
+ */
 public class SearchEngineClient {
 
     private static String API_KEY = null;

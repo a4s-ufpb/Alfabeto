@@ -6,6 +6,9 @@ import android.util.Log;
 
 import java.util.Locale;
 
+/**
+ * Classe responsável por gerenciar o serviço de áudio.
+ */
 public class SingletonAudio implements TextToSpeech.OnInitListener{
 
     private Context myContext;

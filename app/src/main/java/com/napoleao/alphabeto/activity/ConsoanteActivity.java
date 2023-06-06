@@ -23,6 +23,9 @@ import com.napoleao.alphabeto.model.Challenge;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe responsável por gerenciar a tela de desafios do alfabeto.
+ */
 public class ConsoanteActivity extends AppCompatActivity implements View.OnClickListener {
     //Componentes da interface
     private ImageView imagem;
@@ -45,6 +48,10 @@ public class ConsoanteActivity extends AppCompatActivity implements View.OnClick
     private int indice = 0;
     private SingletonJogador jogador = SingletonJogador.getJogador();
 
+    /**
+     * Método responsável por inicializar os componentes da tela.
+     * @param savedInstanceState
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consoantes);
@@ -83,6 +90,10 @@ public class ConsoanteActivity extends AppCompatActivity implements View.OnClick
         desafio = gerenteDeDesafios.definirPalavraConsoante(listDesafios.get(indice).getWord()).toCharArray();
     }
 
+    /**
+     * Método responsável por gerenciar o clique nos botões.
+     * @param v necessário para o mapeamento via XML
+     */
     @Override
     public void onClick(View v) {
         Button button = (Button) v;

@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+/**
+ * Classe responsável por gerenciar as configurações do aplicativo.
+ */
 public class AppConfig  {
     private static AppConfig instance;
     SharedPreferences sPreferences = null;

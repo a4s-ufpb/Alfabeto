@@ -15,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.napoleao.alphabeto.activity.CreateTemaActivity;
 import com.napoleao.alphabeto.activity.util.ImageLoadUtil;
 
+/**
+ * Classe responsável por gerenciar o adapter da tela de criação de temas.
+ */
 public class CreatePalavraAdapter extends RecyclerView.Adapter<CreatePalavraAdapter.ViewHolder> {
     private CreateTemaActivity createTheme;
     private String  TAG = "CreatePalavraAdapter";

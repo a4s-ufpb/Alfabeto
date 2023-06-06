@@ -23,6 +23,9 @@ import com.napoleao.alphabeto.model.Challenge;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe responsável por gerenciar a tela de desafios de vogais.
+ */
 public class VogalActivity extends AppCompatActivity implements View.OnClickListener {
     //Componentes da interface
     private ImageView imagem;

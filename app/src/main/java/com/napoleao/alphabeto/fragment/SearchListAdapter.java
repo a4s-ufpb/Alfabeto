@@ -24,6 +24,9 @@ import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Classe responsável por implementar adaptador da busca de imagens.
+ */
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
     private Context fragmentContext;
     private int TAG;

@@ -25,6 +25,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Classe responsável por gerenciar a tela de importação de temas por ID.
+ */
 public class ImportTemasByIdActivity extends AppCompatActivity {
 
     private Tema tema;

@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.napoleao.alphabeto.R;
 import com.napoleao.alphabeto.activity.util.ComponentesAuxiliares;
 
+/**
+ * Classe responsável por gerenciar a tela de informações sobre o aplicativo.
+ */
 public class SobreActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override

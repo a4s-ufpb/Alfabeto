@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.napoleao.alphabeto.R;
 import com.napoleao.alphabeto.activity.util.ComponentesAuxiliares;
 
+/**
+ * Classe responsável por gerenciar a tela de Splash Screen.
+ */
 public class SplashScreenActivity extends AppCompatActivity {
 
     @Override

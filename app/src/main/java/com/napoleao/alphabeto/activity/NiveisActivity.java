@@ -12,6 +12,9 @@ import com.napoleao.alphabeto.R;
 import com.napoleao.alphabeto.activity.util.ComponentesAuxiliares;
 import com.napoleao.alphabeto.controller.GerenteDeDesafios;
 
+/**
+ * Classe responsável por gerenciar a tela de seleção de níveis.
+ */
 public class NiveisActivity extends AppCompatActivity implements View.OnClickListener{
 
     private int temaSelecionado;

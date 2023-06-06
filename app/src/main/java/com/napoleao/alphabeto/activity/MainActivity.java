@@ -29,6 +29,9 @@ import com.napoleao.alphabeto.model.Tema;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe responsável por gerenciar a tela de seleção de temas.
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int TEMA_CORES = 0;
     private static final int TEMA_OBJETOS = 1;

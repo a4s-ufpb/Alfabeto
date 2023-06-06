@@ -1,5 +1,8 @@
 package com.napoleao.alphabeto.controller;
 
+/**
+ * Classe responsável por gerenciar a pontuação do jogador.
+ */
 public class SingletonJogador {
 
     private float pontuacao = 3;

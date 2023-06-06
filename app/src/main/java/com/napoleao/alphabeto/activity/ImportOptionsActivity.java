@@ -8,6 +8,9 @@ import android.view.View;
 
 import com.napoleao.alphabeto.R;
 
+/**
+ * Classe responsável por gerenciar a tela de opções de importação de temas.
+ */
 public class ImportOptionsActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override

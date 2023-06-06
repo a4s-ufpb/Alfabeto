@@ -15,6 +15,9 @@ import com.napoleao.alphabeto.controller.SingletonJogador;
 import com.willy.ratingbar.BaseRatingBar;
 import com.willy.ratingbar.ScaleRatingBar;
 
+/**
+ * Classe responsável por gerenciar a tela de fim de jogo.
+ */
 public class FimDeJogoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private SingletonJogador jogador = SingletonJogador.getJogador();
