@@ -10,14 +10,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitConfig {
 
-    public static Retrofit getRetrofit(){
+    public static Retrofit getRetrofit() {
         return new Retrofit.Builder()
                 .baseUrl(ApiConfig.getInstance(null).getDomain())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 
-    public ContextService contextService(){
+    public ContextService contextService() {
         return getRetrofit().create(ContextService.class);
     }
 }

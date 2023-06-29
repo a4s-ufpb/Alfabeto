@@ -20,18 +20,19 @@ import com.napoleao.alphabeto.activity.MainActivity;
 import com.napoleao.alphabeto.config.AppConfig;
 
 /**
- * Classe responsável por agrupar métodos auxiliares.
+ * Class responsable for an collection of utils for components.
  */
-public class ComponentesAuxiliares {
+public class ComponentsUtil {
 
     /**
-     * Faz a chamada de uma Intent.
-     * @param context Activity atual
-     * @param classe Activity a ser chamada
-     * @param select Inteiro que define o tema dos desafios
+     * Build the call for an Intent.
+     *
+     * @param context   Activity used
+     * @param className Activity class name used
+     * @param select    Id of the theme
      */
-    public void invocarIntent(Context context, Class classe, int select, Long idTema){
-        Intent it = new Intent(context, classe);
+    public void startIntent(Context context, Class className, int select, Long idTema) {
+        Intent it = new Intent(context, className);
         it.putExtra("tema", select);
         it.putExtra("idTema", idTema);
         context.startActivity(it);
@@ -39,36 +40,38 @@ public class ComponentesAuxiliares {
     }
 
     /**
-     * Define as fonte utilizada no aplicativo, visto que nas versões antigas as mesmas não podem
-     * ser definidas no arquivo xml da activity.
-     * @param context activity atual
-     * @param textView label que receberá a fonte
+     * Define an font for an TextView.
+     *
+     * @param context  activity used
+     * @param textView textLabel for set font
      */
-    public static void definirFonte(Context context, TextView textView){
+    public static void setFont(Context context, TextView textView) {
         Typeface font = Typeface.createFromAsset(context.getAssets(), "fonts/luckiest-guy.ttf");
         textView.setTypeface(font);
     }
 
     /**
-     * Desativa a Activity - impede clique em outro botão.
-     * @param activity Activity atual
+     * Disable the touch in the screen.
+     *
+     * @param activity Activity used
      */
-    public void impedirDuploClique(Activity activity){
-       activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+    public void disableTouchInWindow(Activity activity) {
+        activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 
     /**
-     * Instancia os botões personalizados da interface.
-     * @param view View que agrupa os botões
-     * @param onClickListener Listener responsável pelos eventos de Click
-     * @param botoes Array com todos os ID's dos botões
+     * Instantiate all buttons in the screen.
+     *
+     * @param view            View of group of buttons
+     * @param onClickListener Listener of click in buttons
+     * @param buttons         Array with id of all buttons
      */
-    public void instanciarBotoes(View view, View.OnClickListener onClickListener, int[] botoes, Context context){
+    public void allocAllButtons(View view, View.OnClickListener onClickListener, int[] buttons, Context context) {
         int i;
         Typeface typeface = Typeface.createFromAsset(context.getAssets(), AppConfig.getInstance(context).getCurrentButtonConfig());
-        for(i = 0; i < botoes.length; i++){
-            Button btn = view.findViewById(botoes[i]);
+        for (i = 0; i < buttons.length; i++) {
+            Button btn = view.findViewById(buttons[i]);
             btn.setTypeface(typeface, Typeface.BOLD);
             btn.setAllCaps(AppConfig.getInstance(context).isCurrentButtonCase());
             btn.setOnClickListener(onClickListener);
@@ -76,46 +79,50 @@ public class ComponentesAuxiliares {
     }
 
     /**
-     * Desativa momentaneamente o clique dos botões.
-     * @param botoes Array com todos os ID's dos botões
-     * @param view View que agrupa os botões
+     * Disable the click in all buttons.
+     *
+     * @param buttons Array with id of all buttons
+     * @param view    View of group of buttons
      */
-    public void desligarBotoes(int[] botoes, View view){
+    public void disableAllButtons(int[] buttons, View view) {
         int i;
-        for(i = 0; i < botoes.length; i++){
-            Button btn = view.findViewById(botoes[i]);
+        for (i = 0; i < buttons.length; i++) {
+            Button btn = view.findViewById(buttons[i]);
             btn.setEnabled(false);
         }
     }
 
     /**
-     * Ativa o clique dos botões.
-     * @param botoes Array com todos os ID's dos botões
-     * @param view View que agrupa os botões
+     * Enable the click in all buttons.
+     *
+     * @param buttons Array with id of all buttons
+     * @param view    View of group of buttons
      */
-    public void ligarBotoes(int[] botoes, View view){
+    public void enableAllButtons(int[] buttons, View view) {
         int i;
-        for(i = 0; i < botoes.length; i++){
-            Button btn = view.findViewById(botoes[i]);
+        for (i = 0; i < buttons.length; i++) {
+            Button btn = view.findViewById(buttons[i]);
             btn.setEnabled(true);
         }
     }
 
     /**
-     * Ativa a vibração do dispositivo ao clicar em determinados botões.
-     * @param context Activity atual
+     * Enable the vibration of the device when click in some buttons.
+     *
+     * @param context Activity used
      */
-    public void vibrar(Context context){
+    public void vibrateAction(Context context) {
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         long milliseconds = 100;
         vibrator.vibrate(milliseconds);
     }
 
     /**
-     * Invoca um AlertDialog perguntando se o jogador deseja sair da partida atual.
-     * @param activity Activity atual
+     * Call an AlertDialog asking if the player want to exit the current game.
+     *
+     * @param activity Activity used
      */
-    public void exibirConfirmacaoFechar(final Activity activity) {
+    public void showCloseConfirmation(final Activity activity) {
 
         AlertDialog.Builder mensagem = new AlertDialog.Builder(activity, R.style.AlertDialogStyle);
         mensagem.setTitle("Confirmação");
@@ -144,10 +151,11 @@ public class ComponentesAuxiliares {
     }
 
     /**
-     * Invoca um AlertDialog perguntando se o jogador deseja voltar para a tela de seleção de temas.
-     * @param activity Activity atual
+     * Call an AlertDialog asking if the player want to back to the theme selection screen.
+     *
+     * @param activity Activity used
      */
-    public void exibirConfirmacaoVoltar(final Activity activity) {
+    public void showBackConfirmation(final Activity activity) {
 
         AlertDialog.Builder mensagem = new AlertDialog.Builder(activity, R.style.AlertDialogStyle);
         mensagem.setTitle("Confirmação");

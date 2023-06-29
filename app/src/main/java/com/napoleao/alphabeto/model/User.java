@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe responsável por representar um usuário.
+ * Class responsable for represent user.
  */
 public class User {
     private Long id;
@@ -14,9 +14,20 @@ public class User {
     private List<Challenge> challenges = new ArrayList<>();
     private List<Tema> contexts = new ArrayList<>();
 
+    /**
+     * Constructor for User.
+     */
     public User() {
     }
 
+    /**
+     * Constructor for User.
+     *
+     * @param id
+     * @param name
+     * @param email
+     * @param password
+     */
     public User(Long id, String name, String email, String password) {
         this.id = id;
         this.name = name;

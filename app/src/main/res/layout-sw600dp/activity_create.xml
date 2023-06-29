@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context=".activity.CreateTemaActivity">
+    tools:context=".activity.CreateThemeActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -307,7 +307,7 @@
         android:layout_height="70dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/voltar"
-        android:onClick="voltar"
+        android:onClick="backAction"
         android:padding="5dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/txtBack2"
@@ -323,7 +323,7 @@
         android:background="@android:color/transparent"
         android:contentDescription="@string/salvar"
         android:hapticFeedbackEnabled="true"
-        android:onClick="salvarTema"
+        android:onClick="saveChanges"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/txtSave2"
         app:layout_constraintEnd_toEndOf="parent"

@@ -9,13 +9,18 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.napoleao.alphabeto.R;
-import com.napoleao.alphabeto.activity.util.ComponentesAuxiliares;
+import com.napoleao.alphabeto.activity.util.ComponentsUtil;
 
 /**
- * Classe responsável por gerenciar a tela de informações sobre o aplicativo.
+ * Class responsible for managing the screen of information about the application.
  */
-public class SobreActivity extends AppCompatActivity implements View.OnClickListener {
+public class AboutActivity extends AppCompatActivity implements View.OnClickListener {
 
+    /**
+     * Initializes the screen components.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,16 +32,20 @@ public class SobreActivity extends AppCompatActivity implements View.OnClickList
         txtProjeto = findViewById(R.id.txtProjeto);
         txtCreditos = findViewById(R.id.txtCredit);
 
-        ComponentesAuxiliares.definirFonte(this, txtSobre);
-        ComponentesAuxiliares.definirFonte(this, txtDevby);
-        ComponentesAuxiliares.definirFonte(this, txtProjeto);
-        ComponentesAuxiliares.definirFonte(this, txtCreditos);
+        ComponentsUtil.setFont(this, txtSobre);
+        ComponentsUtil.setFont(this, txtDevby);
+        ComponentsUtil.setFont(this, txtProjeto);
+        ComponentsUtil.setFont(this, txtCreditos);
     }
 
-
+    /**
+     * Button click event.
+     *
+     * @param view
+     */
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btnMenuInicialSobre:
                 finish();
                 break;

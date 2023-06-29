@@ -6,36 +6,46 @@ import com.napoleao.alphabeto.model.Challenge;
 import java.util.List;
 
 /**
- * Classe responsável por gerenciar os temas.
+ * Class responsible for managing themes.
  */
-public class GerenteDeTemas {
+public class ManageThemes {
 
     private List<Challenge> challenges;
 
-    public GerenteDeTemas(List<Challenge> challenges) {
+    /**
+     * Constructor responsible for initializing the class attributes.
+     *
+     * @param challenges
+     */
+    public ManageThemes(List<Challenge> challenges) {
         this.challenges = challenges;
     }
 
-
-    public void escolhaDeTema(int select) {
+    /**
+     * Method responsible for instantiating the theme.
+     */
+    public void chooseTheme(int select) {
         if (select == 0) {
-            instanciarCores();
+            allocColors();
         } else if (select == 1) {
-            instanciarObjetos();
+            allocObjects();
         } else if (select == 2) {
-            instanciarAnimais();
-        }else if (select == 3){
-            instanciarFrutas();
+            allocAnimals();
+        } else if (select == 3) {
+            allocFruits();
         } else if (select == 4) {
-            instanciarBrinquedos();
+            allocToys();
         } else if (select == 5) {
-            instanciarPartesDoCorpo();
-        }else if (select == 6) {
-            instanciarPaises();
+            allocPartsOfHumanBody();
+        } else if (select == 6) {
+            allocCountries();
         }
     }
 
-    void instanciarAnimais(){
+    /**
+     * Method responsible for instantiating the animals.
+     */
+    void allocAnimals() {
         challenges.clear();
 
         Challenge a1 = new Challenge(R.drawable.ovelha, "ovelha");
@@ -54,7 +64,8 @@ public class GerenteDeTemas {
         Challenge a14 = new Challenge(R.drawable.zebra, "zebra");
         Challenge a15 = new Challenge(R.drawable.tigre, "tigre");
 
-        challenges.add(a1); challenges.add(a2);
+        challenges.add(a1);
+        challenges.add(a2);
         challenges.add(a3);
         challenges.add(a4);
         challenges.add(a5);
@@ -70,7 +81,10 @@ public class GerenteDeTemas {
         challenges.add(a15);
     }
 
-    void instanciarPaises(){
+    /**
+     * Method responsible for instantiating the countries.
+     */
+    void allocCountries() {
         challenges.clear();
 
         Challenge p1 = new Challenge(R.drawable.australia, "austrália");
@@ -79,7 +93,7 @@ public class GerenteDeTemas {
         Challenge p4 = new Challenge(R.drawable.china, "china");
         Challenge p5 = new Challenge(R.drawable.colombia, "colômbia");
         Challenge p6 = new Challenge(R.drawable.cuba, "cuba");
-        Challenge p7 = new Challenge(R.drawable.franca,  "frança");
+        Challenge p7 = new Challenge(R.drawable.franca, "frança");
         Challenge p8 = new Challenge(R.drawable.alemanha, "alemanha");
         Challenge p9 = new Challenge(R.drawable.holanda, "holanda");
         Challenge p10 = new Challenge(R.drawable.italia, "itália");
@@ -89,7 +103,8 @@ public class GerenteDeTemas {
         Challenge p14 = new Challenge(R.drawable.reino, "reino\nunido");
         Challenge p15 = new Challenge(R.drawable.usa, "estados\nunidos");
 
-        challenges.add(p1); challenges.add(p2);
+        challenges.add(p1);
+        challenges.add(p2);
         challenges.add(p3);
         challenges.add(p4);
         challenges.add(p5);
@@ -105,7 +120,10 @@ public class GerenteDeTemas {
         challenges.add(p15);
     }
 
-    void instanciarCores(){
+    /**
+     * Method responsible for instantiating the colors.
+     */
+    void allocColors() {
         challenges.clear();
 
         Challenge c1 = new Challenge(R.drawable.amarelo, "amarelo");
@@ -124,7 +142,8 @@ public class GerenteDeTemas {
         Challenge c14 = new Challenge(R.drawable.prata, "prata");
         Challenge c15 = new Challenge(R.drawable.branco, "branco");
 
-        challenges.add(c1); challenges.add(c2);
+        challenges.add(c1);
+        challenges.add(c2);
         challenges.add(c3);
         challenges.add(c4);
         challenges.add(c5);
@@ -140,7 +159,10 @@ public class GerenteDeTemas {
         challenges.add(c15);
     }
 
-    void instanciarObjetos(){
+    /**
+     * Method responsible for instantiating the objects.
+     */
+    void allocObjects() {
         challenges.clear();
 
         Challenge o1 = new Challenge(R.drawable.pilha, "pilha");
@@ -154,12 +176,13 @@ public class GerenteDeTemas {
         Challenge o9 = new Challenge(R.drawable.oculos, "óculos");
         Challenge o10 = new Challenge(R.drawable.relogio, "relógio");
         Challenge o11 = new Challenge(R.drawable.televisao, "televisão");
-        Challenge o12= new Challenge(R.drawable.tambor, "tambor");
+        Challenge o12 = new Challenge(R.drawable.tambor, "tambor");
         Challenge o13 = new Challenge(R.drawable.celular, "celular");
         Challenge o14 = new Challenge(R.drawable.xicara, "xícara");
         Challenge o15 = new Challenge(R.drawable.telefone, "telefone");
 
-        challenges.add(o1); challenges.add(o2);
+        challenges.add(o1);
+        challenges.add(o2);
         challenges.add(o3);
         challenges.add(o4);
         challenges.add(o5);
@@ -175,7 +198,10 @@ public class GerenteDeTemas {
         challenges.add(o15);
     }
 
-    void instanciarFrutas(){
+    /**
+     * Method responsible for instantiating the fruits.
+     */
+    void allocFruits() {
         challenges.clear();
 
         Challenge f1 = new Challenge(R.drawable.abacaxi, "abacaxi");
@@ -194,7 +220,8 @@ public class GerenteDeTemas {
         Challenge f14 = new Challenge(R.drawable.mamao, "mamão");
         Challenge f15 = new Challenge(R.drawable.limao, "limão");
 
-        challenges.add(f1); challenges.add(f2);
+        challenges.add(f1);
+        challenges.add(f2);
         challenges.add(f3);
         challenges.add(f4);
         challenges.add(f5);
@@ -210,7 +237,10 @@ public class GerenteDeTemas {
         challenges.add(f15);
     }
 
-    void instanciarBrinquedos(){
+    /**
+     * Method responsible for instantiating the toys.
+     */
+    void allocToys() {
         challenges.clear();
 
         Challenge b1 = new Challenge(R.drawable.aviao, "avião");
@@ -229,7 +259,8 @@ public class GerenteDeTemas {
         Challenge b14 = new Challenge(R.drawable.gangorra, "gangorra");
         Challenge b15 = new Challenge(R.drawable.quebra_cabecas, "quebra-\ncabeça");
 
-        challenges.add(b1); challenges.add(b2);
+        challenges.add(b1);
+        challenges.add(b2);
         challenges.add(b3);
         challenges.add(b4);
         challenges.add(b5);
@@ -245,7 +276,10 @@ public class GerenteDeTemas {
         challenges.add(b15);
     }
 
-    void instanciarPartesDoCorpo(){
+    /**
+     * Method responsible for instantiating the parts of human body.
+     */
+    void allocPartsOfHumanBody() {
         challenges.clear();
 
         Challenge p1 = new Challenge(R.drawable.boca, "boca");
@@ -264,7 +298,8 @@ public class GerenteDeTemas {
         Challenge p14 = new Challenge(R.drawable.nariz, "nariz");
         Challenge p15 = new Challenge(R.drawable.calcanhar, "calcanhar");
 
-        challenges.add(p1); challenges.add(p2);
+        challenges.add(p1);
+        challenges.add(p2);
         challenges.add(p3);
         challenges.add(p4);
         challenges.add(p5);

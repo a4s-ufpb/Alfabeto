@@ -7,7 +7,7 @@
     android:background="@android:color/transparent">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageTema"
+        android:id="@+id/imageTheme"
         android:layout_width="95dp"
         android:layout_height="105dp"
         android:layout_marginTop="16dp"
@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/alfabeto" />
 
     <TextView
-        android:id="@+id/textNameTema"
+        android:id="@+id/textNameTheme"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -33,6 +33,6 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageTema"
-        app:layout_constraintTop_toTopOf="@+id/imageTema" />
+        app:layout_constraintStart_toEndOf="@+id/imageTheme"
+        app:layout_constraintTop_toTopOf="@+id/imageTheme" />
 </androidx.constraintlayout.widget.ConstraintLayout>

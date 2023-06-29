@@ -5,6 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+/**
+ * Class to manage database
+ */
 public class DBHelper extends SQLiteOpenHelper {
 
     private static DBHelper instance;
@@ -13,6 +16,12 @@ public class DBHelper extends SQLiteOpenHelper {
     public static String TABLE_DESAFIOS = "desafios";
     public static int VERSION = 1;
 
+    /**
+     * Get shared instance
+     *
+     * @param context
+     * @return
+     */
     public static synchronized DBHelper getInstance(Context context) {
         if (instance == null) {
             instance = new DBHelper(context);
@@ -20,10 +29,20 @@ public class DBHelper extends SQLiteOpenHelper {
         return instance;
     }
 
-    public DBHelper(Context context){
+    /**
+     * Constructor for DBHelper.
+     *
+     * @param context
+     */
+    public DBHelper(Context context) {
         super(context, DB_NAME, null, VERSION);
     }
 
+    /**
+     * Create database
+     *
+     * @param sqLiteDatabase
+     */
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String sqlTemas = "CREATE TABLE IF NOT EXISTS " + TABLE_TEMAS +
@@ -37,13 +56,20 @@ public class DBHelper extends SQLiteOpenHelper {
         try {
             sqLiteDatabase.execSQL(sqlTemas);
             sqLiteDatabase.execSQL(sqlDesafios);
-            Log.i("INFO DB", "Sucesso ao criar tabela");
-        }catch (Exception e){
-            Log.i("INFO DB", "Erro ao criar tabela " + e.getMessage());
+            //Log.i("INFO DB", "Sucesso ao criar tabela");
+        } catch (Exception e) {
+            //Log.i("INFO DB", "Erro ao criar tabela " + e.getMessage());
         }
 
     }
 
+    /**
+     * Upgrade database
+     *
+     * @param sqLiteDatabase
+     * @param i
+     * @param i1
+     */
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 

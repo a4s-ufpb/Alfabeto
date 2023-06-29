@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.napoleao.alphabeto.R;
-import com.napoleao.alphabeto.activity.CreateTemaActivity;
+import com.napoleao.alphabeto.activity.CreateThemeActivity;
 import com.napoleao.alphabeto.activity.util.ImageLoadUtil;
 
 import java.io.File;
@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Classe responsável por implementar adaptador da busca de imagens.
+ * Class responsible for implementing the image search adapter.
  */
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
     private Context fragmentContext;
@@ -33,6 +33,14 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
     private Fragment fragmento;
     private List<HashMap<String, Object>> resultado;
 
+    /**
+     * Constructor method.
+     *
+     * @param resultado
+     * @param context
+     * @param searchFragment
+     * @param tag
+     */
     public SearchListAdapter(List<HashMap<String, Object>> resultado, Context context, SearchFragment searchFragment, int tag) {
         this.fragmentContext = context;
         this.resultado = resultado;
@@ -40,6 +48,9 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         this.fragmento = searchFragment;
     }
 
+    /**
+     * Class responsible for implementing the view holder.
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,17 +58,20 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         return new ViewHolder(v);
     }
 
+    /**
+     * Class responsible for implementing the view holder.
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String imageUrl = null;
 
         try {
             imageUrl = resultado.get(position).get("webformatURL").toString();
-        } catch(Exception e){
-            Toast.makeText(fragmentContext,"Imagem Invalida, Tente escolher Outra",Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(fragmentContext, "Imagem Invalida, Tente escolher Outra", Toast.LENGTH_SHORT).show();
         }
 
-        if(imageUrl != null) {
+        if (imageUrl != null) {
             loadImage(imageUrl, holder.img);
 
             String finalImageUrl = imageUrl;
@@ -70,11 +84,19 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         }
     }
 
+    /**
+     * Count the number of items in the list.
+     *
+     * @return number of items in the list
+     */
     @Override
     public int getItemCount() {
         return resultado.size();
     }
 
+    /**
+     * Class responsible for downloading the image.
+     */
     public class GetImageExecutor extends Thread {
 
         private String imageUrl;
@@ -102,18 +124,18 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
                 OutputStream outStream = new FileOutputStream(outputFile);
 
-                byte [] buffer = new byte[2 * 1024];
+                byte[] buffer = new byte[2 * 1024];
                 int bytesRead;
-                while((bytesRead = input.read(buffer)) != -1) {
+                while ((bytesRead = input.read(buffer)) != -1) {
                     outStream.write(buffer, 0, bytesRead);
                 }
                 input.close();
 
-                fragmento.getActivity().runOnUiThread (new Thread(new Runnable() {
+                fragmento.getActivity().runOnUiThread(new Thread(new Runnable() {
                     public void run() {
                         fragmento.getView().findViewById(R.id.loadingframeLayout2).setVisibility(View.GONE);
 
-                        CreateTemaActivity actv = (CreateTemaActivity) fragmento.getActivity();
+                        CreateThemeActivity actv = (CreateThemeActivity) fragmento.getActivity();
 
                         actv.sendImage(outputFile, TAG);
 
@@ -127,14 +149,24 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         }
     }
 
+    /**
+     * Class responsible for implementing the view holder.
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView img;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.grid_image);
         }
     }
 
+    /**
+     * Method responsible for loading the image.
+     *
+     * @param imageUrl
+     * @param themeImageLeft
+     */
     private void loadImage(String imageUrl, ImageView themeImageLeft) {
         ImageLoadUtil.getInstance().loadImage(imageUrl, themeImageLeft, fragmentContext);
     }

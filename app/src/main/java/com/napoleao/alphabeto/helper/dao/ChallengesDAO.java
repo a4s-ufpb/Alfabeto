@@ -13,6 +13,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class responsable for access database and manipulate Challenge.
+ */
 public class ChallengesDAO implements IChallengesDAO {
 
     private static ChallengesDAO instance;
@@ -20,6 +23,12 @@ public class ChallengesDAO implements IChallengesDAO {
     private SQLiteDatabase read;
     private Context context;
 
+    /**
+     * Method responsable for return instance of ChallengesDAO.
+     *
+     * @param context
+     * @return instance
+     */
     public static synchronized ChallengesDAO getInstance(Context context) {
         if (instance == null) {
             instance = new ChallengesDAO(context);
@@ -27,13 +36,24 @@ public class ChallengesDAO implements IChallengesDAO {
         return instance;
     }
 
-    public ChallengesDAO(Context context){
+    /**
+     * Constructor for ChallengesDAO.
+     *
+     * @param context
+     */
+    public ChallengesDAO(Context context) {
         this.context = context;
         DBHelper dbHelper = DBHelper.getInstance(context);
         write = dbHelper.getWritableDatabase();
         read = dbHelper.getReadableDatabase();
     }
 
+    /**
+     * Method responsable for get a challenge.
+     *
+     * @param idGet id of challenge
+     * @return Challenge
+     */
     @Override
     public Challenge get(Long idGet) {
         Long id = null, idTema = null;
@@ -51,7 +71,7 @@ public class ChallengesDAO implements IChallengesDAO {
         }
         cursor.close();
 
-        if(id != null) {
+        if (id != null) {
             Challenge challenge = new Challenge();
             challenge.setId(id);
             challenge.setWord(word);
@@ -63,10 +83,15 @@ public class ChallengesDAO implements IChallengesDAO {
         return null;
     }
 
+    /**
+     * Method responsable for save challenge.
+     *
+     * @return boolean
+     */
     @Override
     public boolean save(Challenge challenge) {
         ContentValues cv = new ContentValues();
-        if(challenge.getId() != null) {
+        if (challenge.getId() != null) {
             cv.put("idDesafio", challenge.getId());
         }
         cv.put("word", challenge.getWord());
@@ -77,32 +102,44 @@ public class ChallengesDAO implements IChallengesDAO {
             challenge.setId(id);
             cv.clear();
             Log.d("SAVE", "Desafio salvo com sucesso!");
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.d("SAVE", "Erro ao salvar!");
             return false;
         }
         return true;
     }
 
+    /**
+     * Method responsable for delete a challenge.
+     *
+     * @param challenge
+     * @return boolean
+     */
     @Override
     public boolean delete(Challenge challenge) {
         try {
             return deleteById(challenge.getId());
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.d("SAVE", "Erro ao remover!");
             return false;
         }
     }
 
+    /**
+     * Method responsable for delete a challenge by id.
+     *
+     * @param challengeId
+     * @return boolean
+     */
     @Override
     public boolean deleteById(Long challengeId) {
         try {
 
             // delete saved local image file
             Challenge palavra = get(challengeId);
-            if(palavra!=null && palavra.getImageUrl()!=null) {
+            if (palavra != null && palavra.getImageUrl() != null) {
                 String imageSt = palavra.getImageUrl();
-                if(imageSt.startsWith("/")) {
+                if (imageSt.startsWith("/")) {
                     File imageFile = new File(imageSt);
                     imageFile.delete();
                 }
@@ -111,13 +148,19 @@ public class ChallengesDAO implements IChallengesDAO {
             String[] args = {challengeId.toString()};
             write.delete(DBHelper.TABLE_DESAFIOS, "idDesafio=?", args);
             Log.d("SAVE", "Desafio removido com sucesso!");
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.d("SAVE", "Erro ao remover!");
             return false;
         }
         return true;
     }
 
+    /**
+     * Method responsable for update a challenge.
+     *
+     * @param challenge
+     * @return boolean
+     */
     @Override
     public boolean update(Challenge challenge) {
         try {
@@ -130,13 +173,18 @@ public class ChallengesDAO implements IChallengesDAO {
             String[] args = {challenge.getId().toString()};
             write.update(DBHelper.TABLE_DESAFIOS, cv, "idDesafio=?", args);
             cv.clear();
-        }catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(context, "Erro ao atualizar tema!", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
     }
 
+    /**
+     * Method responsable for get all challenges.
+     *
+     * @return List<Challenge>
+     */
     @Override
     public List<Challenge> findAll() {
         List<Challenge> challenges = new ArrayList<>();
@@ -145,7 +193,7 @@ public class ChallengesDAO implements IChallengesDAO {
         Cursor cursor = read.rawQuery(sql, null);
 
         cursor.move(0);
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             Challenge challenge = new Challenge();
             Long idDesafio = cursor.getLong(cursor.getColumnIndex("idDesafio"));
             String word = cursor.getString(cursor.getColumnIndex("word"));
@@ -165,6 +213,12 @@ public class ChallengesDAO implements IChallengesDAO {
         return challenges;
     }
 
+    /**
+     * Method responsable for get all challenges by id.
+     *
+     * @param id
+     * @return List<Challenge>
+     */
     @Override
     public List<Challenge> findById(Long id) {
         List<Challenge> challenges = new ArrayList<>();
@@ -174,7 +228,7 @@ public class ChallengesDAO implements IChallengesDAO {
                 " WHERE idTema = " + id;
         Cursor cursor = read.rawQuery(sql, null);
 
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             Challenge challenge = new Challenge();
             Long idDesafio = cursor.getLong(cursor.getColumnIndex("idDesafio"));
             String word = cursor.getString(cursor.getColumnIndex("word"));

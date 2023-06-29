@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Classe responsável por implementar o fragment da busca de imagens.
+ * Class responsible for implementing the image search fragment.
  */
 public class SearchFragment extends Fragment {
 
@@ -31,31 +31,45 @@ public class SearchFragment extends Fragment {
 
     private ArrayList<HashMap<String, Object>> resultado = new ArrayList();
 
+    /**
+     * Constructor method.
+     *
+     * @param query
+     * @param TAG
+     */
     public SearchFragment(String query, int TAG) {
         this.query = query;
         this.TAG = TAG;
     }
 
+    /**
+     * Method responsible for creating the view.
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return root
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        View root = inflater.inflate(R.layout.fragment_nav_search,container,false);
+        View root = inflater.inflate(R.layout.fragment_nav_search, container, false);
 
         searchEngine = new SearchEngineClient(getContext());
         rv = root.findViewById(R.id.search_rv);
 
-        laymanager = new GridLayoutManager(getContext(),2,RecyclerView.VERTICAL,false);
+        laymanager = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
 
         try {
-            getActivity().runOnUiThread (new Thread(new Runnable() {
+            getActivity().runOnUiThread(new Thread(new Runnable() {
                 public void run() {
                     getActivity().findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
 
                     searchEngine.search(query, new SearchEngineClient.SearchEngineClientBingCompletionHandler() {
                         @Override
                         public void success(List<HashMap<String, Object>> resultado) {
-                            getActivity().runOnUiThread (new Thread(new Runnable() {
+                            getActivity().runOnUiThread(new Thread(new Runnable() {
                                 public void run() {
                                     getActivity().findViewById(R.id.progressBar).setVisibility(View.GONE);
                                     fillRecycleView(resultado);
@@ -65,7 +79,7 @@ public class SearchFragment extends Fragment {
 
                         @Override
                         public void failed(String reason) {
-                            getActivity().runOnUiThread (new Thread(new Runnable() {
+                            getActivity().runOnUiThread(new Thread(new Runnable() {
                                 public void run() {
                                     getActivity().findViewById(R.id.progressBar).setVisibility(View.GONE);
                                     Toast.makeText(getActivity(), reason, Toast.LENGTH_SHORT).show();
@@ -75,14 +89,19 @@ public class SearchFragment extends Fragment {
                     });
                 }
             }));
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return root;
     }
 
-    private void fillRecycleView(List<HashMap<String, Object>> resultado){
+    /**
+     * Method responsible for filling the recycle view.
+     *
+     * @param resultado
+     */
+    private void fillRecycleView(List<HashMap<String, Object>> resultado) {
         rv.setLayoutManager(laymanager);
         rv.setAdapter(new SearchListAdapter(resultado, getContext(), this, TAG));
     }

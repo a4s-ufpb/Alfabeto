@@ -18,19 +18,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Class para implementação de busca de imagens no Pixabay.
+ * Class implementation for Search images in Pixabay API.
  */
 public class SearchEngineClient {
 
     private static String API_KEY = null;
 
-    public SearchEngineClient(Context context){
+    public SearchEngineClient(Context context) {
         API_KEY = context.getResources().getString(R.string.pixabay_key);
     }
 
-    public interface SearchEngineClientBingCompletionHandler
-    {
+    public interface SearchEngineClientBingCompletionHandler {
         public void success(List<HashMap<String, Object>> resultado);
+
         public void failed(String reason);
     }
 
@@ -73,7 +73,7 @@ public class SearchEngineClient {
                 URLConnection connection = url.openConnection();
                 connection.setConnectTimeout(5000);
                 connection.setReadTimeout(5000);
-                HttpURLConnection connectionResp = ((HttpURLConnection)connection);
+                HttpURLConnection connectionResp = ((HttpURLConnection) connection);
                 String strCurrentLine = "";
                 if (connectionResp.getResponseCode() == 200) {
                     BufferedReader br = new BufferedReader(new InputStreamReader(connectionResp.getInputStream()));
@@ -83,7 +83,7 @@ public class SearchEngineClient {
                     }
                     ObjectMapper mapper = new ObjectMapper();
                     Map mapRequest = mapper.readValue(strCurrentLine, Map.class);
-                    results = (List<HashMap<String, Object>>)mapRequest.get("hits");
+                    results = (List<HashMap<String, Object>>) mapRequest.get("hits");
 
                     completionHandler.success(results);
                 }

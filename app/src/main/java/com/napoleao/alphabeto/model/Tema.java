@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe responsável por representar um tema.
+ * Class responsable for represent theme.
  */
 public class Tema {
 
@@ -21,11 +21,20 @@ public class Tema {
     private String imageUrl;
     private List<Challenge> challenges = new ArrayList<>();
 
+    /**
+     * Constructor for Tema.
+     */
     public Tema() {
     }
 
-
-    public Tema(Long id, String nomeImagem, String imageUrl, List<Challenge> challenges){
+    /**
+     * Constructor for Tema.
+     *
+     * @param id
+     * @param nomeImagem
+     * @param imageUrl
+     */
+    public Tema(Long id, String nomeImagem, String imageUrl, List<Challenge> challenges) {
         this.id = id;
         this.nomeImagem = nomeImagem;
         this.imageUrl = imageUrl;

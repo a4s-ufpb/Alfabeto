@@ -9,13 +9,20 @@ import android.widget.AdapterView;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * Classe responsável por implementar os métodos de clique no RecyclerView.
+ * Class responsible for implementing the click methods in the RecyclerView.
  */
 public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
 
     private OnItemClickListener mListener;
     GestureDetector mGestureDetector;
 
+    /**
+     * Method responsible for intercepting the touch event.
+     *
+     * @param rv
+     * @param e
+     * @return
+     */
     @Override
     public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
         View childView = rv.findChildViewUnder(e.getX(), e.getY());
@@ -26,22 +33,43 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
         return false;
     }
 
+    /**
+     * Method responsible for intercepting the touch event.
+     *
+     * @param rv
+     * @param e
+     */
     @Override
     public void onTouchEvent(RecyclerView rv, MotionEvent e) {
 
     }
 
+    /**
+     * Method responsible for intercepting the touch event.
+     *
+     * @param disallowIntercept
+     */
     @Override
     public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
     }
 
+    /**
+     * Interface responsible for implementing the click methods in the RecyclerView.
+     */
     public interface OnItemClickListener extends AdapterView.OnItemClickListener {
         public void onItemClick(View view, int position);
 
         public void onLongItemClick(View view, int position);
     }
 
+    /**
+     * Method responsible for intercepting the touch event.
+     *
+     * @param context
+     * @param recyclerView
+     * @param listener
+     */
     public RecyclerItemClickListener(Context context, final RecyclerView recyclerView, OnItemClickListener listener) {
         mListener = listener;
         mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {

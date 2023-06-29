@@ -9,62 +9,70 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.napoleao.alphabeto.R;
-import com.napoleao.alphabeto.activity.util.ComponentesAuxiliares;
-import com.napoleao.alphabeto.controller.GerenteDeDesafios;
-import com.napoleao.alphabeto.controller.SingletonJogador;
+import com.napoleao.alphabeto.activity.util.ComponentsUtil;
+import com.napoleao.alphabeto.controller.ManageChallenges;
+import com.napoleao.alphabeto.controller.SingletonPlayer;
 import com.willy.ratingbar.BaseRatingBar;
 import com.willy.ratingbar.ScaleRatingBar;
 
 /**
- * Classe responsável por gerenciar a tela de fim de jogo.
+ * Class responsible for managing the end of game screen.
  */
-public class FimDeJogoActivity extends AppCompatActivity implements View.OnClickListener {
+public class EndOfGameActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private SingletonJogador jogador = SingletonJogador.getJogador();
+    private final SingletonPlayer userPlayer = SingletonPlayer.getPlayer();
     private int select;
-    private Long idTema;
-    int[] textIds = {R.id.txtPontuacao, R.id.txtRetornarTemas, R.id.txtRepetir, R.id.txtFraseFim};
-    private GerenteDeDesafios gerenteDeDesafios;
-    private ComponentesAuxiliares componentesAuxiliares;
+    private Long idTheme;
+    int[] textIds = {R.id.txtPoints, R.id.txtReturnToThemes, R.id.txtRepeat, R.id.txtTextEnd};
+    private ManageChallenges manageChallenges;
+    private ComponentsUtil componentsUtil;
 
+    /**
+     * Method responsible for creating the screen and setting the text of the TextViews.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fim_de_jogo);
 
-        instanciarTextButtons();
+        allocAllTextButtons();
 
         Bundle extras = getIntent().getExtras();
         select = extras.getInt("tema");
-        idTema = extras.getLong("idTema");
+        idTheme = extras.getLong("idTema");
 
-        gerenteDeDesafios = new GerenteDeDesafios();
-        componentesAuxiliares = new ComponentesAuxiliares();
+        manageChallenges = new ManageChallenges();
+        componentsUtil = new ComponentsUtil();
 
         MediaPlayer mediaPlayer;
         mediaPlayer = MediaPlayer.create(this, R.raw.applause);
         mediaPlayer.start();
 
-        TextView txt = findViewById(R.id.txtFraseFim);
+        TextView txt = findViewById(R.id.txtTextEnd);
         String texto;
-        if(jogador.getPontuacao() <= 1){
+        if (userPlayer.getPoints() <= 1) {
             texto = "Você é capaz!\nContinue tentando!";
             txt.setText(texto);
-            gerenteDeDesafios.ditarPalavra(texto);
-        }else if(jogador.getPontuacao() > 1 && jogador.getPontuacao() <= 2){
+            manageChallenges.editWord(texto);
+        } else if (userPlayer.getPoints() > 1 && userPlayer.getPoints() <= 2) {
             texto = "Parabéns!\nVocê foi muito bem!";
             txt.setText(texto);
-            gerenteDeDesafios.ditarPalavra(texto);
-        }else if(jogador.getPontuacao() > 2 && jogador.getPontuacao() <= 3){
+            manageChallenges.editWord(texto);
+        } else if (userPlayer.getPoints() > 2 && userPlayer.getPoints() <= 3) {
             texto = "Parabéns!\n Você foi demais!";
             txt.setText(texto);
-            gerenteDeDesafios.ditarPalavra(texto);
+            manageChallenges.editWord(texto);
         }
 
         final ScaleRatingBar ratingBar = findViewById(R.id.simpleRatingBar);
-        ratingBar.setNumStars(3);//Número de estrelas que aparecem
-        ratingBar.setMinimumStars(0);//Número mínimo de de estrelas que iniciam preenchidas
-        ratingBar.setRating(jogador.getPontuacao());//Número que define o preenchimento das estrelas
+        // Number of stars that appear
+        ratingBar.setNumStars(3);
+        // Number minimum of stars that start filled
+        ratingBar.setMinimumStars(0);
+        // Number thats defines the size of the stars
+        ratingBar.setRating(userPlayer.getPoints());
         ratingBar.setStarPadding(10);
         ratingBar.setStepSize(0.5f);
         ratingBar.setIsIndicator(false);
@@ -78,21 +86,26 @@ public class FimDeJogoActivity extends AppCompatActivity implements View.OnClick
             public void onRatingChange(BaseRatingBar ratingBar, float rating, boolean fromUser) {
             }
         });
-        jogador.resetarPontuacao();
+        userPlayer.resetPoint();
     }
 
+    /**
+     * Method responsible for managing the click of the buttons.
+     *
+     * @param v
+     */
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.voltar_temas:
-                Intent it = new Intent(FimDeJogoActivity.this, MainActivity.class);
+                Intent it = new Intent(EndOfGameActivity.this, MainActivity.class);
                 startActivity(it);
                 finish();
                 break;
             case R.id.repetir:
-                it = new Intent(FimDeJogoActivity.this, NiveisActivity.class);
+                it = new Intent(EndOfGameActivity.this, LevelsActivity.class);
                 it.putExtra("tema", select);
-                it.putExtra("idTema", idTema);
+                it.putExtra("idTema", idTheme);
                 startActivity(it);
                 finish();
                 break;
@@ -102,15 +115,18 @@ public class FimDeJogoActivity extends AppCompatActivity implements View.OnClick
     /**
      * Define os ID's dos TextView's e define a fonte do TextView.
      */
-    private void instanciarTextButtons(){
+    private void allocAllTextButtons() {
         for (int buttons : textIds) {
             TextView btn = findViewById(buttons);
-            ComponentesAuxiliares.definirFonte(this, btn);
+            ComponentsUtil.setFont(this, btn);
         }
     }
 
+    /**
+     * Method responsible for managing the back button.
+     */
     @Override
-    public void onBackPressed(){
-        componentesAuxiliares.exibirConfirmacaoFechar(this);
+    public void onBackPressed() {
+        componentsUtil.showCloseConfirmation(this);
     }
 }

@@ -15,20 +15,22 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- * Classe responsável por carregar imagens a partir de uma url.
+ * Class responsible for loading images from a url.
  */
 public class ImageLoadUtil {
     private final String TAG = "ImageLoadUtil";
     private static ImageLoadUtil instance;
 
-    private ImageLoadUtil(){}
+    private ImageLoadUtil() {
+    }
 
     /**
-     * Retorna uma instância da classe.
-     * @return instância da classe
+     * Returns an instance of the class.
+     *
+     * @return instance of class
      */
-    public static ImageLoadUtil getInstance(){
-        if(instance == null){
+    public static ImageLoadUtil getInstance() {
+        if (instance == null) {
             instance = new ImageLoadUtil();
         }
 
@@ -36,12 +38,13 @@ public class ImageLoadUtil {
     }
 
     /**
-     * Carrega uma imagem a partir de uma url.
-     * @param imageUrl url da imagem
-     * @param themeImageLeft ImageView que receberá a imagem
-     * @param context contexto da aplicação
+     * Load an image from a url.
+     *
+     * @param imageUrl       url of image
+     * @param themeImageLeft ImageView to receive the image
+     * @param context        context of activity
      */
-    public void loadImage(String imageUrl, ImageView themeImageLeft, Context context){
+    public void loadImage(String imageUrl, ImageView themeImageLeft, Context context) {
         DiskCacheStrategy diskCacheStrategy = new DiskCacheStrategy() {
             @Override
             public boolean isDataCacheable(DataSource dataSource) {
@@ -65,9 +68,9 @@ public class ImageLoadUtil {
         };
 
         int erroImg = -1;
-        try{
+        try {
             erroImg = Integer.parseInt(imageUrl);
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             erroImg = R.drawable.error;
         }
 

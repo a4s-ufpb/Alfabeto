@@ -7,9 +7,9 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 /**
- * Classe responsável por gerenciar as configurações do aplicativo.
+ * Class responsible for managing the application settings.
  */
-public class AppConfig  {
+public class AppConfig {
     private static AppConfig instance;
     SharedPreferences sPreferences = null;
 
@@ -26,9 +26,14 @@ public class AppConfig  {
     private String currentButtonConfig;
     private boolean currentButtonCase;
 
-    private AppConfig(Context appContext){
+    /**
+     * Constructor responsible for initializing the application settings.
+     *
+     * @param appContext
+     */
+    private AppConfig(Context appContext) {
         try {
-            if(sPreferences == null) {
+            if (sPreferences == null) {
                 sPreferences = appContext.getSharedPreferences("configs", MODE_PRIVATE);
             }
             this.currentLetterType = sPreferences.getString("letter_type", BASTAO);
@@ -41,8 +46,14 @@ public class AppConfig  {
         }
     }
 
-    public static AppConfig getInstance(Context appContext){
-        if(instance == null){
+    /**
+     * Method responsible for returning the instance of the class.
+     *
+     * @param appContext
+     * @return
+     */
+    public static AppConfig getInstance(Context appContext) {
+        if (instance == null) {
             instance = new AppConfig(appContext);
         }
         return instance;
@@ -88,8 +99,10 @@ public class AppConfig  {
         this.currentButtonConfig = currentButtonConfig;
     }
 
-    public void saveAllChange()
-    {
+    /**
+     * Method responsible for saving the changes made in the application settings.
+     */
+    public void saveAllChange() {
         try {
             SharedPreferences.Editor edit = sPreferences.edit();
             edit.putString("letter_type", this.currentLetterType);
@@ -98,7 +111,7 @@ public class AppConfig  {
             edit.putString("button_font_preferences", this.currentButtonConfig);
             edit.putBoolean("button_case_preferences", this.currentButtonCase);
             edit.apply();
-            Log.i("AppConfig", "All changes have been saved");
+            //Log.i("AppConfig", "All changes have been saved");
         } catch (Exception e) {
             e.printStackTrace();
         }

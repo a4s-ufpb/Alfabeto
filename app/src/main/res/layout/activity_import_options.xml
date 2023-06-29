@@ -33,7 +33,7 @@
         android:background="@drawable/botao_tela_anterior"
         android:contentDescription="@string/menu_anterior"
         android:scaleType="fitCenter"
-        android:onClick="voltar"
+        android:onClick="backAction"
         app:layout_constraintBottom_toTopOf="@+id/txtBackImportLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -52,8 +52,8 @@
                         android:textStyle="normal"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imageTema"
-                        app:layout_constraintTop_toTopOf="@+id/imageTema" />
+                        app:layout_constraintStart_toEndOf="@+id/imageTheme"
+                        app:layout_constraintTop_toTopOf="@+id/imageTheme" />
                 </LinearLayout>
 
             </FrameLayout>

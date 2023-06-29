@@ -9,44 +9,67 @@ import android.view.View;
 import com.napoleao.alphabeto.R;
 
 /**
- * Classe responsável por gerenciar a tela de opções de importação de temas.
+ * Class responsible for managing the theme import options screen.
  */
 public class ImportOptionsActivity extends AppCompatActivity implements View.OnClickListener {
 
+    /**
+     * Method responsible for initializing the screen components and listeners.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import_options);
     }
 
+    /**
+     * Method responsible for calling the screen of the selected option.
+     *
+     * @param view
+     */
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btnCreate:
-                invocarIntent(CreateTemaActivity.class);
+                callIntent(CreateThemeActivity.class);
                 break;
             case R.id.btnImportByMail:
-                invocarIntent(ImportByMailActivity.class);
+                callIntent(ImportByMailActivity.class);
                 break;
             case R.id.btnImportById:
-                invocarIntent(ImportTemasByIdActivity.class);
+                callIntent(ImportThemeByIdActivity.class);
                 break;
         }
     }
 
-    private void invocarIntent(Class activity){
+    /**
+     * Method responsible for calling the screen of the selected option.
+     *
+     * @param activity
+     */
+    private void callIntent(Class activity) {
         Intent it = new Intent(ImportOptionsActivity.this, activity);
         startActivity(it);
         finish();
     }
 
-    public void voltar(View view){
+    /**
+     * Action button for returning to the previous screen.
+     *
+     * @param view
+     */
+    public void backAction(View view) {
         onBackPressed();
     }
 
+    /**
+     * Override Method responsible for returning to the previous screen.
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        invocarIntent(MainActivity.class);
+        callIntent(MainActivity.class);
     }
 }
