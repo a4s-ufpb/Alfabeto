@@ -6,12 +6,20 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import java.security.cert.CertificateException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
 import com.napoleao.alphabeto.BuildConfig;
 import com.napoleao.alphabeto.R;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -28,6 +36,7 @@ public class ApiConfig {
      * Setup Github user
      */
     public static final String GITHUB_USER = "a4s-ufpb";
+    private static final boolean updateIntervalEnabled = false;
 
     private static ApiConfig instance;
     public SharedPreferences sPreferences = null;
@@ -78,7 +87,7 @@ public class ApiConfig {
 
         // check last saved settings time, to avoid spamming request to github server
         long lastTime = sPreferences.getLong("time", System.currentTimeMillis());
-        if ((System.currentTimeMillis() - lastTime) > updateInterval) {
+        if (updateIntervalEnabled && ((System.currentTimeMillis() - lastTime) > updateInterval)) {
             //Log.i("ApiConfig", "Check Bypassed, Checked less than minimum interval " + updateInterval + " secs.");
             return;
         }
@@ -130,6 +139,35 @@ public class ApiConfig {
         try {
             builder.connectTimeout(30, TimeUnit.MINUTES);
             builder.readTimeout(30, TimeUnit.MINUTES);
+
+            // Create a trust manager that does not validate certificate chains
+            final TrustManager[] trustAllCerts = new TrustManager[] {
+                    new X509TrustManager() {
+                        @Override
+                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                        }
+                        @Override
+                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                        }
+                        @Override
+                        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                            return new java.security.cert.X509Certificate[]{};
+                        }
+                    }
+            };
+            // Install the all-trusting trust manager
+            final SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+            // Create an ssl socket factory with our all-trusting manager
+            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+            X509TrustManager trustManager = (X509TrustManager) trustAllCerts[0];
+            builder.sslSocketFactory(sslSocketFactory, trustManager);
+            builder.hostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
