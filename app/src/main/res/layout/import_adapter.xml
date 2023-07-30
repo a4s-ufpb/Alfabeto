@@ -7,7 +7,7 @@
     android:background="@android:color/transparent">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageTema"
+        android:id="@+id/imageTheme"
         android:layout_width="95dp"
         android:layout_height="105dp"
         android:layout_marginTop="8dp"
@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/alfabeto" />
 
     <TextView
-        android:id="@+id/textNameTema"
+        android:id="@+id/textNameTheme"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -31,10 +31,10 @@
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/textQuantDesafios"
+        app:layout_constraintBottom_toTopOf="@+id/textQuantChallenge"
         app:layout_constraintEnd_toStartOf="@+id/checkBox"
-        app:layout_constraintStart_toEndOf="@+id/imageTema"
-        app:layout_constraintTop_toTopOf="@+id/imageTema"
+        app:layout_constraintStart_toEndOf="@+id/imageTheme"
+        app:layout_constraintTop_toTopOf="@+id/imageTheme"
         app:layout_constraintVertical_bias="0.50" />
 
     <CheckBox
@@ -46,12 +46,12 @@
         android:scaleX="1.5"
         android:scaleY="1.5"
         app:buttonTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/textQuantDesafios"
+        app:layout_constraintBottom_toBottomOf="@+id/textQuantChallenge"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textNameTema" />
+        app:layout_constraintTop_toTopOf="@+id/textNameTheme" />
 
     <TextView
-        android:id="@+id/textQuantDesafios"
+        android:id="@+id/textQuantChallenge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -60,6 +60,6 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textNameTema"
-        app:layout_constraintStart_toStartOf="@+id/textNameTema" />
+        app:layout_constraintEnd_toEndOf="@+id/textNameTheme"
+        app:layout_constraintStart_toStartOf="@+id/textNameTheme" />
 </androidx.constraintlayout.widget.ConstraintLayout>

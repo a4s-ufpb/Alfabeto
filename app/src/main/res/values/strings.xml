@@ -94,6 +94,7 @@
     <string name="menu_import">Importar</string>
     <string name="tipo_importacao">Selecione o modo de importação:</string>
     <string name="ou">Ou</string>
+    <string name="import_criar">Criar Meu Tema</string>
     <string name="import_mail">Importação por e-mail</string>
     <string name="import_id">Importação por número de ID</string>
 
@@ -101,6 +102,18 @@
     <string name="email">E-mail</string>
     <string name="senha">Senha</string>
 
+
+    <string name="import_label_create">Criar Tema</string>
+    <string name="create_name_tema">Tema</string>
+    <string name="create_name_theme">Nome do Tema</string>
+    <string name="create_name_palavra">Palavras</string>
+    <string name="create_palavra_word">Palavra</string>
+    <string name="create_palavra_add">Adicionar Palavra</string>
+    <string name="create_ok">OK</string>
+    <string name="create_cancel">Cancelar</string>
+
+    <string name="pixabay_key">19907127-f35bb215b0e537eb04e52197f</string>
+    <string name="bing_key">575aa564aa034976984d2a26c3f394d7</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

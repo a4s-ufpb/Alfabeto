@@ -33,7 +33,7 @@
         android:background="@drawable/botao_tela_anterior"
         android:contentDescription="@string/menu_anterior"
         android:scaleType="fitCenter"
-        android:onClick="voltar"
+        android:onClick="backAction"
         app:layout_constraintBottom_toTopOf="@+id/txtBackImportLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -54,7 +54,7 @@
         app:layout_constraintStart_toStartOf="@+id/btnVoltarImport" />
 
     <Button
-        android:id="@+id/btnImportByMail"
+        android:id="@+id/btnCreate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -63,11 +63,10 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:onClick="onClick"
-        android:text="@string/import_mail"
+        android:text="@string/import_criar"
         android:textStyle="bold"
         app:backgroundTint="@android:color/transparent"
-        app:icon="@drawable/email"
-        app:layout_constraintBottom_toTopOf="@+id/txtOrLabel"
+        app:icon="@drawable/adicionar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,6 +74,26 @@
 
     <TextView
         android:id="@+id/txtImportModeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginRight="19dp"
+        android:fontFamily="@font/luckiest_guy"
+        android:gravity="center"
+        android:text="@string/tipo_importacao"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/btnCreate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtImportTemasLabel" />
+
+    <Button
+        android:id="@+id/btnImportByMail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -82,31 +101,17 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:fontFamily="@font/luckiest_guy"
-        android:gravity="center"
-        android:text="@string/tipo_importacao"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnImportByMail"
+        android:layout_marginBottom="16dp"
+        android:onClick="onClick"
+        android:text="@string/import_mail"
+        android:textStyle="bold"
+        app:backgroundTint="@android:color/transparent"
+        app:icon="@drawable/email"
+        app:layout_constraintBottom_toTopOf="@+id/btnImportById"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtImportTemasLabel" />
-
-    <TextView
-        android:id="@+id/txtOrLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/luckiest_guy"
-        android:text="@string/ou"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnImportById"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnImportByMail" />
+        app:layout_constraintTop_toBottomOf="@id/btnCreate" />
 
     <Button
         android:id="@+id/btnImportById"
@@ -116,6 +121,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:onClick="onClick"
         android:text="@string/import_id"
         android:textStyle="bold"
@@ -124,8 +130,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtOrLabel" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"

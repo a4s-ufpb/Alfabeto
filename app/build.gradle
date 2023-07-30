@@ -4,12 +4,15 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.napoleao.alphabeto"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
-        versionName "0.3-Cocada"
+        versionName "0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+
+        // get API URL from system enviroment variable
+        buildConfigField "String", "EDUC_API_URL", "\""+System.getenv("EDUC_API_URL")+"\""
     }
     buildTypes {
         release {
@@ -41,10 +44,18 @@ dependencies {
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
     //Url to Image
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+
     //Circle Image View
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // Obter Imagem da Galeria/Camera
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4'
+
 }

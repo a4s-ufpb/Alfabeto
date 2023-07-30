@@ -7,35 +7,58 @@ import android.util.Log;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
+/**
+ * Class responsible for managing the application font.
+ */
 public class AlphaTextView extends AppCompatTextView {
     private Context context;
     private String fontFamily;
     private String fontCase;
 
-
+    /**
+     * Constructor
+     *
+     * @param context
+     */
     public AlphaTextView(Context context) {
         super(context);
         this.context = context;
         init();
     }
 
+    /**
+     * Constructor
+     *
+     * @param context
+     * @param attrs
+     */
     public AlphaTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
         init();
     }
 
+    /**
+     * Constructor
+     *
+     * @param context
+     * @param attrs
+     * @param defStyleAttr
+     */
     public AlphaTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
         init();
     }
 
+    /**
+     * Method responsible for initializing the font.
+     */
     private void init() {
         this.fontFamily = AppConfig.getInstance(this.context).getCurrentLetterType();
         this.fontCase = AppConfig.getInstance(this.context).getCurrentLetterCase();
-        Log.i("AlphaTextView","fontFamily charged: "+this.fontFamily);
-        Log.i("AlphaTextView","fontCase charged: "+this.fontCase);
+        //Log.i("AlphaTextView","fontFamily charged: "+this.fontFamily);
+        //Log.i("AlphaTextView","fontCase charged: "+this.fontCase);
 
         switch (this.fontFamily) {
             case AppConfig.CURSIVA: {
@@ -54,13 +77,13 @@ public class AlphaTextView extends AppCompatTextView {
 
         }
 
-        switch (this.fontCase){
-            case AppConfig.UPPER:{
+        switch (this.fontCase) {
+            case AppConfig.UPPER: {
                 this.setAllCaps(true);
                 break;
             }
 
-            case AppConfig.LOWER:{
+            case AppConfig.LOWER: {
                 this.setAllCaps(false);
                 break;
             }

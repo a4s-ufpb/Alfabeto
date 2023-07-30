@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
     android:orientation="vertical"
-    tools:context=".activity.FimDeJogoActivity">
+    tools:context=".activity.EndOfGameActivity">
 
     <ImageButton
         android:id="@+id/voltar_temas"
@@ -23,7 +23,7 @@
         android:cropToPadding="false"
         android:onClick="onClick"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/txtRetornarTemas"
+        app:layout_constraintBottom_toTopOf="@+id/txtReturnToThemes"
         app:layout_constraintEnd_toStartOf="@+id/repetir"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,14 +42,14 @@
         android:contentDescription="@string/repetir"
         android:onClick="onClick"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/txtRepetir"
+        app:layout_constraintBottom_toTopOf="@+id/txtRepeat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/voltar_temas"
         app:srcCompat="@drawable/botao_repetir" />
 
     <TextView
-        android:id="@+id/txtFraseFim"
+        android:id="@+id/txtTextEnd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -73,7 +73,7 @@
         app:layout_constraintVertical_bias="0.19" />
 
     <TextView
-        android:id="@+id/txtPontuacao"
+        android:id="@+id/txtPoints"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -92,7 +92,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtRepetir"
+        android:id="@+id/txtRepeat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -106,7 +106,7 @@
         app:layout_constraintStart_toStartOf="@+id/repetir" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txtRetornarTemas"
+        android:id="@+id/txtReturnToThemes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -127,7 +127,7 @@
         android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPontuacao"
+        app:layout_constraintTop_toBottomOf="@+id/txtPoints"
         app:srb_clearRatingEnabled="true"
         app:srb_clickable="true"
         app:srb_drawableEmpty="@drawable/estrela_vazia"

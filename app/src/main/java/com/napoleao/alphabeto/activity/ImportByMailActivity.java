@@ -7,14 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.napoleao.alphabeto.R;
-import com.napoleao.alphabeto.adapter.TemasAdapterImportByMail;
+import com.napoleao.alphabeto.adapter.ThemeAdapterImportByMail;
 import com.napoleao.alphabeto.helper.RetrofitConfig;
 import com.napoleao.alphabeto.helper.dao.ChallengesDAO;
 import com.napoleao.alphabeto.helper.dao.TemasDAO;
@@ -29,15 +28,23 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Class responsible for managing the screen for importing themes by e-mail.
+ */
 public class ImportByMailActivity extends AppCompatActivity {
 
     private ConstraintLayout constraintImportByMail;
     private EditText editEmail;
     private ProgressBar progressBarEmail;
     private RecyclerView recyclerImportByMail;
-    private List<Tema> temasCarregados = new ArrayList<>();
-    private List<Tema> temasSelecionados = new ArrayList<>();
+    private List<Tema> loadedThemes = new ArrayList<>();
+    private List<Tema> selectedThemes = new ArrayList<>();
 
+    /**
+     * Method responsible for initializing the screen components.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,69 +57,84 @@ public class ImportByMailActivity extends AppCompatActivity {
 
     }
 
-    public void importByEmail(View view){
-        if (editEmail.getText().toString().isEmpty()){
+    /**
+     * Method responsible for importing themes by e-mail.
+     *
+     * @param view
+     */
+    public void importByEmail(View view) {
+        if (editEmail.getText().toString().isEmpty()) {
             Toast.makeText(ImportByMailActivity.this, "Insira um endereço de e-mail!", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             progressBarEmail.setVisibility(View.VISIBLE);
             Call call = new RetrofitConfig().contextService().getContextsByUser(editEmail.getText().toString());
-                call.enqueue(new Callback<ContextPageResponse>() {
-                    @Override
-                    public void onResponse(Call<ContextPageResponse> call, Response<ContextPageResponse> response) {
-                        if (response.isSuccessful()){
-                            ContextPageResponse apiResponse = response.body();
-                            temasCarregados = apiResponse.getContent();
-                            progressBarEmail.setVisibility(View.GONE);
-                            configureRecyclerView();
-                            constraintImportByMail.setVisibility(View.VISIBLE);
-                        }else{
-                            progressBarEmail.setVisibility(View.GONE);
-                            Toast.makeText(ImportByMailActivity.this, "Erro. Verifique o e-mail digitado e tente novamente!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ContextPageResponse> call, Throwable t) {
-                        Toast.makeText(ImportByMailActivity.this, "Erro na requisição. Tente novamente!", Toast.LENGTH_SHORT).show();
+            call.enqueue(new Callback<ContextPageResponse>() {
+                @Override
+                public void onResponse(Call<ContextPageResponse> call, Response<ContextPageResponse> response) {
+                    if (response.isSuccessful()) {
+                        ContextPageResponse apiResponse = response.body();
+                        loadedThemes = apiResponse.getContent();
                         progressBarEmail.setVisibility(View.GONE);
+                        configureRecyclerView();
+                        constraintImportByMail.setVisibility(View.VISIBLE);
+                    } else {
+                        progressBarEmail.setVisibility(View.GONE);
+                        Toast.makeText(ImportByMailActivity.this, "Erro. Verifique o e-mail digitado e tente novamente!", Toast.LENGTH_SHORT).show();
                     }
+                }
 
-                });
-                Log.d("DEBUG", "TEM?" + temasCarregados.size());
+                @Override
+                public void onFailure(Call<ContextPageResponse> call, Throwable t) {
+                    Toast.makeText(ImportByMailActivity.this, "Erro na requisição. Tente novamente!", Toast.LENGTH_SHORT).show();
+                    progressBarEmail.setVisibility(View.GONE);
+                }
+
+            });
+            //Log.d("DEBUG", "TEM?" + temasCarregados.size());
         }
     }
 
     /**
-     * Configura o RecyclerView.
+     * Configure RecyclerView.
      */
-    private void configureRecyclerView(){
+    private void configureRecyclerView() {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        TemasAdapterImportByMail temasAdapterImportByMail = new TemasAdapterImportByMail(ImportByMailActivity.this, temasCarregados);
+        ThemeAdapterImportByMail themeAdapterImportByMail = new ThemeAdapterImportByMail(ImportByMailActivity.this, loadedThemes);
         recyclerImportByMail.setLayoutManager(layoutManager);
         recyclerImportByMail.setHasFixedSize(true);
-        recyclerImportByMail.setAdapter(temasAdapterImportByMail);
-        temasSelecionados = temasAdapterImportByMail.getTemasSelecionados();
+        recyclerImportByMail.setAdapter(themeAdapterImportByMail);
+        selectedThemes = themeAdapterImportByMail.getSelectedThemes();
     }
 
-    public void voltar(View view){
+    /**
+     * Method responsible for returning to the previous screen.
+     *
+     * @param view
+     */
+    public void backAction(View view) {
         onBackPressed();
     }
 
-    public void salvarTemaByMail(View view){
-        TemasDAO temasDAO = new TemasDAO(getApplicationContext());
-        ChallengesDAO challengesDAO = new ChallengesDAO(getApplicationContext());
+    /**
+     * Method responsible for saving the selected themes.
+     *
+     * @param view
+     */
+    public void saveThemeByEmail(View view) {
+        TemasDAO temasDAO = TemasDAO.getInstance(getApplicationContext());
+        ChallengesDAO challengesDAO = ChallengesDAO.getInstance(getApplicationContext());
         int contSucessos = 0;
 
-        if (temasCarregados == null){
+        if (loadedThemes == null) {
             Toast.makeText(getApplicationContext(), "Erro! Nenhum contexto carregado!\nVocê inseriu algum e-mail?", Toast.LENGTH_LONG).show();
-        }else{
-            for (Tema t: temasSelecionados){
-                if (!t.getChallenges().isEmpty()){
+        } else {
+            for (Tema t : selectedThemes) {
+                if (!t.getChallenges().isEmpty()) {
 
-                    if(temasDAO.save(t)){
-                        for (Challenge c: t.getChallenges()){
+                    if (temasDAO.save(t)) {
+                        for (Challenge c : t.getChallenges()) {
                             c.setIdTema(t.getId());
-                            Log.d("DESAFIO", "Desafio attr: " + c.getId());
+                            //Log.d("DESAFIO", "Desafio attr: " + c.getId());
                             challengesDAO.save(c);
                         }
                         contSucessos++;
@@ -120,9 +142,16 @@ public class ImportByMailActivity extends AppCompatActivity {
                 }
             }
             Toast.makeText(ImportByMailActivity.this, contSucessos + " novo(s) tema(s) salvo(s)!", Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent(ImportByMailActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
     }
 
+    /**
+     * Method responsible for returning to the previous screen.
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();

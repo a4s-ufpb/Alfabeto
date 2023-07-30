@@ -8,6 +8,9 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+/**
+ * Interface that represents the Context API.
+ */
 public interface ContextService {
 
     @GET("v1/api/contexts/{idContext}")

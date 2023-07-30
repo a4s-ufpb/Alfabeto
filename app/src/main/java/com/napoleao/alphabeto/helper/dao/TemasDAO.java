@@ -9,53 +9,180 @@ import android.widget.Toast;
 
 import com.napoleao.alphabeto.model.Tema;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class responsable for access database and manipulate Tema.
+ */
 public class TemasDAO implements ITemasDAO {
 
+    private static TemasDAO instance;
     private SQLiteDatabase write;
     private SQLiteDatabase read;
     private Context context;
 
-    public TemasDAO(Context context){
+    /**
+     * Method responsable for return instance of TemasDAO.
+     *
+     * @param context
+     * @return instance
+     */
+    public static synchronized TemasDAO getInstance(Context context) {
+        if (instance == null) {
+            instance = new TemasDAO(context);
+        }
+        return instance;
+    }
+
+    /**
+     * Constructor for TemasDAO.
+     *
+     * @param context
+     */
+    public TemasDAO(Context context) {
         this.context = context;
-        DBHelper dbHelper = new DBHelper(context);
+        DBHelper dbHelper = DBHelper.getInstance(context);
         write = dbHelper.getWritableDatabase();
         read = dbHelper.getReadableDatabase();
     }
 
-
+    /**
+     * Method responsable for get a theme.
+     *
+     * @param idGet id of theme
+     * @return Tema
+     */
     @Override
-    public boolean save(Tema tema) {
+    public Tema get(Long idGet) {
+
+        Long id = null;
+        String nomeImegem = null, imagemUrl = null;
+
+        String sql = "SELECT * FROM " + DBHelper.TABLE_TEMAS + " WHERE idTema = ?";
+
+        Cursor cursor = read.rawQuery(sql, new String[]{Long.toString(idGet)});
+
+        if (cursor.moveToFirst()) {
+            id = cursor.getLong(cursor.getColumnIndex("idTema"));
+            nomeImegem = cursor.getString(cursor.getColumnIndex("nomeImagem"));
+            imagemUrl = cursor.getString(cursor.getColumnIndex("imagemUrl"));
+        }
+        cursor.close();
+
+        if (id != null) {
+            Tema tema = new Tema();
+            tema.setId(id);
+            tema.setNomeImagem(nomeImegem);
+            tema.setImageUrl(imagemUrl);
+            return tema;
+        }
+
+        return null;
+    }
+
+    /**
+     * Method responsable for save a theme.
+     *
+     * @param theme theme to save
+     * @return boolean
+     */
+    @Override
+    public boolean save(Tema theme) {
         ContentValues cv = new ContentValues();
-        cv.put("idTema", tema.getId());
-        cv.put("nomeImagem", tema.getNomeImagem());
-        cv.put("imagemUrl", tema.getImageUrl());
+        if (theme.getId() != null) {
+            cv.put("idTema", theme.getId());
+        }
+        cv.put("nomeImagem", theme.getNomeImagem());
+        cv.put("imagemUrl", theme.getImageUrl());
         try {
-            write.insertOrThrow(DBHelper.TABLE_TEMAS, null, cv);
+            Long id = write.insertOrThrow(DBHelper.TABLE_TEMAS, null, cv);
+            theme.setId(id);
+            cv.clear();
             Log.d("SAVE", "Tema salvo com sucesso!");
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.d("SAVE", "Erro ao salvar tema!");
             return false;
         }
         return true;
     }
 
+    /**
+     * Method responsable for delete a theme.
+     *
+     * @param temaDel theme to delete
+     * @return boolean
+     */
     @Override
-    public boolean delete(Tema tema) {
+    public boolean delete(Tema temaDel) {
         try {
-            String[] args = {tema.getId().toString()};
-            write.delete(DBHelper.TABLE_TEMAS, "idTema=?", args);
+            return deleteById(temaDel.getId());
+        } catch (Exception e) {
+            //Log.d("SAVE", "Erro ao remover!");
+            return false;
+        }
+    }
+
+    /**
+     * Method responsable for delete a theme.
+     *
+     * @param temaId id of theme
+     * @return boolean
+     */
+    @Override
+    public boolean deleteById(Long temaId) {
+        try {
+
+            // delete saved local image file
+            Tema tema = get(temaId);
+            if (tema != null && tema.getImageUrl() != null) {
+                String imageSt = tema.getImageUrl();
+                if (imageSt.startsWith("/")) {
+                    File imageFile = new File(imageSt);
+                    imageFile.delete();
+                }
+            }
+
+            String[] args = {temaId.toString()};
             write.delete(DBHelper.TABLE_DESAFIOS, "idTema=?", args);
+            write.delete(DBHelper.TABLE_TEMAS, "idTema=?", args);
             Toast.makeText(context, "Tema removido com sucesso!", Toast.LENGTH_LONG).show();
-        }catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(context, "Erro ao tentar remover!", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
     }
 
+    /**
+     * Method responsable for update a theme.
+     *
+     * @param tema
+     * @return boolean
+     */
+    @Override
+    public boolean update(Tema tema) {
+        try {
+            ContentValues cv = new ContentValues();
+
+            cv.put("nomeImagem", tema.getNomeImagem());
+            cv.put("imagemUrl", tema.getImageUrl());
+
+            write.update(DBHelper.TABLE_TEMAS, cv, "idTema=" + tema.getId(), null);
+            cv.clear();
+        } catch (Exception e) {
+            Toast.makeText(context, "Erro ao atualizar tema!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Method responsable for get all themes.
+     *
+     * @return List<Tema>
+     */
     @Override
     public List<Tema> findAll() {
 
@@ -65,7 +192,7 @@ public class TemasDAO implements ITemasDAO {
         Cursor cursor = read.rawQuery(sql, null);
 
         cursor.move(0);
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             Tema tema = new Tema();
             Long id = cursor.getLong(cursor.getColumnIndex("idTema"));
             String nomeImegem = cursor.getString(cursor.getColumnIndex("nomeImagem"));
@@ -76,7 +203,7 @@ public class TemasDAO implements ITemasDAO {
             tema.setImageUrl(imagemUrl);
 
             temas.add(tema);
-            Log.i("Size: ", "List Size " + temas.size());
+            //Log.i("Size: ", "List Size " + temas.size());
         }
         cursor.close();
 

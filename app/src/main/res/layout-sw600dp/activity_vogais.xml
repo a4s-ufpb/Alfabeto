@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
     android:orientation="vertical"
-    tools:context=".activity.VogalActivity">
+    tools:context=".activity.LevelVowelActivity">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationVogais"
@@ -30,7 +30,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/botao_tela_anterior"
         android:contentDescription="@string/menu_anterior"
-        android:onClick="voltarVogais"
+        android:onClick="backVowel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,7 +43,7 @@
         android:layout_marginRight="8dp"
         android:background="@drawable/botao_desistir"
         android:contentDescription="@string/menu_anterior"
-        android:onClick="fecharVogais"
+        android:onClick="closeVowel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -76,7 +76,7 @@
         android:layout_marginRight="8dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/ditar"
-        android:onClick="falarImagem"
+        android:onClick="speakImage"
         android:scaleType="fitCenter"
         android:tint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/imageVogal"

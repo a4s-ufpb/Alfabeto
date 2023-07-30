@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context=".activity.ImportTemasByIdActivity">
+    tools:context=".activity.ImportThemeByIdActivity">
 
     <ImageButton
         android:id="@+id/btnVoltarImportar"
@@ -13,7 +13,7 @@
         android:layout_height="80dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/voltar"
-        android:onClick="voltar"
+        android:onClick="backAction"
         android:padding="5dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/txtBack2"
@@ -152,7 +152,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btnImport">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageTemaImportado"
+            android:id="@+id/imageThemeImported"
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:layout_marginStart="16dp"
@@ -165,7 +165,7 @@
             app:srcCompat="@drawable/animais" />
 
         <TextView
-            android:id="@+id/textNameTemaImportado"
+            android:id="@+id/textNameThemeImported"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -178,14 +178,14 @@
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="35sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageTemaImportado"
+            app:layout_constraintBottom_toBottomOf="@+id/imageThemeImported"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageTemaImportado"
-            app:layout_constraintTop_toTopOf="@+id/imageTemaImportado"
+            app:layout_constraintStart_toEndOf="@+id/imageThemeImported"
+            app:layout_constraintTop_toTopOf="@+id/imageThemeImported"
             app:layout_constraintVertical_bias="0.39" />
 
         <TextView
-            android:id="@+id/textQuantDesafios"
+            android:id="@+id/textQuantChallenge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/luckiest_guy"
@@ -194,9 +194,9 @@
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="35sp"
-            app:layout_constraintEnd_toEndOf="@+id/textNameTemaImportado"
-            app:layout_constraintStart_toStartOf="@+id/textNameTemaImportado"
-            app:layout_constraintTop_toBottomOf="@+id/textNameTemaImportado" />
+            app:layout_constraintEnd_toEndOf="@+id/textNameThemeImported"
+            app:layout_constraintStart_toStartOf="@+id/textNameThemeImported"
+            app:layout_constraintTop_toBottomOf="@+id/textNameThemeImported" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -206,7 +206,7 @@
         android:layout_height="80dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/salvar"
-        android:onClick="salvarTema"
+        android:onClick="saveChanges"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/txtSave2"
         app:layout_constraintEnd_toEndOf="parent"

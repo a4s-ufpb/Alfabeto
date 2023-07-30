@@ -9,6 +9,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -17,12 +18,12 @@
         <activity android:name=".activity.ImportByMailActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".activity.ImportOptionsActivity" />
-        <activity android:name=".activity.ImportTemasByIdActivity" />
+        <activity android:name=".activity.ImportThemeByIdActivity" />
         <activity
-            android:name=".activity.SobreActivity"
+            android:name=".activity.AboutActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.ConfiguracoesActivity"
+            android:name=".activity.SettingsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SplashScreenActivity"
@@ -34,25 +35,29 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.VogalActivity"
+            android:name=".activity.LevelVowelActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.ConsoanteActivity"
+            android:name=".activity.LevelConsonantActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.TelaInicialActivity"
+            android:name=".activity.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.NiveisActivity"
+            android:name=".activity.LevelsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.AlfabetoActivity"
+            android:name=".activity.LevelAlphabetActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.FimDeJogoActivity"
+            android:name=".activity.EndOfGameActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.CreateThemeActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

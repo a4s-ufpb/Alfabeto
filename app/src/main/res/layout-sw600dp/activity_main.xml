@@ -43,7 +43,7 @@
             android:scaleType="centerInside"
             app:layout_constraintBottom_toTopOf="@+id/btnObjetos"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtTemas"
+            app:layout_constraintTop_toBottomOf="@+id/txtThemes"
             app:srcCompat="@drawable/cores" />
 
         <ImageButton
@@ -97,7 +97,7 @@
             app:srcCompat="@drawable/animais" />
 
         <TextView
-            android:id="@+id/txtCores"
+            android:id="@+id/txtColors"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -118,7 +118,7 @@
             app:layout_constraintTop_toTopOf="@+id/btnCores" />
 
         <TextView
-            android:id="@+id/txtObjetos"
+            android:id="@+id/txtObjects"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -139,7 +139,7 @@
             app:layout_constraintTop_toTopOf="@+id/btnObjetos" />
 
         <TextView
-            android:id="@+id/txtAnimais"
+            android:id="@+id/txtAnimals"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -161,7 +161,7 @@
             app:layout_constraintTop_toTopOf="@+id/btnAnimais" />
 
         <TextView
-            android:id="@+id/txtFrutas"
+            android:id="@+id/txtFruits"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -182,7 +182,7 @@
             app:layout_constraintTop_toTopOf="@+id/btnFrutas" />
 
         <TextView
-            android:id="@+id/txtPaises"
+            android:id="@+id/txtCountries"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -203,7 +203,7 @@
             app:layout_constraintTop_toTopOf="@+id/btnPaises" />
 
         <TextView
-            android:id="@+id/txtTemas"
+            android:id="@+id/txtThemes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -264,7 +264,7 @@
             app:srcCompat="@drawable/partes" />
 
         <TextView
-            android:id="@+id/txtBrinquedos"
+            android:id="@+id/txtToys"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -284,7 +284,7 @@
             app:layout_constraintTop_toTopOf="@+id/btnBrinquedos" />
 
         <TextView
-            android:id="@+id/txtPartesDoCorpo"
+            android:id="@+id/txtPartsBodyHuman"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
