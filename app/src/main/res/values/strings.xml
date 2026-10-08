@@ -86,19 +86,43 @@
     <string name="op2">Opção 02</string>
     <string name="op3">Opção 03</string>
 
-    <string name="id">"Digite o número de ID do Tema (Contexto):</string>
-    <string name="import_label_id">"Importar por ID"</string>
     <string name="save">Salvar</string>
-    <string name="import_tema">Importar Tema</string>
 
     <string name="menu_import">Importar</string>
-    <string name="tipo_importacao">Selecione o modo de importação:</string>
+    <string name="tipo_importacao">De onde vem o tema?</string>
     <string name="ou">Ou</string>
-    <string name="import_criar">Criar Meu Tema</string>
-    <string name="import_mail">Importação por e-mail</string>
-    <string name="import_id">Importação por número de ID</string>
+    <string name="import_educapi">Importar do EducAPI</string>
+    <string name="import_educapi_desc">Temas cadastrados no site/plataforma do EducAPI.</string>
+    <string name="import_criar">Criar meu tema</string>
+    <string name="import_criar_desc">Um tema só seu, feito aqui no app. O EducAPI não altera.</string>
+    <string name="tab_todos">Todos os temas</string>
+    <string name="import_intro_todos">Estes são os temas cadastrados no EducAPI por todos os criadores. Marque os temas e toque em Salvar.</string>
+    <string name="import_intro_id">Digite o número do tema cadastrado no EducAPI e toque em Buscar. Confira o tema, marque-o e toque em Salvar.</string>
+    <string name="import_intro_email">Digite o e-mail de um criador do EducAPI e toque em Buscar para ver os temas dele. Marque os temas e toque em Salvar.</string>
+    <string name="import_filter_name_hint">Filtrar por nome</string>
+    <string name="import_id_hint">Número do ID do tema</string>
+    <string name="import_email_hint">E-mail do criador</string>
+    <string name="import_buscar">Buscar</string>
+    <string name="import_counter_not_found">Tema não encontrado. Confira o número do ID.</string>
+    <string name="import_msg_id_vazio">Insira um número de ID!</string>
+    <string name="import_msg_id_invalido">Digite um número de ID válido!</string>
+    <string name="import_msg_email_vazio">Digite o e-mail do criador!</string>
+    <string name="import_msg_email_invalido">Digite um e-mail válido!</string>
+    <string name="import_counter">%1$d de %2$d temas</string>
+    <string name="import_counter_one">1 tema</string>
+    <string name="import_counter_unknown">%d temas</string>
+    <string name="import_counter_empty">Nenhum tema encontrado.</string>
+    <string name="import_counter_error">Não foi possível carregar. Toque aqui para tentar de novo.</string>
+    <string name="import_desafio_um">1 desafio</string>
+    <string name="import_desafios_n">%d desafios</string>
+    <string name="import_criado_por">Criado por %s</string>
+    <string name="import_tag_importado">Já importado</string>
+    <string name="import_tag_sem_desafios">Sem desafios</string>
+    <string name="import_msg_ja_importado">Este tema já está no seu aplicativo.</string>
+    <string name="import_msg_sem_desafios">Este tema não tem desafios e não pode ser importado. Cadastre desafios nele no EducAPI.</string>
+    <string name="import_mail">Por e-mail</string>
+    <string name="import_id">Por ID</string>
 
-    <string name="import_label_mail">"Importar por E-mail"</string>
     <string name="email">E-mail</string>
     <string name="senha">Senha</string>
 

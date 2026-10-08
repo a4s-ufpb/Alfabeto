@@ -17,5 +17,18 @@ public interface ContextService {
     Call<Tema> getContextById(@Path("idContext") Long idContext);
 
     @GET("v1/api/contexts")
+    Call<ContextPageResponse> getContexts(@Query("page") int page,
+                                          @Query("size") int size,
+                                          @Query("sort") String sort);
+
+    /** Listagem paginada; name (comeca com) e email (exato) sao opcionais - null e omitido. */
+    @GET("v1/api/contexts")
+    Call<ContextPageResponse> getContextsFiltered(@Query("page") int page,
+                                                  @Query("size") int size,
+                                                  @Query("sort") String sort,
+                                                  @Query("name") String name,
+                                                  @Query("email") String email);
+
+    @GET("v1/api/contexts")
     Call<ContextPageResponse> getContextsByUser(@Query("email") String email);
 }

@@ -14,8 +14,28 @@ public class ContextPageResponse {
     private boolean first;
     private boolean last;
     private int size;
+    private int number;
+    private int totalPages;
+    private long totalElements;
 
     public List<Tema> getContent() {
-        return content;
+        return content == null ? new ArrayList<Tema>() : content;
+    }
+
+    public boolean isLast() {
+        return last;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public int getTotalPages() {
+        return totalPages;
+    }
+
+    /** Total of themes (all pages) that match the request; 0 if the API did not send it. */
+    public long getTotalElements() {
+        return totalElements;
     }
 }

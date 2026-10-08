@@ -12,6 +12,8 @@ public class Challenge implements Serializable {
     private String word;
     private String imageUrl;
     private Long idTema;
+    // id do desafio no EducAPI (null se foi criado localmente)
+    private Long remoteId;
 
     /**
      * Constructor for Challenge.
@@ -56,6 +58,14 @@ public class Challenge implements Serializable {
         this.word = word;
         this.imageUrl = imageUrl;
         this.idTema = idTema;
+    }
+
+    public Long getRemoteId() {
+        return remoteId;
+    }
+
+    public void setRemoteId(Long remoteId) {
+        this.remoteId = remoteId;
     }
 
     public int getIdImagem() {

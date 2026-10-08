@@ -11,4 +11,5 @@ public interface ITemasDAO {
     boolean delete(Tema tema);
     boolean deleteById(Long temaId);
     List<Tema> findAll();
+    Tema findByRemote(Long remoteId, String name);
 }

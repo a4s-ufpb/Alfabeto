@@ -22,6 +22,7 @@ import com.napoleao.alphabeto.adapter.ThemeAdapter;
 import com.napoleao.alphabeto.controller.ManageChallenges;
 import com.napoleao.alphabeto.controller.RecyclerItemClickListener;
 import com.napoleao.alphabeto.helper.ApiConfig;
+import com.napoleao.alphabeto.helper.ThemeSyncManager;
 import com.napoleao.alphabeto.helper.dao.TemasDAO;
 import com.napoleao.alphabeto.model.Tema;
 
@@ -159,6 +160,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         );
 
         configureRecyclerView();
+        syncWithEducApi();
+    }
+
+    /**
+     * Pulls themes/challenges registered in EducAPI and refreshes the list when something changed.
+     * Silent on failure (the app works offline with what is already saved).
+     */
+    private void syncWithEducApi() {
+        ThemeSyncManager.sync(this, false, new ThemeSyncManager.Listener() {
+            @Override
+            public void onFinished(ThemeSyncManager.Result result) {
+                if (isFinishing() || isDestroyed() || !result.success || !result.hasChanges()) {
+                    return;
+                }
+                configureRecyclerView();
+                if (result.added > 0) {
+                    Toast.makeText(MainActivity.this, result.added + " novo(s) tema(s) do EducAPI!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     /**

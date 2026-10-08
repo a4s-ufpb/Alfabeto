@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Tablet: abas maiores -->
+    <style name="ImportTabText" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">22sp</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+</resources>

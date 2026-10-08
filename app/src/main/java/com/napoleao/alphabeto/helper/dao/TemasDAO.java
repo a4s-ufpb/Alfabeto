@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.napoleao.alphabeto.helper.ThemeSyncManager;
 import com.napoleao.alphabeto.model.Tema;
 
 import java.io.File;
@@ -57,7 +58,7 @@ public class TemasDAO implements ITemasDAO {
     @Override
     public Tema get(Long idGet) {
 
-        Long id = null;
+        Long id = null, remoteId = null;
         String nomeImegem = null, imagemUrl = null;
 
         String sql = "SELECT * FROM " + DBHelper.TABLE_TEMAS + " WHERE idTema = ?";
@@ -68,6 +69,7 @@ public class TemasDAO implements ITemasDAO {
             id = cursor.getLong(cursor.getColumnIndex("idTema"));
             nomeImegem = cursor.getString(cursor.getColumnIndex("nomeImagem"));
             imagemUrl = cursor.getString(cursor.getColumnIndex("imagemUrl"));
+            remoteId = DBHelper.getLongOrNull(cursor, "remoteId");
         }
         cursor.close();
 
@@ -76,6 +78,7 @@ public class TemasDAO implements ITemasDAO {
             tema.setId(id);
             tema.setNomeImagem(nomeImegem);
             tema.setImageUrl(imagemUrl);
+            tema.setRemoteId(remoteId);
             return tema;
         }
 
@@ -90,9 +93,16 @@ public class TemasDAO implements ITemasDAO {
      */
     @Override
     public boolean save(Tema theme) {
+        // tema vindo do EducAPI que ja existe localmente (sincronizado ou importado antes)
+        if (theme.getRemoteId() != null && findByRemote(theme.getRemoteId(), theme.getNomeImagem()) != null) {
+            return false;
+        }
         ContentValues cv = new ContentValues();
         if (theme.getId() != null) {
             cv.put("idTema", theme.getId());
+        }
+        if (theme.getRemoteId() != null) {
+            cv.put("remoteId", theme.getRemoteId());
         }
         cv.put("nomeImagem", theme.getNomeImagem());
         cv.put("imagemUrl", theme.getImageUrl());
@@ -136,6 +146,10 @@ public class TemasDAO implements ITemasDAO {
 
             // delete saved local image file
             Tema tema = get(temaId);
+            if (tema != null && tema.getRemoteId() != null) {
+                // usuario removeu: a sincronizacao nao deve trazer de volta
+                ThemeSyncManager.markDismissed(context, tema.getRemoteId());
+            }
             if (tema != null && tema.getImageUrl() != null) {
                 String imageSt = tema.getImageUrl();
                 if (imageSt.startsWith("/")) {
@@ -201,6 +215,7 @@ public class TemasDAO implements ITemasDAO {
             tema.setId(id);
             tema.setNomeImagem(nomeImegem);
             tema.setImageUrl(imagemUrl);
+            tema.setRemoteId(DBHelper.getLongOrNull(cursor, "remoteId"));
 
             temas.add(tema);
             //Log.i("Size: ", "List Size " + temas.size());
@@ -208,5 +223,51 @@ public class TemasDAO implements ITemasDAO {
         cursor.close();
 
         return temas;
+    }
+
+    /**
+     * Finds the local copy of a theme that came from EducAPI.
+     * Also adopts themes imported before the sync existed (they were stored using the
+     * EducAPI id as local id), matching by id + name.
+     *
+     * @param remoteId theme id in EducAPI
+     * @param name     theme name in EducAPI
+     * @return local theme or null
+     */
+    public Tema findByRemote(Long remoteId, String name) {
+        Cursor cursor = read.rawQuery("SELECT * FROM " + DBHelper.TABLE_TEMAS + " WHERE remoteId = ?",
+                new String[]{Long.toString(remoteId)});
+        if (cursor.moveToFirst()) {
+            Tema tema = fromCursor(cursor);
+            cursor.close();
+            return tema;
+        }
+        cursor.close();
+
+        cursor = read.rawQuery("SELECT * FROM " + DBHelper.TABLE_TEMAS
+                + " WHERE remoteId IS NULL AND idTema = ?", new String[]{Long.toString(remoteId)});
+        Tema legacy = null;
+        if (cursor.moveToFirst()) {
+            legacy = fromCursor(cursor);
+        }
+        cursor.close();
+
+        if (legacy != null && name != null && name.equals(legacy.getNomeImagem())) {
+            ContentValues cv = new ContentValues();
+            cv.put("remoteId", remoteId);
+            write.update(DBHelper.TABLE_TEMAS, cv, "idTema=?", new String[]{legacy.getId().toString()});
+            legacy.setRemoteId(remoteId);
+            return legacy;
+        }
+        return null;
+    }
+
+    private Tema fromCursor(Cursor cursor) {
+        Tema tema = new Tema();
+        tema.setId(cursor.getLong(cursor.getColumnIndex("idTema")));
+        tema.setNomeImagem(cursor.getString(cursor.getColumnIndex("nomeImagem")));
+        tema.setImageUrl(cursor.getString(cursor.getColumnIndex("imagemUrl")));
+        tema.setRemoteId(DBHelper.getLongOrNull(cursor, "remoteId"));
+        return tema;
     }
 }

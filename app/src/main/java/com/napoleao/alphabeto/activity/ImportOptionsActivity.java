@@ -32,14 +32,11 @@ public class ImportOptionsActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnCreate:
+            case R.id.cardCreateTheme:
                 callIntent(CreateThemeActivity.class);
                 break;
-            case R.id.btnImportByMail:
-                callIntent(ImportByMailActivity.class);
-                break;
-            case R.id.btnImportById:
-                callIntent(ImportThemeByIdActivity.class);
+            case R.id.cardImportEducapi:
+                callIntent(ImportEducapiActivity.class);
                 break;
         }
     }

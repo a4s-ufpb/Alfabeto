@@ -15,10 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AlfabetoTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ImportByMailActivity"
-            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".activity.ImportOptionsActivity" />
-        <activity android:name=".activity.ImportThemeByIdActivity" />
+        <activity
+            android:name=".activity.ImportEducapiActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.AboutActivity"
             android:screenOrientation="portrait" />

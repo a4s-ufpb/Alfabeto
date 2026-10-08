@@ -56,7 +56,7 @@ public class ChallengesDAO implements IChallengesDAO {
      */
     @Override
     public Challenge get(Long idGet) {
-        Long id = null, idTema = null;
+        Long id = null, idTema = null, remoteId = null;
         String word = null, imageUrl = null;
 
         String sql = "SELECT * FROM " + DBHelper.TABLE_DESAFIOS + " WHERE idDesafio = ?";
@@ -68,6 +68,7 @@ public class ChallengesDAO implements IChallengesDAO {
             word = cursor.getString(cursor.getColumnIndex("word"));
             imageUrl = cursor.getString(cursor.getColumnIndex("imageUrl"));
             idTema = cursor.getLong(cursor.getColumnIndex("idTema"));
+            remoteId = DBHelper.getLongOrNull(cursor, "remoteId");
         }
         cursor.close();
 
@@ -77,6 +78,7 @@ public class ChallengesDAO implements IChallengesDAO {
             challenge.setWord(word);
             challenge.setImageUrl(imageUrl);
             challenge.setIdTema(idTema);
+            challenge.setRemoteId(remoteId);
             return challenge;
         }
 
@@ -97,6 +99,9 @@ public class ChallengesDAO implements IChallengesDAO {
         cv.put("word", challenge.getWord());
         cv.put("imageUrl", challenge.getImageUrl());
         cv.put("idTema", challenge.getIdTema());
+        if (challenge.getRemoteId() != null) {
+            cv.put("remoteId", challenge.getRemoteId());
+        }
         try {
             Long id = write.insertOrThrow(DBHelper.TABLE_DESAFIOS, null, cv);
             challenge.setId(id);
@@ -204,6 +209,7 @@ public class ChallengesDAO implements IChallengesDAO {
             challenge.setWord(word);
             challenge.setImageUrl(imageUrl);
             challenge.setIdTema(idTema);
+            challenge.setRemoteId(DBHelper.getLongOrNull(cursor, "remoteId"));
 
             challenges.add(challenge);
             Log.i("Size: ", "List Size " + challenges.size());
@@ -239,6 +245,7 @@ public class ChallengesDAO implements IChallengesDAO {
             challenge.setWord(word);
             challenge.setImageUrl(imageUrl);
             challenge.setIdTema(idTema);
+            challenge.setRemoteId(DBHelper.getLongOrNull(cursor, "remoteId"));
 
             challenges.add(challenge);
             Log.i("Size: ", "List Size " + challenges.size());

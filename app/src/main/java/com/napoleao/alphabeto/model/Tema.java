@@ -3,6 +3,8 @@ package com.napoleao.alphabeto.model;
 import android.widget.ImageView;
 
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -20,6 +22,14 @@ public class Tema {
     private String nomeImagem;
     private String imageUrl;
     private List<Challenge> challenges = new ArrayList<>();
+    // id do tema no EducAPI (null se foi criado localmente)
+    private Long remoteId;
+
+    // quem criou o tema no EducAPI. Pode vir como objeto (com "name") ou como texto, por isso
+    // fica como JsonElement: assim um formato diferente nunca quebra a leitura da lista.
+    @SerializedName(value = "user", alternate = {"owner", "creator", "author", "createdBy",
+            "userName", "ownerName", "creatorName"})
+    private JsonElement creator;
 
     /**
      * Constructor for Tema.
@@ -39,6 +49,47 @@ public class Tema {
         this.nomeImagem = nomeImagem;
         this.imageUrl = imageUrl;
         this.challenges = challenges;
+    }
+
+    /**
+     * @return name of who created the theme in EducAPI, or null if the API did not send it.
+     */
+    public String getCreatorName() {
+        if (creator == null || creator.isJsonNull()) {
+            return null;
+        }
+        if (creator.isJsonPrimitive()) {
+            return creator.getAsJsonPrimitive().isString() ? clean(creator.getAsString()) : null;
+        }
+        if (creator.isJsonObject()) {
+            JsonObject obj = creator.getAsJsonObject();
+            String[] keys = {"name", "nome", "username"};
+            for (String key : keys) {
+                if (obj.has(key) && obj.get(key).isJsonPrimitive()) {
+                    String value = clean(obj.get(key).getAsString());
+                    if (value != null) {
+                        return value;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    private static String clean(String s) {
+        if (s == null) {
+            return null;
+        }
+        s = s.trim();
+        return s.isEmpty() ? null : s;
+    }
+
+    public Long getRemoteId() {
+        return remoteId;
+    }
+
+    public void setRemoteId(Long remoteId) {
+        this.remoteId = remoteId;
     }
 
     public Long getId() {
