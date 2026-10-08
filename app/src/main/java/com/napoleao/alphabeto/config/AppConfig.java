@@ -39,7 +39,11 @@ public class AppConfig {
             this.currentLetterType = sPreferences.getString("letter_type", BASTAO);
             this.currentLetterCase = sPreferences.getString("letter_case", UPPER);
             this.currentSound = sPreferences.getString("hit_sound", OPCAO03);
-            this.currentButtonConfig = sPreferences.getString("button_font_preferences", "fonts/bastão.ttf");
+            this.currentButtonConfig = sPreferences.getString("button_font_preferences", "fonts/bastao.ttf");
+            // preferencia antiga salva com acento no nome do arquivo
+            if ("fonts/bastão.ttf".equals(this.currentButtonConfig)) {
+                this.currentButtonConfig = "fonts/bastao.ttf";
+            }
             this.currentButtonCase = sPreferences.getBoolean("button_case_preferences", true);
         } catch (Exception e) {
             e.printStackTrace();

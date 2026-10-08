@@ -73,13 +73,21 @@ public class LevelVowelActivity extends AppCompatActivity implements View.OnClic
         // Loading themes according to choice
         if (idTheme != -1) {
             ChallengesDAO challengesDAO = ChallengesDAO.getInstance(this);
-            listChallenges = challengesDAO.findById(idTheme);
+            listChallenges = manageChallenges.removeInvalid(challengesDAO.findById(idTheme));
             listChallenges = manageChallenges.randomListDesafios(listChallenges);
             imageType = 1;
             //Log.d("DEBUG", "LIST: " + listChallenges.size());
         } else {
             selectorChallenge.choosenTheme(selectedTheme);
             listChallenges = manageChallenges.carregarTemas(listChallenges, LEVEL_SELECTED);
+        }
+
+        // Tema sem desafios (ex.: removido/alterado na sincronizacao): volta para o menu sem fechar o app
+        if (listChallenges == null || listChallenges.isEmpty()) {
+            android.widget.Toast.makeText(this, "Este tema não tem desafios. Importe novamente.", android.widget.Toast.LENGTH_LONG).show();
+            startActivity(new android.content.Intent(this, MainActivity.class));
+            finish();
+            return;
         }
 
         //Alloc the interface

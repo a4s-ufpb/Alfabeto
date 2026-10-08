@@ -68,13 +68,21 @@ public class LevelAlphabetActivity extends AppCompatActivity implements View.OnC
         //Loading themes according to choice
         if (idTheme != -1) {
             ChallengesDAO challengesDAO = ChallengesDAO.getInstance(this);
-            listChallenge = challengesDAO.findById(idTheme);
+            listChallenge = manageChallenges.removeInvalid(challengesDAO.findById(idTheme));
             listChallenge = manageChallenges.randomListDesafios(listChallenge);
             imageType = 1;
             Log.d("DEBUG", "LIST: " + listChallenge.size());
         } else {
             selectorChallenge.choosenTheme(selectedTheme);
             listChallenge = manageChallenges.carregarTemas(listChallenge, LEVEL_SELECTED);
+        }
+
+        // Tema sem desafios (ex.: removido/alterado na sincronizacao): volta para o menu sem fechar o app
+        if (listChallenge == null || listChallenge.isEmpty()) {
+            android.widget.Toast.makeText(this, "Este tema não tem desafios. Importe novamente.", android.widget.Toast.LENGTH_LONG).show();
+            startActivity(new android.content.Intent(this, MainActivity.class));
+            finish();
+            return;
         }
 
         //Alloc the interface

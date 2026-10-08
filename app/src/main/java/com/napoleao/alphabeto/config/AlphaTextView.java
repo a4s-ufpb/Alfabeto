@@ -69,7 +69,7 @@ public class AlphaTextView extends AppCompatTextView {
             }
 
             case AppConfig.BASTAO: {
-                final String bastaoFontPath = "fonts/bastão.ttf";
+                final String bastaoFontPath = "fonts/bastao.ttf";
                 Typeface tf = Typeface.createFromAsset(this.context.getAssets(), bastaoFontPath);
                 this.setTypeface(tf);
                 break;

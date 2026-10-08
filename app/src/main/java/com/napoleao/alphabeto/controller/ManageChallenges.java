@@ -186,6 +186,25 @@ public class ManageChallenges {
     }
 
     /**
+     * Remove desafios sem palavra (dados invalidos) para o jogo nao quebrar.
+     *
+     * @param desafios Lista de desafios carregada do banco
+     * @return Lista apenas com desafios validos
+     */
+    public List<Challenge> removeInvalid(List<Challenge> desafios) {
+        List<Challenge> validos = new ArrayList<>();
+        if (desafios == null) {
+            return validos;
+        }
+        for (Challenge c : desafios) {
+            if (c != null && c.getWord() != null && !c.getWord().trim().isEmpty()) {
+                validos.add(c);
+            }
+        }
+        return validos;
+    }
+
+    /**
      * Recebe uma lista com desafios e randoniza os índices.
      *
      * @param desafios Lista com desafios importados

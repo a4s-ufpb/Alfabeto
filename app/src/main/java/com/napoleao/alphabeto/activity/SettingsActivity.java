@@ -88,7 +88,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         if (rgSelectedLetterType.equals("Cursiva")) {
             this.configurator.setCurrentButtonConfig("fonts/cursiva.ttf");
         } else {
-            this.configurator.setCurrentButtonConfig("fonts/bastão.ttf");
+            this.configurator.setCurrentButtonConfig("fonts/bastao.ttf");
         }
 
         if (rgSelectedLetterCase.equals("Maiúsculas")) {

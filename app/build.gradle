@@ -11,11 +11,17 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
-        // get API URL from system enviroment variable
-        buildConfigField "String", "EDUC_API_URL", "\""+System.getenv("EDUC_API_URL")+"\""
     }
     buildTypes {
+        debug {
+            // URL da API local (EducAPI). Altere aqui ou defina a variavel de ambiente EDUC_API_URL.
+            // Emulador: 10.0.2.2 = localhost do PC | Celular fisico: use o IP do PC (ex.: http://192.168.0.10:8080/)
+            // A URL deve terminar com "/"
+            def localApiUrl = System.getenv("EDUC_API_URL") ?: ""
+            buildConfigField "String", "EDUC_API_URL", "\"" + localApiUrl + "\""
+        }
         release {
+            buildConfigField "String", "EDUC_API_URL", "\"\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
